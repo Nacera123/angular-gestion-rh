@@ -17,6 +17,13 @@ import * as fr from '@angular/common/locales/fr';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/user/login/login.component';
+import { EtatCandidatureComponent } from './components/candidature/etat-candidature/etat-candidature.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { LoggInComponent } from './components/logg-in/logg-in.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SignInComponent } from './forms/sign-in/sign-in.component';
+import { SignUpComponent } from './forms/sign-up/sign-up.component';
 
 //http client
 
@@ -26,7 +33,14 @@ import { LoginComponent } from './pages/user/login/login.component';
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    EtatCandidatureComponent,
+    HeaderComponent,
+    FooterComponent,
+    LoggInComponent,
+    NavbarComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

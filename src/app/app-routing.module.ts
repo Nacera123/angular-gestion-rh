@@ -5,12 +5,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/general/home/home.component';
 import { RegisterComponent } from './pages/user/register/register.component';
 import { LoginComponent } from './pages/user/login/login.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { LoggInComponent } from './components/logg-in/logg-in.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'header', component: HeaderComponent },
+  { path: 'footer', component: FooterComponent },
+  // { path: 'loggin', component: LoggInComponent }
+
 ];
 
 

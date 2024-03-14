@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthDto } from 'src/app/models/authDto';
 
@@ -11,11 +11,19 @@ import { AuthDto } from 'src/app/models/authDto';
 export class AuthenticationService {
   private readonly endpoint: string = 'http://localhost:1234/api';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
-  private currentUser = {};
+
+
+
+  /******************** */
+  private currentUserEmailSubject = new BehaviorSubject<string>(''); // Utilisation de BehaviorSubject pour la gestion des abonnements
+
+  currentUserEmail$: Observable<string> = this.currentUserEmailSubject.asObservable();
+
+  /************** */
 
   constructor(
     private readonly http: HttpClient,
-    public router: Router
+    public router: Router,
   ) { }
 
   signin(user: AuthDto) {
@@ -27,23 +35,37 @@ export class AuthenticationService {
         tap((res: any) => {
           localStorage.setItem('access_token', res.token);
           localStorage.setItem('sub', res.id);
-          this.router.navigate(['/']);  // Redirection vers la page d'accueil après la connexion réussie
+
+          /*********** */
+          if (user.email !== null && user.email !== undefined) {
+            localStorage.setItem('user_email', user.email);
+            this.currentUserEmailSubject.next(user.email);
+            this.router.navigate(['/' + user.email]);
+          } else {
+            console.log("ya un souucis");
+
+          }
+          // if (user !== null && user !== undefined) {
+          //   localStorage.setItem('user', JSON.stringify(user));
+          //   this.currentUserEmailSubject.next(JSON.stringify(user));
+          //   this.router.navigate(['/' + user]);
+          // } else {
+          //   console.log("ya un souucis");
+
+          // }
+
+          /************* */
+          //this.router.navigate(['/' + `${user.email !== null ? user.email : ''}`]);  // Redirection vers la page d'accueil après la connexion réussie
         })
       );
 
-
-    // return this.http
-    //   .post(`${this.endpoint}/signin`, user)
-    //   .subscribe(
-    //     (res: any) => {
-    //       localStorage.setItem('access_token', res.token)
-    //       localStorage.setItem('sub', res.id)
-    //       this.router.navigate(['' + res.id])
-    //     })
   }
 
+
   getToken(): string | null {
+
     return localStorage.getItem('access_token');
+    console.log(localStorage);
   }
 
   get isLoggedIn(): boolean {

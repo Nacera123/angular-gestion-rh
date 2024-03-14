@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthDto } from 'src/app/models/authDto';
+import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +17,13 @@ export class LoginComponent implements OnInit {
 
   signinForm: FormGroup;
 
+  // role =  '';
+
   constructor(
     public fb: FormBuilder,
     public authService: AuthenticationService,
-    public router: Router
+    public router: Router,
+    private userService: UserService
   ) {
     this.signinForm = this.fb.group({
       email: [''],
@@ -37,6 +42,7 @@ export class LoginComponent implements OnInit {
     this.authService.signin(this.user)
       .subscribe(
         () => {
+          this.recupUtilisateur();
           this.router.navigate(['/']);
         }
       )
@@ -45,4 +51,25 @@ export class LoginComponent implements OnInit {
     console.log(this.user);
 
   }
+
+
+
+
+  recupUtilisateur(): void {
+    this.userService.getUserByEmail(this.user.email).subscribe(data => {
+
+      // let user1: User;
+      this.userService.setConnectedUser(data);
+      // user1 = data ;
+      // this.role = user1.email.roles
+
+    })
+  }
+
+
+  // logOut() {
+  //   localStorage.removeItem('access_token');
+  //   localStorage.removeItem('connectedUser');
+  //   this.router.navigate(['/']);
+  // }
 }
