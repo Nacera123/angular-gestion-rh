@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/']">home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/register']">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/login']">Auth</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+    </ul>
+
+
+    <form class="form-horizontal" (ngSubmit)="registerUser()" [formGroup]="registerForm">
+        <div class="control-group">
+            <label class="control-label">Nom</label>
+            <div class="controls">
+                <input type="text" placeholder="tapez votre nom" formControlName="nom">
+            </div>
+            <div *ngIf="registerForm.get('nom')?.hasError('required') && registerForm.get('nom')?.touched"
+                class="text-danger">
+                Email is required</div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Prenom</label>
+            <div class="controls">
+                <input type="text" placeholder="tapez votre nom" formControlName="prenom">
+            </div>
+            <div *ngIf="registerForm.get('prenom')?.hasError('required') && registerForm.get('prenom')?.touched"
+                class="text-danger">Email is required</div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">telephone</label>
+            <div class="controls">
+                <input type="text" placeholder="tapez votre telephone" formControlName="telephone">
+            </div>
+            <div *ngIf="registerForm.get('telephone')?.hasError('required') && registerForm.get('telephone')?.touched"
+                class="text-danger">Email is required</div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">email</label>
+            <div class="controls">
+                <input type="text" placeholder="tapez votre email" formControlName="email">
+            </div>
+            <div *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched"
+                class="text-danger">Email is required</div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="inputSigninPassword">Password</label>
+            <div class="controls">
+                <input type="password" id="inputSigninPassword" placeholder="Password" formControlName="password">
+            </div>
+            <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
+                class="text-danger">Password is required</div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Register</button>
+            </div>
+
+        </div>
+    </form>
+
+
+
+</body>
+
+</html>

@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { registerLocaleData } from '@angular/common';
 
 //pages
-import { RegisterComponent } from './pages/user/register/register.component';
+import { RegisterComponent } from './forms/user/register/register.component';
 import { HomeComponent } from './pages/general/home/home.component';
 
 //locale
@@ -16,14 +16,16 @@ import * as fr from '@angular/common/locales/fr';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './pages/user/login/login.component';
+import { LoginComponent } from './forms/user/login/login.component';
 import { EtatCandidatureComponent } from './components/candidature/etat-candidature/etat-candidature.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { LoggInComponent } from './components/logg-in/logg-in.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { SignInComponent } from './forms/sign-in/sign-in.component';
-import { SignUpComponent } from './forms/sign-up/sign-up.component';
+import { HeaderAdminComponent } from './components/admin/header-admin/header-admin.component';
+import { SidebarAdminComponent } from './components/admin/sidebar-admin/sidebar-admin.component';
+import { FooterAdminComponent } from './components/admin/footer-admin/footer-admin.component';
+import { AdminComponent } from './pages/general/admin/admin.component';
+import { TestComponent } from './pages/specific/test/test.component';
 
 //http client
 
@@ -37,10 +39,12 @@ import { SignUpComponent } from './forms/sign-up/sign-up.component';
     EtatCandidatureComponent,
     HeaderComponent,
     FooterComponent,
-    LoggInComponent,
     NavbarComponent,
-    SignInComponent,
-    SignUpComponent
+    HeaderAdminComponent,
+    SidebarAdminComponent,
+    FooterAdminComponent,
+    AdminComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

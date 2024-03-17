@@ -45,17 +45,6 @@ export class AuthenticationService {
             console.log("ya un souucis");
 
           }
-          // if (user !== null && user !== undefined) {
-          //   localStorage.setItem('user', JSON.stringify(user));
-          //   this.currentUserEmailSubject.next(JSON.stringify(user));
-          //   this.router.navigate(['/' + user]);
-          // } else {
-          //   console.log("ya un souucis");
-
-          // }
-
-          /************* */
-          //this.router.navigate(['/' + `${user.email !== null ? user.email : ''}`]);  // Redirection vers la page d'accueil après la connexion réussie
         })
       );
 
@@ -64,8 +53,8 @@ export class AuthenticationService {
 
   getToken(): string | null {
 
-    return localStorage.getItem('access_token');
     console.log(localStorage);
+    return localStorage.getItem('access_token');
   }
 
   get isLoggedIn(): boolean {

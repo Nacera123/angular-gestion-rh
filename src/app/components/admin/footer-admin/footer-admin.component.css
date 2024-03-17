@@ -1,0 +1,67 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "~boxicons/css/boxicons.min.css";
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.bubble.css";
+ 
+ 
+.dropdown-menu .dropdown-footer {
+    text-align: center;
+    font-size: 15px;
+    padding: 10px 25px;
+  }
+  .dropdown-menu .dropdown-footer a {
+    color: #444444;
+    text-decoration: underline;
+  }
+  .dropdown-menu .dropdown-footer a:hover {
+    text-decoration: none;
+  }
+  .card-footer {
+    border-color: #ebeef4;
+    background-color: #fff;
+    color: #798eb3;
+    padding: 15px;
+  }
+ 
+ /*--------------------------------------------------------------
+  # Footer
+  --------------------------------------------------------------*/
+  .footer {
+    padding: 20px 0;
+    font-size: 14px;
+    transition: all 0.3s;
+    border-top: 1px solid #cddfff;
+  }
+  
+  .footer .copyright {
+    text-align: center;
+    color: #012970;
+  }
+  
+  .footer .credits {
+    padding-top: 5px;
+    text-align: center;
+    font-size: 13px;
+    color: #012970;
+  }
+
+
+
+
+  @media (min-width: 1200px) {
+  
+
+    #footer {
+      margin-left: 300px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+  
+
+    .toggle-sidebar #footer {
+      margin-left: 0;
+    }
+
+  }
+  

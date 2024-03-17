@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
     <div class="container">
 
         <div class="row nomargin">
@@ -9,6 +9,10 @@
 
 
                         <li *ngIf="!isConnected"><a (click)="logOut()" type="submit">Logout</a></li>
+                        <li><a href="#mySignin" data-toggle="modal">Sign in</a></li>
+
+
+                        <li><a (click)="logOut()" type="submit">Logout</a></li>
 
 
                     </ul>
@@ -66,4 +70,33 @@
 
         </div>
     </div>
-</header>
+</header> -->
+
+<!-- ======= Top Bar ======= -->
+<section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+
+            <a data-bs-target="#exampleModal" data-bs-toggle="modal" class="twitter text-primary" style="  outline: 0;
+                font-size: 12px;
+                font-weight: 600;"><i class="bi bi-person-fill text-primary"></i>&nbsp; Sign In</a>
+
+
+        </div>
+    </div>
+</section>
+
+
+<app-login></app-login>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <app-login></app-login>
+
+        </div>
+    </div>
+</div> -->
