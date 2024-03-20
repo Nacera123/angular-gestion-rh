@@ -1,5 +1,6 @@
 import { Individu } from "../individu";
 import { EtatCandidature } from "./etatCandidature";
+import { PosteVacant } from "./posteVacant";
 
 export class Candidature {
 
@@ -9,7 +10,7 @@ export class Candidature {
 
     public etatCandidature?: EtatCandidature
 
-    //public posteVacant?: PosteVacant
+    public posteVacant?: PosteVacant
 
 
 

@@ -13,6 +13,9 @@ import { SidebarAdminComponent } from './components/admin/sidebar-admin/sidebar-
 import { FooterAdminComponent } from './components/admin/footer-admin/footer-admin.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TestComponent } from './pages/specific/test/test.component';
+import { AuthGuard } from './guards/auth-guard.guard';
+import { TypeContratComponent } from './pages/general/candidature/type-contrat/type-contrat.component';
+import { EtatCandidatureComponent } from './pages/general/candidature/etat-candidature/etat-candidature.component';
 
 
 const routes: Routes = [
@@ -22,11 +25,21 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'navbar', component: NavbarComponent },
   { path: 'footer', component: FooterComponent },
-  { path: 'admin', component: AdminComponent },
   { path: 'header-admin', component: HeaderAdminComponent },
   { path: 'sidebar', component: SidebarAdminComponent },
   { path: 'footer-admin', component: FooterAdminComponent },
-  { path: 'test', component: TestComponent }
+  { path: 'test', component: TestComponent },
+  //candidature
+  {
+    path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
+    children: [
+      { path: 'type-contrat', component: TypeContratComponent },
+      { path: 'etat-candidature', component: EtatCandidatureComponent }
+    ]
+  },
+
+
+
 
 ];
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { User } from 'src/app/models/user';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class UserService {
   ) { }
 
   // inscription
-  signup(user: User) {
+  signup(user: User): Observable<any> {
     let api = `${this.endpoint}/register`
     return this.http.post(api, user)
 
@@ -84,10 +84,6 @@ export class UserService {
    * @returns 
    */
   getRole(email?: string) {
-    let url = this.endpointUser + `/role/${email}`
-    return this.http.get<any>(url);
-  }
-  gettoto(email?: string) {
     let url = this.endpointUser + `/role/${email}`
     return this.http.get<any>(url);
   }

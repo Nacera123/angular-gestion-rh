@@ -17,7 +17,6 @@ import * as fr from '@angular/common/locales/fr';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './forms/user/login/login.component';
-import { EtatCandidatureComponent } from './components/candidature/etat-candidature/etat-candidature.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -26,6 +25,9 @@ import { SidebarAdminComponent } from './components/admin/sidebar-admin/sidebar-
 import { FooterAdminComponent } from './components/admin/footer-admin/footer-admin.component';
 import { AdminComponent } from './pages/general/admin/admin.component';
 import { TestComponent } from './pages/specific/test/test.component';
+import { TypeContratComponent } from './pages/general/candidature/type-contrat/type-contrat.component';
+import { NavTabComponent } from './components/admin/nav-tab/nav-tab.component';
+import { EtatCandidatureComponent } from './pages/general/candidature/etat-candidature/etat-candidature.component';
 
 //http client
 
@@ -36,7 +38,6 @@ import { TestComponent } from './pages/specific/test/test.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    EtatCandidatureComponent,
     HeaderComponent,
     FooterComponent,
     NavbarComponent,
@@ -44,7 +45,11 @@ import { TestComponent } from './pages/specific/test/test.component';
     SidebarAdminComponent,
     FooterAdminComponent,
     AdminComponent,
-    TestComponent
+    TestComponent,
+    TypeContratComponent,
+    NavTabComponent,
+    //candidature
+    EtatCandidatureComponent
   ],
   imports: [
     BrowserModule,

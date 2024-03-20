@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthDto } from 'src/app/models/authDto';
 
@@ -40,7 +40,6 @@ export class AuthenticationService {
           if (user.email !== null && user.email !== undefined) {
             localStorage.setItem('user_email', user.email);
             this.currentUserEmailSubject.next(user.email);
-            this.router.navigate(['/' + user.email]);
           } else {
             console.log("ya un souucis");
 
@@ -50,7 +49,15 @@ export class AuthenticationService {
 
   }
 
+  // toto: Observable<string | null> = this.getUserEmail();
 
+  getUserEmail(): Observable<string | null> {
+    // Récupérer la valeur de l'e-mail de l'utilisateur depuis le localStorage
+    const userEmail = localStorage.getItem('user_email');
+
+    // Créer un Observable à partir de la valeur récupérée
+    return of(userEmail);
+  }
   getToken(): string | null {
 
     console.log(localStorage);

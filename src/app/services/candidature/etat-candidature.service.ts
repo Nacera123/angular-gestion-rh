@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, catchError } from 'rxjs';
 import { EtatCandidature } from 'src/app/models/candidature/etatCandidature';
 
 @Injectable({
@@ -6,12 +9,28 @@ import { EtatCandidature } from 'src/app/models/candidature/etatCandidature';
 })
 export class EtatCandidatureService {
 
-  private etatCandidature!: EtatCandidature[]
+  private endpoint: string = 'http://localhost:1234/etat-candidature';
 
 
-  constructor() {
-    this.etatCandidature = [];
+  constructor(
+    private readonly http: HttpClient,
+    private router: Router
+  ) { }
 
 
+
+  getAll(): Observable<EtatCandidature[]> {
+    let api = `${this.endpoint}/list`;
+
+    return this.http.get<EtatCandidature[]>(api)
+      .pipe(
+        catchError(
+          error => {
+            console.error('l\'erreur : ', error);
+            throw error;
+
+          }
+        )
+      )
   }
 }

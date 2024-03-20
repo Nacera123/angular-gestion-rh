@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 
           this.recupUtilisateur();
           this.getRoleByUser();
-          this.close();
+          //this.close();
         }
       )
 
