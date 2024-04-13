@@ -16,6 +16,10 @@ import { TestComponent } from './pages/specific/test/test.component';
 import { AuthGuard } from './guards/auth-guard.guard';
 import { TypeContratComponent } from './pages/general/candidature/type-contrat/type-contrat.component';
 import { EtatCandidatureComponent } from './pages/general/candidature/etat-candidature/etat-candidature.component';
+import { DocumentCandidatureComponent } from './pages/general/candidature/document-candidature/document-candidature.component';
+import { CandidatureComponent } from './pages/general/candidature/candidature/candidature.component';
+import { NomDocumentComponent } from './pages/general/candidature/nom-document/nom-document.component';
+import { PosteDeTravailComponent } from './pages/general/candidature/poste-de-travail/poste-de-travail.component';
 
 
 const routes: Routes = [
@@ -30,6 +34,10 @@ const routes: Routes = [
   { path: 'footer-admin', component: FooterAdminComponent },
   { path: 'test', component: TestComponent },
   //candidature
+  { path: 'document-candidature', component: DocumentCandidatureComponent },
+  { path: 'app-candidature', component: CandidatureComponent },
+  { path: 'nom-document', component: NomDocumentComponent },
+  { path: 'poste-de-travail', component: PosteDeTravailComponent },
   {
     path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
     children: [

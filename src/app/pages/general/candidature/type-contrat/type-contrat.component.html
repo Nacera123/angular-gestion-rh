@@ -1,31 +1,28 @@
+<button type="button" class="btn btn-warning">Nouveau +</button>
+<br><br>
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">TYPE DE CONTRAT</h5>
 
-        <app-nav-tab></app-nav-tab>
-        <div class="tab-content pt-2" id="myTabjustifiedContent">
+        <!-- <app-nav-tab></app-nav-tab> -->
+        <div class="tab-content pt-4" id="myTabjustifiedContent">
             <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
 
 
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Table with stripped rows</h5>
-
-                        <!-- Table with stripped rows -->
                         <table class="table table-striped">
-                            <thead>
+                            <thead class="table table-dark">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Type De Contrat</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let contrat of typeDeContrat">
                                     <th scope="row">{{ contrat.id }}</th>
                                     <td>{{ contrat.type }}</td>
-                                    <td>2016-05-25</td>
                                 </tr>
 
                             </tbody>

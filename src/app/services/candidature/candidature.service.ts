@@ -12,16 +12,12 @@ import { Candidature } from "src/app/models/candidature/candidature";
 
 export class CandidatureService {
 
-    private candidature!: Candidature[];
+
     private endpoint: string = 'http://localhost:1234/candidature'
 
     constructor(
         private readonly http: HttpClient,
-        private router: Router
-    ) {
-        this.candidature = [];
-
-    }
+    ) { }
 
     getAll(): Observable<Candidature[]> {
         let api = `${this.endpoint}/list`;
@@ -29,7 +25,7 @@ export class CandidatureService {
             .pipe(
                 catchError(
                     error => {
-                        console.error('l\'erreur : ', error);
+                        console.error(error);
                         throw error
 
                     }

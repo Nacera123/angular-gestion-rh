@@ -12,20 +12,17 @@
                     <div class="card-body">
                         <h5 class="card-title">Table with stripped rows</h5>
 
-                        <!-- Table with stripped rows -->
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Etat de la candidature</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let etat of etatCandidature">
                                     <th scope="row">{{ etat.id }}</th>
                                     <td>{{ etat.etat }}</td>
-                                    <td>2016-05-25</td>
                                 </tr>
 
                             </tbody>

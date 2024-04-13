@@ -28,6 +28,12 @@ import { TestComponent } from './pages/specific/test/test.component';
 import { TypeContratComponent } from './pages/general/candidature/type-contrat/type-contrat.component';
 import { NavTabComponent } from './components/admin/nav-tab/nav-tab.component';
 import { EtatCandidatureComponent } from './pages/general/candidature/etat-candidature/etat-candidature.component';
+import { CandidatureComponent } from './pages/general/candidature/candidature/candidature.component';
+import { DocumentCandidatureComponent } from './pages/general/candidature/document-candidature/document-candidature.component';
+import { NomDocumentComponent } from './pages/general/candidature/nom-document/nom-document.component';
+import { PosteDeTravailComponent } from './pages/general/candidature/poste-de-travail/poste-de-travail.component';
+import { PosteVacantComponent } from './pages/general/candidature/poste-vacant/poste-vacant.component';
+import { SessionCandidatureComponent } from './pages/general/candidature/session-candidature/session-candidature.component';
 
 //http client
 
@@ -49,7 +55,13 @@ import { EtatCandidatureComponent } from './pages/general/candidature/etat-candi
     TypeContratComponent,
     NavTabComponent,
     //candidature
-    EtatCandidatureComponent
+    EtatCandidatureComponent,
+    CandidatureComponent,
+    DocumentCandidatureComponent,
+    NomDocumentComponent,
+    PosteDeTravailComponent,
+    PosteVacantComponent,
+    SessionCandidatureComponent
   ],
   imports: [
     BrowserModule,
