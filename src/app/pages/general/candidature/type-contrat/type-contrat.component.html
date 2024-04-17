@@ -1,44 +1,44 @@
-<button type="button" class="btn btn-warning">Nouveau +</button>
-<br><br>
+<app-add disabled></app-add>
+
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">TYPE DE CONTRAT</h5>
 
         <!-- <app-nav-tab></app-nav-tab> -->
         <div class="tab-content pt-4" id="myTabjustifiedContent">
-            <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
+            <!-- <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab"> -->
 
 
 
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-striped">
-                            <thead class="table table-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Type De Contrat</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let contrat of typeDeContrat">
-                                    <th scope="row">{{ contrat.id }}</th>
-                                    <td>{{ contrat.type }}</td>
-                                </tr>
+            <!-- <div class="card"> -->
+            <div class="card-body">
+                <table class="table datatable">
+                    <thead class="table table-info">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Type De Contrat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contrat of typeDeContrat">
+                            <th scope="row">{{ contrat.id }}</th>
+                            <td>{{ contrat.type }}</td>
+                        </tr>
 
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-
-
+                    </tbody>
+                </table>
 
             </div>
-            <div class="tab-pane fade" id="profile-justified" role="tabpanel" aria-labelledby="profile-tab">
+            <!-- </div> -->
+
+
+
+            <!-- </div> -->
+            <!-- <div class="tab-pane fade" id="profile-justified" role="tabpanel" aria-labelledby="profile-tab">
                 Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio
                 omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil
                 recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
-            </div>
+            </div> -->
         </div>
 
     </div>

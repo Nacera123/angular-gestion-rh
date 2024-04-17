@@ -25,7 +25,7 @@ export class SidebarAdminComponent implements OnInit {
     {
       label: 'Emplois & Postes', icon: 'bi-menu-button-wide', collapse: 'emplois', expanded: true,
       children: [
-        { label: 'Alerts', route: '/admin/components/alerts' },
+        { label: 'Poste de Travail', route: 'poste-de-travail' },
         { label: 'Accordion', route: '/admin/components/accordion' },
       ]
     },

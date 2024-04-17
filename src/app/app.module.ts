@@ -34,6 +34,16 @@ import { NomDocumentComponent } from './pages/general/candidature/nom-document/n
 import { PosteDeTravailComponent } from './pages/general/candidature/poste-de-travail/poste-de-travail.component';
 import { PosteVacantComponent } from './pages/general/candidature/poste-vacant/poste-vacant.component';
 import { SessionCandidatureComponent } from './pages/general/candidature/session-candidature/session-candidature.component';
+import { PosteDeTravailAddComponent } from './forms/candidature/poste-de-travail/poste-de-travail.component';
+import { AddComponent } from './components/Buttons/add/add.component';
+import { SubmitComponent } from './components/Buttons/submit/submit.component';
+import { ViewComponent } from './components/Buttons/view/view.component';
+import { UpdateComponent } from './components/Buttons/update/update.component';
+import { DeleteComponent } from './components/Buttons/delete/delete.component';
+import { PosteDeTravailFicheComponent } from './components/candidature/fiche/poste-de-travail-fiche/poste-de-travail-fiche.component';
+import { NgConfirmModule } from 'ng-confirm-box';
+import { AnnulerComponent } from './components/Buttons/annuler/annuler.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 //http client
 
@@ -61,7 +71,15 @@ import { SessionCandidatureComponent } from './pages/general/candidature/session
     NomDocumentComponent,
     PosteDeTravailComponent,
     PosteVacantComponent,
-    SessionCandidatureComponent
+    SessionCandidatureComponent,
+    PosteDeTravailAddComponent,
+    AddComponent,
+    SubmitComponent,
+    ViewComponent,
+    UpdateComponent,
+    DeleteComponent,
+    PosteDeTravailFicheComponent,
+    AnnulerComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +87,8 @@ import { SessionCandidatureComponent } from './pages/general/candidature/session
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgConfirmModule,
+    NgxPaginationModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' }

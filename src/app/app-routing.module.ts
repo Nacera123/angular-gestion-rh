@@ -20,6 +20,9 @@ import { DocumentCandidatureComponent } from './pages/general/candidature/docume
 import { CandidatureComponent } from './pages/general/candidature/candidature/candidature.component';
 import { NomDocumentComponent } from './pages/general/candidature/nom-document/nom-document.component';
 import { PosteDeTravailComponent } from './pages/general/candidature/poste-de-travail/poste-de-travail.component';
+import { SessionCandidatureComponent } from './pages/general/candidature/session-candidature/session-candidature.component';
+import { PosteDeTravailAddComponent } from './forms/candidature/poste-de-travail/poste-de-travail.component';
+import { PosteDeTravailFicheComponent } from './components/candidature/fiche/poste-de-travail-fiche/poste-de-travail-fiche.component';
 
 
 const routes: Routes = [
@@ -37,12 +40,18 @@ const routes: Routes = [
   { path: 'document-candidature', component: DocumentCandidatureComponent },
   { path: 'app-candidature', component: CandidatureComponent },
   { path: 'nom-document', component: NomDocumentComponent },
-  { path: 'poste-de-travail', component: PosteDeTravailComponent },
+  //1-poste de travail
+
+  { path: 'session-candidature', component: SessionCandidatureComponent },
+  { path: 'poste-de-travail-fiche', component: PosteDeTravailFicheComponent },
   {
     path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
     children: [
       { path: 'type-contrat', component: TypeContratComponent },
-      { path: 'etat-candidature', component: EtatCandidatureComponent }
+      { path: 'etat-candidature', component: EtatCandidatureComponent },
+      { path: 'poste-de-travail', component: PosteDeTravailComponent },
+      { path: 'poste-de-travail/add', component: PosteDeTravailAddComponent },
+      { path: 'poste-de-travail/edit/:id', component: PosteDeTravailAddComponent }
     ]
   },
 
