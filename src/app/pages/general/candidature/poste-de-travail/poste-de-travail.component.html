@@ -5,6 +5,10 @@
 
 <div class="card-body">
 
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+
     <table class="table datatable">
         <thead class="table table-info">
             <tr>
@@ -13,12 +17,18 @@
                 <th scope="col"> Detail</th>
             </tr>
         </thead>
+
+
+
         <tbody>
             <tr *ngFor="let poste of posteDeTravail | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
                 <td>{{ poste.reference }}</td>
                 <td>{{ poste.nom }}</td>
                 <td>
-                    <app-view (click)="toto(poste.id)"></app-view>
+
+                    <!-- <app-view (click)="toto(poste.id)"></app-view> -->
+                    <app-voir (click)="toto(poste.id)"
+                        [routerLink]="['/admin/poste-de-travail/fiche', poste.id]"></app-voir>
                     <app-delete (click)="deletePoste(poste.id)"></app-delete>
                     <app-update [routerLink]="['/admin/poste-de-travail/edit', poste.id]"></app-update>
 
@@ -30,26 +40,6 @@
     </table>
 
     <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
-    <!-- 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav> -->
-
-
 
 </div>
 <div class="modal fade" id="verticalycentered" tabindex="-1">

@@ -21,7 +21,12 @@ export class PosteDeTravailFicheComponent implements OnInit {
     private posteDeTravailService: PosteDeTravailService,
     private routeActivated: ActivatedRoute
   ) {
-
+    const id = this.routeActivated.snapshot.paramMap.get('id');
+    if (id) {
+      this.getPosteById(Number(id)); // Appel de getSessionById avec l'ID
+    } else {
+      console.error('ID est undefined');
+    }
 
   }
 
@@ -31,7 +36,7 @@ export class PosteDeTravailFicheComponent implements OnInit {
 
   }
 
-  toto(id?: Number) {
+  getPosteById(id?: Number) {
 
 
     console.log(id);

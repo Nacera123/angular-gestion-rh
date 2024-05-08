@@ -15,9 +15,10 @@ export class PosteDeTravailComponent implements OnInit {
 
   posteDeTravail: PosteDeTravail[] = [];
 
-  selected: PosteDeTravail = new PosteDeTravail();
+  //selected: PosteDeTravail = new PosteDeTravail();
 
   posteSelectionne: PosteDeTravail | undefined;
+  errorMessage: string = '';
 
   constructor(
     private posteDeTravailService: PosteDeTravailService,
@@ -40,6 +41,7 @@ export class PosteDeTravailComponent implements OnInit {
       },
       (error) => {
         console.error(error);
+        this.errorMessage = error;
       }
     );
   }

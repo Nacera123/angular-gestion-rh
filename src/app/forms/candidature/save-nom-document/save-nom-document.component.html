@@ -1,0 +1,34 @@
+<h2 class="card-title pt-4 pb-4">
+
+    {{ nomDocument ? 'Nom de document update' : 'Nom de document create' }}
+
+</h2>
+<div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
+    {{ errorMessage }}
+</div>
+
+<div class="card-body" style="width: 500px;margin-bottom: 200px;" *ngIf="formGroupe">
+
+
+
+
+    <form class="row g-3" [formGroup]="formGroupe" (ngSubmit)="create()">
+        <div class="col-12">
+            <label for="inputNanme4" class="form-label">Type de piece jointe</label>
+            <input type="text" class="form-control" id="inputNanme4" formControlName="nom">
+        </div>
+        <div class="col-12 text-center pt-4" *ngIf="nomDocument">
+            <app-submit></app-submit>
+            <app-annuler [routerLink]="['/admin/nom-document']" class="ms-2"></app-annuler>
+        </div>
+
+        <div class="col-12 text-center pt-4" *ngIf="!nomDocument">
+            <app-submit></app-submit>
+            <app-annuler [routerLink]="['/admin/nom-document']" class="ms-2"></app-annuler>
+        </div>
+
+    </form>
+
+
+
+</div>

@@ -1,0 +1,24 @@
+<div class="card-body">
+
+    <table class="table datatable">
+
+        <tbody>
+
+            <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
+                {{ errorMessage }}
+            </div>
+
+            <tr *ngFor="let toto of postesVacants">
+                <td>{{ toto.poste?.nom }}</td>
+
+
+                <button [routerLink]="['/offre/dtail', toto.id]">Detail</button>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+
+</div>

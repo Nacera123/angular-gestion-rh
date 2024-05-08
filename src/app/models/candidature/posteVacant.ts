@@ -11,7 +11,7 @@ export class PosteVacant {
 
     session?: SessionCandidature;
 
-    postes?: PosteDeTravail;
+    poste?: PosteDeTravail;
 
     typeContrat?: TypeDeContrat;
 

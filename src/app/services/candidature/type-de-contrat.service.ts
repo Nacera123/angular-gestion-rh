@@ -35,4 +35,12 @@ export class TypeDeContratService {
                 )
             )
     }
+
+
+    //2- recuperer la type de constrat par type
+    getContratByType(type: String): Observable<TypeDeContrat> {
+        let api = `${this.endpoint}/${type}`;
+        return this.http.get<TypeDeContrat>(api);
+    }
+
 }

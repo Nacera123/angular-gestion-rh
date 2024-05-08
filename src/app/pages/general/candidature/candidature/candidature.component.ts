@@ -12,6 +12,10 @@ export class CandidatureComponent implements OnInit {
 
   candidature: Candidature[] = [];
 
+
+
+  errorMessage: string = '';
+
   constructor(
     private readonly http: HttpClient,
     private candidatureService: CandidatureService
@@ -20,6 +24,12 @@ export class CandidatureComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.getAllCandidature();
+
+  }
+
+  getAllCandidature() {
 
     this.candidatureService.getAll()
       .subscribe(
@@ -30,10 +40,20 @@ export class CandidatureComponent implements OnInit {
         },
         (error) => {
           console.error(error);
+          this.errorMessage = error;
 
         }
       )
+  }
 
+  // pagination 
+  pageSize = 10;
+
+  currentPage = 1;
+
+
+  pageChanged(event: any): void {
+    this.currentPage = event;
   }
 
 

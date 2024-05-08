@@ -1,1 +1,39 @@
-<p>candidature works!</p>
+<app-add [routerLink]="['/admin/session-candidature/add']"></app-add>
+<div class="card-body">
+
+    <table class="table datatable">
+        <thead class="table table-info">
+            <tr>
+                <th scope="col">Poste Vacant</th>
+                <th scope="col">Candidat</th>
+                <th scope="col"> Etat Candidature</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
+                {{ errorMessage }}
+            </div>
+
+            <tr
+                *ngFor="let candidature of candidature | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+                <td>{{ candidature.posteVacant }}</td>
+                <td>{{ candidature.individu }}</td>
+                <td>{{ candidature.etatCandidature }}</td>
+
+
+                <!-- <td>
+                    <app-view (click)="toto(poste.id)"></app-view>
+                    <app-delete (click)="deletePoste(poste.id)"></app-delete>
+                    <app-update [routerLink]="['/admin/poste-de-travail/edit', poste.id]"></app-update>
+
+
+                </td> -->
+            </tr>
+
+        </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+
+</div>

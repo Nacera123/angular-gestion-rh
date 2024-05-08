@@ -1,0 +1,47 @@
+<div class="card-body" style="width: 600px;margin-bottom: 200px;">
+
+
+    <form (ngSubmit)="ajoutPoste()">
+
+        <div class="col-12 mb-2">
+            <label for="inputState" class="form-label">Nom poste</label>
+            <select id="inputState" class="form-select" [(ngModel)]="posteDeTravail.nom" name="nom" required>
+                <option *ngFor="let nom of posteNom" [value]="nom">{{ nom }}</option>
+            </select>
+        </div>
+        <div class="col-12 mb-2">
+            <label for="inputState" class="form-label">Reference de la session de recrutement</label>
+            <select id="inputState" class="form-select" [(ngModel)]="sessionCan.reference" name="sessionRef" required>
+                <option *ngFor="let ref of sessionRef" [value]="ref">{{ ref }}</option>
+            </select>
+        </div>
+        <div class="col-12 mb-2">
+            <label for="inputState" class="form-label">Type de contrat</label>
+            <select id="inputState" class="form-select" [(ngModel)]="typeDeContrat.type" name="type" required>
+                <option *ngFor="let type of typeContratNom" [value]="type">{{ type }}</option>
+            </select>
+        </div>
+
+        <div class="col-12 mb-12">
+            <label for="inputState" class="form-label">Description:</label>
+
+
+            <div class="editor bg-white" style="height: 200px; border: 1px solid #ccc;"
+                [(ngModel)]="posteVacant.descriptif" name="descriptif"></div>
+        </div>
+
+
+
+
+        <div class="col-12 text-center pt-4 mt-4">
+            <app-submit></app-submit>
+            <app-annuler [routerLink]="['/admin/poste-vacant']" class="ms-2"></app-annuler>
+        </div>
+
+        <!-- <div>
+            <button type="submit">Ajouter Test</button>
+        </div> -->
+
+    </form>
+
+</div>

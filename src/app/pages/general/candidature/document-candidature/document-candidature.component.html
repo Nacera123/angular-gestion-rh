@@ -1,1 +1,39 @@
-<p>document-candidature works!</p>
+<app-add [routerLink]="['/admin/session-candidature/add']"></app-add>
+<div class="card-body">
+
+    <table class="table datatable">
+        <thead class="table table-info">
+            <tr>
+                <th scope="col">Candidature</th>
+                <th scope="col">Nom de la piece jointe</th>
+                <th scope="col"> Piece jointe</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
+                {{ errorMessage }}
+            </div>
+
+            <tr
+                *ngFor="let document of documentCandidature | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+                <td>{{ document.candidature }}</td>
+                <td>{{ document.nomPieceJointe }}</td>
+                <td>{{ document.pieceJointe }}</td>
+
+
+                <!-- <td>
+                    <app-view (click)="toto(poste.id)"></app-view>
+                    <app-delete (click)="deletePoste(poste.id)"></app-delete>
+                    <app-update [routerLink]="['/admin/poste-de-travail/edit', poste.id]"></app-update>
+
+
+                </td> -->
+            </tr>
+
+        </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+
+</div>

@@ -44,6 +44,15 @@ import { PosteDeTravailFicheComponent } from './components/candidature/fiche/pos
 import { NgConfirmModule } from 'ng-confirm-box';
 import { AnnulerComponent } from './components/Buttons/annuler/annuler.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SessionCandidatureFicheComponent } from './components/candidature/session-candidature-fiche/session-candidature-fiche.component';
+import { SaveSessionCandidatureComponent } from './forms/candidature/save-session-candidature/save-session-candidature.component';
+import { RetourComponent } from './components/Buttons/retour/retour.component';
+import { VoirComponent } from './components/Buttons/voir/voir.component';
+import { SavePosteVacantComponent } from './forms/candidature/save-poste-vacant/save-poste-vacant.component';
+import { FichePosteVacantComponent } from './components/candidature/fiche/fiche-poste-vacant/fiche-poste-vacant.component';
+import { OffreDeTravailComponent } from './pages/utilisateur/offre-de-travail/offre-de-travail.component';
+import { DetailOffreComponent } from './pages/utilisateur/detail-offre/detail-offre.component';
+import { SaveNomDocumentComponent } from './forms/candidature/save-nom-document/save-nom-document.component';
 
 //http client
 
@@ -64,22 +73,40 @@ import { NgxPaginationModule } from 'ngx-pagination';
     TestComponent,
     TypeContratComponent,
     NavTabComponent,
-    //candidature
+    //*************************************candidature
+    //1- etat candidture
     EtatCandidatureComponent,
+    //2- candidture
     CandidatureComponent,
+    //3- document candidture
     DocumentCandidatureComponent,
+    //4- nom document
     NomDocumentComponent,
+    //5- poste de travail
     PosteDeTravailComponent,
-    PosteVacantComponent,
-    SessionCandidatureComponent,
     PosteDeTravailAddComponent,
+    PosteDeTravailFicheComponent,
+    //5- poste vacant
+    PosteVacantComponent,
+    SavePosteVacantComponent,
+    FichePosteVacantComponent,
+    //6- session candidature
+    SessionCandidatureComponent,
+    SessionCandidatureFicheComponent,
+    SaveSessionCandidatureComponent,
+    //7- boutons
     AddComponent,
     SubmitComponent,
     ViewComponent,
     UpdateComponent,
     DeleteComponent,
-    PosteDeTravailFicheComponent,
-    AnnulerComponent
+    AnnulerComponent,
+    RetourComponent,
+    VoirComponent,
+    OffreDeTravailComponent,
+    DetailOffreComponent,
+    SaveNomDocumentComponent
+
   ],
   imports: [
     BrowserModule,
@@ -89,6 +116,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     NgConfirmModule,
     NgxPaginationModule
+
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' }

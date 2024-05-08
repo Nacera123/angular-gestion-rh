@@ -1,0 +1,23 @@
+<div>
+    <div>
+        <div>
+            <div>
+                <h5 class="title" *ngIf="sessionSelectionne">Détails de la session : <b>{{
+                        sessionSelectionne.reference
+                        }}</b>
+                </h5>
+            </div>
+            <div>
+                <p *ngIf="sessionSelectionne">Référence : {{ sessionSelectionne.reference }}</p>
+                <p *ngIf="sessionSelectionne">Date d'ouverture : {{ sessionSelectionne.dateOuverture }}</p>
+                <p *ngIf="sessionSelectionne">Date de clôture : {{ sessionSelectionne.dateCloture }}</p>
+                <p *ngIf="sessionSelectionne">Status : {{ sessionSelectionne.status }}</p>
+
+            </div>
+            <div class="footer">
+                <app-retour [routerLink]="['/admin/session-candidature']"></app-retour>
+
+            </div>
+        </div>
+    </div>
+</div>

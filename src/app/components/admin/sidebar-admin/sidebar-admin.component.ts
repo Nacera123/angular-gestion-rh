@@ -25,15 +25,19 @@ export class SidebarAdminComponent implements OnInit {
     {
       label: 'Emplois & Postes', icon: 'bi-menu-button-wide', collapse: 'emplois', expanded: true,
       children: [
-        { label: 'Poste de Travail', route: 'poste-de-travail' },
-        { label: 'Accordion', route: '/admin/components/accordion' },
+        { label: 'Poste de Travail', route: '/admin/poste-de-travail' },
+        { label: 'Poste de Vaccant', route: '/admin/poste-vacant' },
       ]
     },
     {
-      label: 'CANDIDATURE', icon: 'bi-journal-text', collapse: 'form', expanded: true,
+      label: 'Gestion des Candidatures', icon: 'bi-journal-text', collapse: 'form', expanded: true,
       children: [
-        { label: 'Type de contrat', route: 'type-contrat' },
-        { label: 'Etat de candidature', route: 'etat-candidature' },
+        { label: 'Type de contrat', route: '/admin/type-contrat' },
+        { label: 'Etat de candidature', route: '/admin/etat-candidature' },
+        { label: 'Session de candidature', route: '/admin/session-candidature' },
+        { label: 'Candidatures', route: '/admin/candidature' },
+        { label: 'Document candidature', route: '/admin/document-candidature' },
+        { label: 'Noms des documents', route: '/admin/nom-document' },
       ]
     },
     {

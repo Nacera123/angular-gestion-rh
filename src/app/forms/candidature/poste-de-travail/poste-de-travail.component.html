@@ -3,6 +3,10 @@
     {{ formulaire ? 'Poste de Travail Register' : 'toto' }}
 
 </h2>
+<div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
+    {{ errorMessage }}
+</div>
+
 <div class="card-body" style="width: 500px;margin-bottom: 200px;" *ngIf="form">
 
 
@@ -11,12 +15,12 @@
     <form class="row g-3" [formGroup]="form" (ngSubmit)="create()">
         <div class="col-12">
             <label for="inputNanme4" class="form-label">Reference du poste</label>
-            <input type="text" class="form-control" id="inputNanme4" formControlName="nom">
+            <input type="text" class="form-control" id="inputNanme4" formControlName="reference">
         </div>
 
         <div class="col-12">
             <label for="inputEmail4" class="form-label">Nom du Poste</label>
-            <input type="text" class="form-control" id="inputEmail4" formControlName="reference">
+            <input type="text" class="form-control" id="inputEmail4" formControlName="nom">
         </div>
 
         <div class="col-12 text-center pt-4" *ngIf="formulaire">

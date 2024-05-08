@@ -13,7 +13,7 @@ export class PosteDeTravailAddComponent implements OnInit {
 
   form!: FormGroup;
   formulaire!: PosteDeTravail;
-
+  errorMessage: string = '';
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -27,30 +27,46 @@ export class PosteDeTravailAddComponent implements OnInit {
       reference: ['', Validators.required]
     });
 
-    this.route.params.subscribe(params => {
-      const id = params['id'];
-      if (id) {
-        this.posteDeTravailService.getById(id).subscribe(formulaire => {
-          this.formulaire = formulaire;
-          this.form.patchValue({
-            nom: formulaire.nom,
-            reference: formulaire.reference
+    this.route.params
+      .subscribe(params => {
+        const id = params['id'];
+        if (id) {
+          this.posteDeTravailService.getById(id).subscribe(formulaire => {
+            this.formulaire = formulaire;
+            this.form.patchValue({
+              nom: formulaire.nom,
+              reference: formulaire.reference
+            });
           });
-        });
-      }
-    });
+        }
+      });
   }
 
   create(): void {
     const formulaire = this.form.value;
     if (this.formulaire && this.formulaire.id) {
-      this.posteDeTravailService.update({ id: this.formulaire.id, ...formulaire }).subscribe(() => {
-        this.router.navigate(['admin/poste-de-travail']);
-      });
+      this.posteDeTravailService.update({ id: this.formulaire.id, ...formulaire })
+        .subscribe(() => {
+          this.router.navigate(['admin/poste-de-travail']);
+        },
+          (error) => {
+            console.error(error);
+            this.errorMessage = error;
+
+          }
+        );
     } else {
-      this.posteDeTravailService.add(formulaire).subscribe(() => {
-        this.router.navigate(['admin/poste-de-travail']);
-      });
+      this.posteDeTravailService.add(formulaire)
+        .subscribe(
+          () => {
+            this.router.navigate(['admin/poste-de-travail']);
+          },
+          (error) => {
+            console.error(error);
+            this.errorMessage = error;
+
+          }
+        );
     }
   }
 

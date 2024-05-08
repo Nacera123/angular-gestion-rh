@@ -12,12 +12,33 @@ export class DocumentCandidatureComponent implements OnInit {
 
   documentCandidature: DocumentCandidature[] = [];
 
+  errorMessage: string = '';
+
+
+
+  //gestion pagination
+  pageSize = 10;
+
+  currentPage = 1;
+
+
+  pageChanged(event: any): void {
+    this.currentPage = event;
+  }
+
 
   constructor(
     private documentCandidatureService: DocumentCandidatureService,
   ) { }
 
   ngOnInit(): void {
+    this.getAllDocument();
+
+  }
+
+  // recuperer la liste des document de candidature
+  getAllDocument() {
+
 
     this.documentCandidatureService.getAll()
       .subscribe(
@@ -28,10 +49,10 @@ export class DocumentCandidatureComponent implements OnInit {
         },
         (error) => {
           console.error(error);
+          this.errorMessage = error
 
         }
       )
-
   }
 
 

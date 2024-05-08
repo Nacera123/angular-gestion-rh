@@ -1,0 +1,21 @@
+<div>
+
+    <p *ngIf="posteSelectionne">Nom du poste : {{ posteSelectionne.poste?.nom }}</p>
+    <p *ngIf="posteSelectionne">Reference du poste : {{ posteSelectionne.poste?.reference }}</p>
+    <p *ngIf="posteSelectionne">Type de contrat : {{ posteSelectionne.typeContrat?.type }}</p>
+    <p *ngIf="posteSelectionne">Reference de la session : {{ posteSelectionne.session?.reference }}</p>
+    <p *ngIf="posteSelectionne">Ouverture de la session : {{ posteSelectionne.session?.dateOuverture }}</p>
+    <p *ngIf="posteSelectionne">Cloture de la session : {{ posteSelectionne.session?.dateCloture }}</p>
+    <p *ngIf="posteSelectionne">Status de la session : {{ posteSelectionne.session?.status }}</p>
+    <p>descriptif du poste :</p>
+    <div class=" bg-white p-5" *ngIf="posteSelectionne" [innerHTML]="contenuHtml">
+        {{ posteSelectionne.descriptif }}
+    </div>
+
+
+
+
+</div>
+
+<button>Candiddater</button>
+<button [routerLink]="['/offre']">retour</button>

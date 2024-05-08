@@ -1,1 +1,58 @@
-<p>poste-vacant works!</p>
+<app-add [routerLink]="['/admin/poste-vacant/add']"></app-add>
+<div class="card-body">
+
+    <table class="table datatable">
+        <thead class="table table-info">
+            <tr>
+                <th scope="col">Poste Vacant</th>
+                <th scope="col">Reference du poste</th>
+                <th scope="col">Type de Contrat</th>
+                <th scope="col">Descriptif</th>
+                <th scope="col">Session d'ouverture</th>
+                <th scope="col">Session de fermeture</th>
+                <th scope="col">Position</th>
+                <th scope="col"> Detail</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
+                {{ errorMessage }}
+            </div>
+
+            <tr *ngFor="let toto of postesVacants">
+                <td>{{ toto.poste?.nom }}</td>
+                <td>{{ toto.poste?.reference }}</td>
+                <td>{{ toto.typeContrat?.type }}</td>
+                <td>{{ toto.descriptif }}</td>
+                <td>{{ toto.session?.dateOuverture }}</td>
+                <td>{{ toto.session?.dateCloture }}</td>
+                <td>{{ toto.session?.status }}</td>
+
+                <app-voir (click)="getPosteVacantById(toto.id)"
+                    [routerLink]="['/admin/poste-vacant/fiche', toto.id]"></app-voir>
+                <app-delete></app-delete>
+                <app-update></app-update>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+
+</div>
+
+<!-- <div *ngIf="postesVacants.length > 0">
+    <h2>Liste des postes vacants</h2>
+    <ul>
+        <li *ngFor="let poste of postesVacants">
+            <h3>{{ poste.descriptif }}</h3>
+            <p>Type de contrat : {{ poste.typeContrat?.type }}</p>
+        </li>
+    </ul>
+</div>
+<div *ngIf="postesVacants.length === 0">
+    <p>Aucun poste vacant disponible pour le moment.</p>
+</div> -->

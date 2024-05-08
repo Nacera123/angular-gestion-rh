@@ -1,6 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { PosteDeTravail } from "src/app/models/candidature/posteDeTravail";
 
@@ -17,18 +17,37 @@ export class PosteDeTravailService {
         private readonly http: HttpClient
     ) { }
 
+
+    ///gestion des erreur
+    private handleError(error: HttpErrorResponse): Observable<any> {
+        if (error.error instanceof ErrorEvent) {
+            // Erreur côté client
+            console.error(' Erreur côté client: ', error.error.message);
+        } else {
+            // Erreur côté serveur
+            console.log('Erreur côté serveur : ', error.statusText);
+            console.log('mon test : ', error);
+
+            console.error(
+                `Error Code: ${error.status}\n` +
+                `Message: ${error.error}` +
+                `MessageTest: ${error.error.message}`
+            );
+        }
+        return throwError(error.error);
+    }
+
+
+
     //1-liste des poste de travail
     getAll(): Observable<PosteDeTravail[]> {
         let api = `${this.endpoint}/list`;
         return this.http.get<PosteDeTravail[]>(api)
             .pipe(
-                catchError(
-                    (error) => {
-                        console.log(error);
-                        throw error;
+                catchError((error: HttpErrorResponse) => {
+                    return this.handleError(error);
+                })
 
-                    }
-                )
             )
     }
 
@@ -38,12 +57,10 @@ export class PosteDeTravailService {
         let api = `${this.endpoint}/add`;
         return this.http.post<PosteDeTravail>(api, posteDeTravail)
             .pipe(
-                catchError(
-                    (error) => {
-                        console.log(error);
-                        throw error;
-                    }
-                )
+                catchError((error: HttpErrorResponse) => {
+                    return this.handleError(error);
+                })
+
             );
     }
 
@@ -64,17 +81,15 @@ export class PosteDeTravailService {
             );
     }
 
-    //3- modification d'un poste de travail
+    //4- modification d'un poste de travail
     update(posteDeTravail: PosteDeTravail): Observable<PosteDeTravail> {
         let api = `${this.endpoint}/${posteDeTravail.id}/update`;
         return this.http.post<PosteDeTravail>(api, posteDeTravail)
             .pipe(
-                catchError(
-                    (error) => {
-                        console.log(error);
-                        throw error;
-                    }
-                )
+                catchError((error: HttpErrorResponse) => {
+                    return this.handleError(error);
+                })
+
             );
     }
     // update(posteDeTravail: PosteDeTravail): Observable<PosteDeTravail> {
@@ -90,7 +105,7 @@ export class PosteDeTravailService {
     //         );
     // }
 
-    //- suppression d'un poste de travail
+    //5- suppression d'un poste de travail
     delete(id?: Number) {
         let api = `${this.endpoint}/delete/${id}`;
         return this.http.delete<void>(api)
@@ -116,5 +131,13 @@ export class PosteDeTravailService {
     //             )
     //         );
     // }
+
+
+    //6- recuperer la poste par nom
+    getPosteByNom(nom: String): Observable<PosteDeTravail> {
+        let api = `${this.endpoint}/detail/${nom}`;
+        return this.http.get<PosteDeTravail>(api);
+    }
+
 
 }

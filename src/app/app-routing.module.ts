@@ -23,6 +23,14 @@ import { PosteDeTravailComponent } from './pages/general/candidature/poste-de-tr
 import { SessionCandidatureComponent } from './pages/general/candidature/session-candidature/session-candidature.component';
 import { PosteDeTravailAddComponent } from './forms/candidature/poste-de-travail/poste-de-travail.component';
 import { PosteDeTravailFicheComponent } from './components/candidature/fiche/poste-de-travail-fiche/poste-de-travail-fiche.component';
+import { SaveSessionCandidatureComponent } from './forms/candidature/save-session-candidature/save-session-candidature.component';
+import { PosteVacantComponent } from './pages/general/candidature/poste-vacant/poste-vacant.component';
+import { SessionCandidatureFicheComponent } from './components/candidature/session-candidature-fiche/session-candidature-fiche.component';
+import { SavePosteVacantComponent } from './forms/candidature/save-poste-vacant/save-poste-vacant.component';
+import { FichePosteVacantComponent } from './components/candidature/fiche/fiche-poste-vacant/fiche-poste-vacant.component';
+import { OffreDeTravailComponent } from './pages/utilisateur/offre-de-travail/offre-de-travail.component';
+import { DetailOffreComponent } from './pages/utilisateur/detail-offre/detail-offre.component';
+import { SaveNomDocumentComponent } from './forms/candidature/save-nom-document/save-nom-document.component';
 
 
 const routes: Routes = [
@@ -36,22 +44,43 @@ const routes: Routes = [
   { path: 'sidebar', component: SidebarAdminComponent },
   { path: 'footer-admin', component: FooterAdminComponent },
   { path: 'test', component: TestComponent },
+
   //candidature
-  { path: 'document-candidature', component: DocumentCandidatureComponent },
-  { path: 'app-candidature', component: CandidatureComponent },
-  { path: 'nom-document', component: NomDocumentComponent },
+  { path: 'offre', component: OffreDeTravailComponent },
+  { path: 'offre/dtail/:id', component: DetailOffreComponent },
+
   //1-poste de travail
 
-  { path: 'session-candidature', component: SessionCandidatureComponent },
-  { path: 'poste-de-travail-fiche', component: PosteDeTravailFicheComponent },
+  // Admin
   {
     path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
     children: [
       { path: 'type-contrat', component: TypeContratComponent },
       { path: 'etat-candidature', component: EtatCandidatureComponent },
+      //poste de travail
       { path: 'poste-de-travail', component: PosteDeTravailComponent },
       { path: 'poste-de-travail/add', component: PosteDeTravailAddComponent },
-      { path: 'poste-de-travail/edit/:id', component: PosteDeTravailAddComponent }
+      { path: 'poste-de-travail/edit/:id', component: PosteDeTravailAddComponent },
+      { path: 'poste-de-travail/fiche/:id', component: PosteDeTravailFicheComponent },
+      { path: 'poste-de-travail-fiche', component: PosteDeTravailFicheComponent },
+
+      //session candidature
+      { path: 'session-candidature', component: SessionCandidatureComponent },
+      { path: 'session-candidature/fiche/:id', component: SessionCandidatureFicheComponent },
+      { path: 'session-candidature/add', component: SaveSessionCandidatureComponent },
+      { path: 'session-candidature/edit/:id', component: SaveSessionCandidatureComponent },
+      //candidature
+      { path: 'candidature', component: CandidatureComponent },
+      //document candidature
+      { path: 'document-candidature', component: DocumentCandidatureComponent },
+      //nom des documents
+      { path: 'nom-document', component: NomDocumentComponent },
+      { path: 'nom-document/add', component: SaveNomDocumentComponent },
+      //poste de travail vaccant 
+      { path: 'poste-vacant', component: PosteVacantComponent },
+      { path: 'poste-vacant/add', component: SavePosteVacantComponent },
+      { path: 'poste-vacant/fiche/:id', component: FichePosteVacantComponent },
+
     ]
   },
 

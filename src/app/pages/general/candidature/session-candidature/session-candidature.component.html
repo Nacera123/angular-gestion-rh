@@ -1,1 +1,77 @@
-<p>session-candidature works!</p>
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+</div>
+
+<app-add [routerLink]="['/admin/session-candidature/add']"></app-add>
+<div class="card-body">
+
+    <table class="table datatable">
+        <thead class="table table-info">
+            <tr>
+                <th scope="col">Reference</th>
+                <th scope="col">Date d'ouverture</th>
+                <th scope="col"> Date de cloture</th>
+                <th scope="col"> Status</th>
+                <th scope="col"> Detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let session of sessionCandidature | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+                <td>{{ session.reference }}</td>
+                <td>{{ session.dateOuverture }}</td>
+                <td>{{ session.dateCloture }}</td>
+                <td>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                            [checked]="session.status" disabled>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">{{ session.status ? 'Activé' :
+                            'Désactivé' }}</label>
+                    </div>
+                </td>
+
+
+                <td>
+                    <!-- <button [routerLink]="['/admin/session-candidature/fiche', session.id]">voir</button> -->
+
+                    <!-- <app-view (click)="getSessionById(session.id)"></app-view> -->
+                    <app-voir [routerLink]="['/admin/session-candidature/fiche', session.id]"></app-voir>
+                    <app-delete (click)="deleteSession(session.id)"></app-delete>
+                    <app-update [routerLink]="['/admin/session-candidature/edit', session.id]"></app-update>
+
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+
+</div>
+
+
+<!-- <div class="modal fade" id="verticalycentered" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" *ngIf="sessionSelectionne">Détails de la session : <b>{{
+                        sessionSelectionne.reference
+                        }}</b>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p *ngIf="sessionSelectionne">Référence : {{ sessionSelectionne.reference }}</p>
+                <p *ngIf="sessionSelectionne">Date d'ouverture : {{ sessionSelectionne.dateOuverture }}</p>
+                <p *ngIf="sessionSelectionne">Date de clôture : {{ sessionSelectionne.dateCloture }}</p>
+                <p *ngIf="sessionSelectionne">Status : {{ sessionSelectionne.status }}</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+
+            </div>
+        </div>
+    </div>
+</div> -->

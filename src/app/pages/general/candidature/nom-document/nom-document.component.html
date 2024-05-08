@@ -1,1 +1,33 @@
-<p>nom-document works!</p>
+<app-add [routerLink]="['/admin/nom-document/add']"></app-add>
+<div class="card-body">
+
+    <table class="table datatable">
+        <thead class="table table-info">
+            <tr>
+                <th scope="col">Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
+                {{ errorMessage }}
+            </div>
+
+            <tr *ngFor="let nomDoc of nomDocument | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+                <td>{{ nomDoc.nom }}</td>
+
+
+                <td>
+                    <!-- <app-delete (click)="deleteNomDoc(nomDoc!.id)"></app-delete> -->
+                    <!-- <app-update [routerLink]="['/admin/nom-document/edit', nomDoc.id]"></app-update> -->
+
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+
+</div>
