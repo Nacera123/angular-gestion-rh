@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import Quill from 'quill';
@@ -7,7 +6,6 @@ import { PosteDeTravail } from 'src/app/models/candidature/posteDeTravail';
 import { PosteVacant } from 'src/app/models/candidature/posteVacant';
 import { SessionCandidature } from 'src/app/models/candidature/sessionCandidature';
 import { TypeDeContrat } from 'src/app/models/candidature/typeDeContrat';
-import { SessionCandidatureComponent } from 'src/app/pages/general/candidature/session-candidature/session-candidature.component';
 import { PosteDeTravailService } from 'src/app/services/candidature/poste-de-travail.service';
 import { PosteVacantService } from 'src/app/services/candidature/poste-vacant.service';
 import { sessionCandidatureService } from 'src/app/services/candidature/sessionCandidature.service';
@@ -91,14 +89,7 @@ export class SavePosteVacantComponent implements OnInit {
       }
     )
 
-    // this.initQuillEditor();
-    // this.editor = new Quill('#editor', {
-    //   theme: 'snow' 
-    // });
 
-    // this.editor.on('text-change', () => {
-    //   this.posteVacant.descriptif = this.editor?.getText();
-    // });
 
     // Initialisation de l'éditeur Quill
     const editor = new Quill('.editor', {

@@ -12,6 +12,7 @@ export class NomDocumentComponent implements OnInit {
 
   nomDocument: NomDocument[] = [];
 
+  nomDocumentSelectionne: NomDocument | undefined;
   errorMessage: string = '';
 
 
@@ -55,28 +56,43 @@ export class NomDocumentComponent implements OnInit {
   }
 
   //suprimer
-  // deleteNomDoc(id?: Number): void {
+  deleteSession(id?: Number): void {
 
 
-  //   this.confirmService.showConfirm("Are you sure want to Delete?",
-  //     (doc: NomDocument) => {
+    this.confirmService.showConfirm("Are you sure want to Delete?",
+      () => {
 
-  //       this.nomDocumentService.delete(doc.id)
-  //         .subscribe(
+        this.nomDocumentService.delete(id)
+          .subscribe(
 
-  //           () => {
-  //             console.log('La session a été supprimé avec succès.');
-  //             // Mettre à jour les données après la suppression réussie
-  //             this.getAllNomDocuments();
-  //           },
-  //           (error) => {
-  //             console.error('Une erreur s\'est produite lors de la suppression de la session de travail :', error);
-  //           }
-  //         )
-  //     },
-  //     () => {
+            () => {
+              alert('toto')
+              console.log('La session a été supprimé avec succès.');
+              // Mettre à jour les données après la suppression réussie
+              this.getAllNomDocuments();
+            },
+            (error) => {
+              console.error('Une erreur s\'est produite lors de la suppression de la session de travail :', error);
+            }
+          )
+      },
+      () => {
 
-  //     })
+      })
 
-  // }
+  }
+
+  getNomDocById(id?: Number) {
+    console.log(id);
+    if (id !== undefined) {
+      this.nomDocumentService.getById(id).subscribe(
+        (response: NomDocument) => {
+          // this.selected = response;
+          this.nomDocumentSelectionne = response;
+        }
+      );
+    } else {
+      console.error('ID est undefined');
+    }
+  }
 }

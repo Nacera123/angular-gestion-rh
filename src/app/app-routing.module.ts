@@ -31,6 +31,8 @@ import { FichePosteVacantComponent } from './components/candidature/fiche/fiche-
 import { OffreDeTravailComponent } from './pages/utilisateur/offre-de-travail/offre-de-travail.component';
 import { DetailOffreComponent } from './pages/utilisateur/detail-offre/detail-offre.component';
 import { SaveNomDocumentComponent } from './forms/candidature/save-nom-document/save-nom-document.component';
+import { SaveDocumentCandidatureComponent } from './forms/candidature/save-document-candidature/save-document-candidature.component';
+import { AComponent } from './forms/candidature/a/a.component';
 
 
 const routes: Routes = [
@@ -48,6 +50,9 @@ const routes: Routes = [
   //candidature
   { path: 'offre', component: OffreDeTravailComponent },
   { path: 'offre/dtail/:id', component: DetailOffreComponent },
+  //candidater
+  { path: 'a/:id', component: AComponent },
+
 
   //1-poste de travail
 
@@ -64,6 +69,7 @@ const routes: Routes = [
       { path: 'poste-de-travail/fiche/:id', component: PosteDeTravailFicheComponent },
       { path: 'poste-de-travail-fiche', component: PosteDeTravailFicheComponent },
 
+
       //session candidature
       { path: 'session-candidature', component: SessionCandidatureComponent },
       { path: 'session-candidature/fiche/:id', component: SessionCandidatureFicheComponent },
@@ -73,9 +79,11 @@ const routes: Routes = [
       { path: 'candidature', component: CandidatureComponent },
       //document candidature
       { path: 'document-candidature', component: DocumentCandidatureComponent },
+      { path: 'save-document-candidature', component: SaveDocumentCandidatureComponent },
       //nom des documents
       { path: 'nom-document', component: NomDocumentComponent },
       { path: 'nom-document/add', component: SaveNomDocumentComponent },
+      { path: 'nom-document/edit/:id', component: SaveNomDocumentComponent },
       //poste de travail vaccant 
       { path: 'poste-vacant', component: PosteVacantComponent },
       { path: 'poste-vacant/add', component: SavePosteVacantComponent },

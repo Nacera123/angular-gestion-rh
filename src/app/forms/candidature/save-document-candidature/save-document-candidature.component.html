@@ -1,0 +1,33 @@
+<div class="card-body" style="width: 600px;margin-bottom: 200px;">
+
+
+    <form (ngSubmit)="ajout()">
+
+        <div class="col-12 mb-2">
+            <label for="inputState" class="form-label">Nom </label>
+            <select id="inputState" class="form-select" [(ngModel)]="nomDoc.nom" name="nom" required>
+                <option *ngFor="let nom of tabNomDoc" [value]="nom">{{ nom }}
+                </option>
+            </select>
+        </div>
+
+
+
+        <div class="col-12 mb-12">
+            <label for="inputState" class="form-label">Description:</label>
+            <input type="text" [(ngModel)]="documentCandidature.pieceJointe" name="pieceJointe">
+
+        </div>
+
+
+
+
+        <div class="col-12 text-center pt-4 mt-4">
+            <app-submit></app-submit>
+
+        </div>
+
+
+    </form>
+
+</div>

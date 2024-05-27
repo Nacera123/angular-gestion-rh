@@ -38,6 +38,7 @@ export class SidebarAdminComponent implements OnInit {
         { label: 'Candidatures', route: '/admin/candidature' },
         { label: 'Document candidature', route: '/admin/document-candidature' },
         { label: 'Noms des documents', route: '/admin/nom-document' },
+        { label: 'save-document-candidature', route: '/admin/save-document-candidature' },
       ]
     },
     {

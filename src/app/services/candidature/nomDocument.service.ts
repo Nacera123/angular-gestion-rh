@@ -13,111 +13,114 @@ export class NomDocumentService {
 
     private endpoint: string = 'http://localhost:1234/nom-document'
 
+
     constructor(
         private readonly http: HttpClient
     ) { }
 
 
-    // gestion des erreurs:
+    ///gestion des erreur
     private handleError(error: HttpErrorResponse): Observable<any> {
         if (error.error instanceof ErrorEvent) {
             // Erreur côté client
-            console.error('Erreur côté client: ', error.error.message);
+            console.error(' Erreur côté client: ', error.error.message);
         } else {
             // Erreur côté serveur
-            //console.log('Erreur côté serveur : ', error.statusText);
-            console.log('test 1  : ', error.error.message);
+            console.log('Erreur côté serveur : ', error.statusText);
+            console.log('mon test : ', error);
 
             console.error(
-                /// `Error Code: ${error.status}\n` +
-                `Message: ${error.error}`
+                `Error Code: ${error.status}\n` +
+                `Message: ${error.error}` +
+                `MessageTest: ${error.error.message}`
             );
         }
-        return throwError(error.error.message);
+        return throwError(error.error);
     }
 
-    //1- retourner la liste des nom de doc 
+
+
+    //1-liste des nom de document
     getAll(): Observable<NomDocument[]> {
         let api = `${this.endpoint}/list`;
         return this.http.get<NomDocument[]>(api)
             .pipe(
-                catchError(
-                    (error: HttpErrorResponse) => {
-
-                        console.log(this.handleError(error));
-
-                        //console.error(this.handleError(error));
-                        return this.handleError(error)
-
-                    }
-                )
+                catchError((error: HttpErrorResponse) => {
+                    return this.handleError(error);
+                })
 
             )
     }
 
-    //2-  Ajouter un nom de document
-    add(nomDocument: NomDocument) {
+
+    //2- ajout d'un poste de travail
+    add(posteDeTravail: NomDocument): Observable<NomDocument> {
         let api = `${this.endpoint}/add`;
-        return this.http.post<NomDocument>(api, nomDocument)
+        return this.http.post<NomDocument>(api, posteDeTravail)
             .pipe(
-                catchError(
-                    (error: HttpErrorResponse) => {
+                catchError((error: HttpErrorResponse) => {
+                    return this.handleError(error);
+                })
 
-                        console.error(this.handleError(error));
-                        return this.handleError(error)
-
-                    }
-                )
-            )
+            );
     }
 
-    //3- get by id
-    getById(id: Number): Observable<NomDocument> {
-        let api = `${this.endpoint}/${id}`
+
+    //3- recuperation d'un poste de travail par id
+    getById(id?: Number): Observable<NomDocument> {
+
+        let api = `${this.endpoint}/${id}`;
         return this.http.get<NomDocument>(api)
             .pipe(
                 catchError(
-                    (error: HttpErrorResponse) => {
-
-                        console.error(this.handleError(error));
-                        return this.handleError(error)
+                    (error) => {
+                        console.log(error);
+                        throw error;
 
                     }
                 )
-
-            )
+            );
     }
 
-    //4 - update
-    update(nom: NomDocument): Observable<NomDocument> {
-        let api = `${this.endpoint}/${nom.id}/update`
+    //3- recuperation d'un document par nom
+    getByNom(nom?: String): Observable<NomDocument> {
 
-        return this.http.post<NomDocument>(api, nom)
+        let api = `${this.endpoint}/detail/${nom}`;
+        return this.http.get<NomDocument>(api)
             .pipe(
                 catchError(
-                    (error: HttpErrorResponse) => {
-                        console.log(this.handleError(error));
-                        return this.handleError(error);
+                    (error) => {
+                        console.log(error);
+                        throw error;
 
                     }
                 )
-            )
-
+            );
     }
 
-    //5- delete
-    delete(id: Number): Observable<NomDocument> {
-        let api = `${this.endpoint}/delete?id=${id}`
-        return this.http.delete<NomDocument>(api)
+    //4- modification d'un poste de travail
+    update(posteDeTravail: NomDocument): Observable<NomDocument> {
+        let api = `${this.endpoint}/${posteDeTravail.id}/update`;
+        return this.http.post<NomDocument>(api, posteDeTravail)
             .pipe(
-                catchError(
-                    (error: HttpErrorResponse) => {
-                        console.log(this.handleError(error));
-                        return this.handleError(error);
+                catchError((error: HttpErrorResponse) => {
+                    return this.handleError(error);
+                })
 
-                    }
-                )
-            )
+            );
     }
 
+    //5- suppression d'un poste de travail
+    delete(id?: Number) {
+        let api = `${this.endpoint}/delete/${id}`;
+        return this.http.delete<void>(api)
+            .pipe(
+                catchError(error => {
+                    console.log(error);
+                    throw error;
+                })
+            );
+
+
+    }
 }

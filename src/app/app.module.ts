@@ -53,6 +53,8 @@ import { FichePosteVacantComponent } from './components/candidature/fiche/fiche-
 import { OffreDeTravailComponent } from './pages/utilisateur/offre-de-travail/offre-de-travail.component';
 import { DetailOffreComponent } from './pages/utilisateur/detail-offre/detail-offre.component';
 import { SaveNomDocumentComponent } from './forms/candidature/save-nom-document/save-nom-document.component';
+import { SaveDocumentCandidatureComponent } from './forms/candidature/save-document-candidature/save-document-candidature.component';
+import { AComponent } from './forms/candidature/a/a.component';
 
 //http client
 
@@ -105,7 +107,9 @@ import { SaveNomDocumentComponent } from './forms/candidature/save-nom-document/
     VoirComponent,
     OffreDeTravailComponent,
     DetailOffreComponent,
-    SaveNomDocumentComponent
+    SaveNomDocumentComponent,
+    SaveDocumentCandidatureComponent,
+    AComponent,
 
   ],
   imports: [

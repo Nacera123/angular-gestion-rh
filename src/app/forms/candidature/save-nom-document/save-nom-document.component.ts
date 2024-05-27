@@ -10,8 +10,10 @@ import { NomDocumentService } from 'src/app/services/candidature/nomDocument.ser
   styleUrls: ['./save-nom-document.component.css']
 })
 export class SaveNomDocumentComponent implements OnInit {
-  formGroupe!: FormGroup
-  nomDocument!: NomDocument
+  //formGroupe!: FormGroup
+  form!: FormGroup
+  formulaire!: NomDocument
+  //nomDocument!: NomDocument
   errorMessage: string = ''
 
   constructor(
@@ -23,7 +25,8 @@ export class SaveNomDocumentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.formGroupe = this.fb.group({
+    //this.formGroupe = this.fb.group({
+    this.form = this.fb.group({
       nom: ['', Validators.required]
     });
 
@@ -33,11 +36,15 @@ export class SaveNomDocumentComponent implements OnInit {
           const id = params['id'];
           if (id) {
             this.nomDocumentService.getById(id).subscribe(
-              doc => {
-                this.nomDocument = doc
-                this.formGroupe.patchValue({
-                  nom: doc.nom
+              formulaire => {
+                this.formulaire = formulaire
+                this.form.patchValue({
+                  nom: formulaire.nom
                 })
+              },
+              error => {
+                console.log(error);
+                this.errorMessage = error;
               }
             )
           }
@@ -46,11 +53,12 @@ export class SaveNomDocumentComponent implements OnInit {
   }
 
   create(): void {
-    const formulaire = this.formGroupe.value;
-    if (this.nomDocument && this.nomDocument.id) {
-      this.nomDocumentService.update({ id: this.nomDocument.id, ...formulaire })
+    const formulaire = this.form.value;
+    if (this.formulaire && this.formulaire.id) {
+      this.nomDocumentService.update({ id: this.formulaire.id, ...formulaire })
         .subscribe(
           () => {
+            alert('Le nom a bien été mis à jour');
             this.router.navigate(['admin/nom-document'])
           },
           (error) => {

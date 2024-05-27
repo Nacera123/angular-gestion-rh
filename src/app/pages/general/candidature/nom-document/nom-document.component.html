@@ -1,3 +1,8 @@
+<div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
+    {{ errorMessage }}
+</div>
+
+
 <app-add [routerLink]="['/admin/nom-document/add']"></app-add>
 <div class="card-body">
 
@@ -9,19 +14,15 @@
         </thead>
         <tbody>
 
-            <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
-                {{ errorMessage }}
-            </div>
 
             <tr *ngFor="let nomDoc of nomDocument | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
                 <td>{{ nomDoc.nom }}</td>
 
 
                 <td>
-                    <!-- <app-delete (click)="deleteNomDoc(nomDoc!.id)"></app-delete> -->
-                    <!-- <app-update [routerLink]="['/admin/nom-document/edit', nomDoc.id]"></app-update> -->
+                    <app-update [routerLink]="['/admin/nom-document/edit', nomDoc.id]"></app-update>
 
-
+                    <app-delete (click)="deleteSession(nomDoc.id)"></app-delete>
                 </td>
             </tr>
 

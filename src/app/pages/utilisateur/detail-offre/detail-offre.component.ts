@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PosteVacant } from 'src/app/models/candidature/posteVacant';
 import { PosteVacantService } from 'src/app/services/candidature/poste-vacant.service';
 
@@ -36,7 +36,8 @@ export class DetailOffreComponent implements OnInit {
   constructor(
     private posteVacantService: PosteVacantService,
     private routeActivated: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) {
     const id = this.routeActivated.snapshot.paramMap.get('id');
 
@@ -49,6 +50,14 @@ export class DetailOffreComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getPosteVacantById();
+  }
+
+  candidater(id: Number | undefined) {
+    if (id) {
+      this.router.navigate(['/a', id]);
+    } else {
+      console.log('Id du poste vacant est undefined');
+    }
   }
 
   getPosteVacantById(id?: Number) {

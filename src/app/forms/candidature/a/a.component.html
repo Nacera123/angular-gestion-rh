@@ -1,0 +1,69 @@
+<div class="card-body" style="width: 600px;margin-bottom: 200px;">
+
+
+    <form (ngSubmit)="ajout()">
+
+        <div class="col-12 mb-2">
+            <label for="inputState" class="form-label">Civilite</label>
+            <select id="inputState" class="form-select" [(ngModel)]="civilite.designation" name="designation" required>
+                <option *ngFor="let designation of tabCivilite" [value]="designation">{{ designation }}
+                </option>
+            </select>
+        </div>
+        <div class="col-12 mb-2">
+            <label for="inputState" class="form-label">Nom Document</label>
+            <select id="inputState" class="form-select" [(ngModel)]="nomDoc.nom" name="nom" required>
+                <option *ngFor="let nom of tabNomDoc" [value]="nom">{{ nom }}
+                </option>
+            </select>
+        </div>
+        <div class="col-12 mb-2">
+            <label for="inputState" class="form-label">Pays </label>
+            <select id="inputState" class="form-select" [(ngModel)]="pays.designation" name="designation" required>
+                <option *ngFor="let designation of tabPays" [value]="designation">{{ designation }}
+                </option>
+            </select>
+        </div>
+
+
+
+        <div class="col-12 mb-12">
+            <label for="inputState" class="form-label">Description:</label>
+            <input type="text" [(ngModel)]="test.pieceJointe" name="pieceJointe">
+
+        </div>
+
+
+        <div class="col-12 mb-12">
+            <label for="inputState" class="form-label">nom Individu</label>
+            <input type="text" [(ngModel)]="individu.nom" name="nom">
+
+        </div>
+        <div class="col-12 mb-12">
+            <label for="inputState" class="form-label">prenom Individu</label>
+            <input type="text" [(ngModel)]="individu.prenom" name="prenom">
+
+        </div>
+        <div class="col-12 mb-12">
+            <label for="inputState" class="form-label">emailIndividu</label>
+            <input type="text" [(ngModel)]="individu.email" name="email">
+
+        </div>
+        <div class="col-12 mb-12">
+            <label for="inputState" class="form-label">telaphone Individu</label>
+            <input type="text" [(ngModel)]="individu.telephone" name="telephone">
+
+        </div>
+
+
+
+
+        <div class="col-12 text-center pt-4 mt-4">
+            <app-submit></app-submit>
+
+        </div>
+
+
+    </form>
+
+</div>

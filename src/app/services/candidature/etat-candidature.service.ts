@@ -33,4 +33,9 @@ export class EtatCandidatureService {
         )
       )
   }
+
+  getByEtat(etat: String): Observable<EtatCandidature> {
+    let api = `${this.endpoint}/list/etats/${etat}`
+    return this.http.get<EtatCandidature>(api)
+  }
 }

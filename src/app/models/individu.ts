@@ -1,3 +1,7 @@
+import { Civilite } from "./civilite"
+import { EtatCivilEnum } from "./enum/etatCivilEnum"
+import { Pays } from "./pays"
+
 export class Individu {
     public _id?: number
     public nom?: string
@@ -9,5 +13,7 @@ export class Individu {
     public cp?: number
     public ville?: string
     public nombreEnfant?: number
+    public civilite?: Civilite;
+    public pays?: Pays
 
 }
