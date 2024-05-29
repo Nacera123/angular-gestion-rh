@@ -1,7 +1,27 @@
 <div class="card-body" style="width: 600px;margin-bottom: 200px;">
 
 
-    <form (ngSubmit)="ajout()">
+    <form (ngSubmit)="uploadPdf()">
+
+        <div class="row">
+            <div class="col-12 mb-2">
+                <label for="inputState1" class="form-label">Nom Document 1</label>
+                <select id="inputState1" class="form-select" [(ngModel)]="nomDoc.nom" name="nom" required>
+                    <option *ngFor="let nom of tabNomDoc" [value]="nom">{{ nom }}</option>
+                </select>
+                <input type="file" (change)="onFileSelected1($event)">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mb-2">
+                <label for="inputState2" class="form-label">Nom Document 2</label>
+                <select id="inputState2" class="form-select" [(ngModel)]="nomDoc.nom" name="nom" required>
+                    <option *ngFor="let nom of tabNomDoc" [value]="nom">{{ nom }}</option>
+                </select>
+                <input type="file" (change)="onFileSelected2($event)">
+            </div>
+        </div>
 
         <div class="col-12 mb-2">
             <label for="inputState" class="form-label">Civilite</label>
@@ -10,13 +30,24 @@
                 </option>
             </select>
         </div>
+        <!-- <div class="col-12 mb-2">
+            <label for="inputState" class="form-label">Nom Document</label>
+            <select id="inputState" class="form-select" [(ngModel)]="nomDoc.nom" name="nom" required>
+                <option *ngFor="let nom of tabNomDoc" [value]="nom">{{ nom }}
+                </option>
+            </select>
+            <input type="file" (change)="onFileSelected1($event)">
+
+
+        </div>
         <div class="col-12 mb-2">
             <label for="inputState" class="form-label">Nom Document</label>
             <select id="inputState" class="form-select" [(ngModel)]="nomDoc.nom" name="nom" required>
                 <option *ngFor="let nom of tabNomDoc" [value]="nom">{{ nom }}
                 </option>
             </select>
-        </div>
+            <input type="file" (change)="onFileSelected2($event)">
+        </div> -->
         <div class="col-12 mb-2">
             <label for="inputState" class="form-label">Pays </label>
             <select id="inputState" class="form-select" [(ngModel)]="pays.designation" name="designation" required>
@@ -29,6 +60,8 @@
 
         <div class="col-12 mb-12">
             <label for="inputState" class="form-label">Description:</label>
+
+            <!-- <input type="file" (change)="onFileSelected($event)" [(ngModel)]="test.pieceJointe" name="pieceJointe"> -->
             <input type="text" [(ngModel)]="test.pieceJointe" name="pieceJointe">
 
         </div>

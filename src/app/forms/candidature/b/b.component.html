@@ -1,0 +1,11 @@
+<!-- b.component.html -->
+<div>
+    <!-- Sélection du premier fichier -->
+    <input type="file" (change)="onFileSelected($event)">
+    <br>
+    <!-- Sélection du deuxième fichier -->
+    <input type="file" (change)="onFileSelected1($event)">
+    <br>
+    <!-- Bouton pour déclencher l'envoi des fichiers -->
+    <button (click)="uploadPdf()">Envoyer</button>
+</div>

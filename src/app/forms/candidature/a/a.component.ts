@@ -10,6 +10,7 @@ import { TestDto } from 'src/app/models/candidature/testDto';
 import { Civilite } from 'src/app/models/civilite';
 import { Individu } from 'src/app/models/individu';
 import { Pays } from 'src/app/models/pays';
+import { DocumentCandidatureService } from 'src/app/services/candidature/documentCandidature.service';
 import { NomDocumentService } from 'src/app/services/candidature/nomDocument.service';
 import { PosteVacantService } from 'src/app/services/candidature/poste-vacant.service';
 import { TestService } from 'src/app/services/candidature/test.service';
@@ -37,6 +38,14 @@ export class AComponent implements OnInit {
 
 
 
+  pdfInfo: DocumentCandidature = new DocumentCandidature();
+  pdfInfo1: DocumentCandidature = new DocumentCandidature();
+  selectedFile1: File | null = null;
+  selectedFile2: File | null = null;
+
+  posteSelectionne: PosteVacant | undefined;
+
+
   posteId: Number | undefined;
   posteVacant: PosteVacant = new PosteVacant();
 
@@ -46,6 +55,7 @@ export class AComponent implements OnInit {
     private nomDocService: NomDocumentService,
     private paysService: PaysService,
     private civiliteService: CiviliteService,
+    private documentCandidatureService: DocumentCandidatureService,
 
 
 
@@ -89,165 +99,363 @@ export class AComponent implements OnInit {
     if (this.posteId) {
       this.getPosteVacantById(this.posteId);
     }
-  }
-
-  getPosteVacantById(id: Number) {
-    this.posteVacantService.getById(id).subscribe(
-      (response: PosteVacant) => {
-        this.posteVacant = response;
-      }
-    );
-  }
 
 
-  ajout() {
-    if (this.nomDoc.nom && this.posteVacant.id && this.individu
-      && this.pays && this.pays.designation
-      && this.civilite && this.civilite.designation
-    ) {
-      this.test.nomPieceJointe = this.nomDoc
-      this.test.candidature = this.candidature
-      this.candidature.individu = this.individu
-      this.candidature.posteVacant = this.posteVacant
-
-      forkJoin([
-        this.nomDocService.getByNom(this.nomDoc.nom),
-        this.paysService.getByDesignation(this.pays.designation),
-        this.civiliteService.getByDesignation(this.civilite.designation),
-        this.posteVacantService.getById(this.posteVacant.id)
-      ]).subscribe(
-        ([ses, pes, civ, pov]) => {
-          if (ses && pes && civ && pov) {
-
-            if (this.test.candidature && this.test.candidature.individu
-              && this.test.candidature.posteVacant
-            ) {
-              this.test.candidature.individu.pays = pes;
-              this.test.candidature.individu.civilite = civ
-              this.test.candidature.posteVacant = pov
-            }
-            this.test.nomPieceJointe = ses;
-            if (this.posteVacant.id) {
-              this.testService.add1(this.test, this.posteId!).subscribe(
-                (response) => {
-                  console.log('Test bien ajouté', response);
-                  alert('Test bien ajouté');
-                },
-                (error) => {
-                  console.log('Erreur lors de la souscription des clés étrangères:', error);
-                  console.error('Erreur lors de la souscription des clés étrangères:', error);
-                }
-              )
-
-            } else {
-              console.error('Erreur lors de la récupération des données nécessaires');
-              alert('Erreur lors de la récupération des données nécessaires');
-            }
-          }
-        }
-      )
-
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.getPosteVacantById(Number(id));
     } else {
-      console.error('Nom de document non valide ou non sélectionné');
-      alert('Nom de document non valide ou non sélectionné');
+      console.error('ID est undefined');
     }
   }
 
 
+  onFileSelected1(event: any): void {
+    this.selectedFile1 = event.target.files[0];
+  }
+  onFileSelected2(event: any): void {
+    this.selectedFile2 = event.target.files[0];
+  }
+  getPosteVacantById(id: Number) {
 
 
+    if (id) {
+      this.posteVacantService.getById(id).subscribe(
+        (response: PosteVacant) => {
+          this.posteSelectionne = response;
+        },
+        error => {
+          console.error('Error retrieving post:', error);
+        }
+      );
+    } else {
+      console.error('ID est undefined');
+    }
+  }
 
 
+  uploadPdf(): void {
+    if (this.posteSelectionne) {
+      const postId = this.posteSelectionne.id;
+      if (postId) {
+        if (this.nomDoc.nom && this.individu
+          && this.pays && this.pays.designation
+          && this.civilite && this.civilite.designation
+        ) {
+          this.test.nomPieceJointe = this.nomDoc
+          this.test.candidature = this.candidature
+          this.candidature.individu = this.individu
+          this.candidature.posteVacant = this.posteVacant
 
+          forkJoin([
+            this.nomDocService.getByNom(this.nomDoc.nom),
+            this.paysService.getByDesignation(this.pays.designation),
+            this.civiliteService.getByDesignation(this.civilite.designation),
 
+          ]).subscribe(
+            ([ses, pes, civ]) => {
+              if (ses && pes && civ) {
 
+                if (this.test.candidature && this.test.candidature.individu
+                  && this.test.candidature.posteVacant
+                ) {
+                  this.test.candidature.individu.pays = pes;
+                  this.test.candidature.individu.civilite = civ
 
+                }
+                this.test.nomPieceJointe = ses;
+                if (this.selectedFile1) {
+                  this.documentCandidatureService.uploadPdf(this.selectedFile1, this.nomDoc.nom!, postId).subscribe(
+                    (response) => {
+                      console.log('Test bien ajouté', response);
+                      alert('Test bien ajouté');
+                    },
+                    (error) => {
+                      console.log('Erreur lors de la souscription des clés étrangères:', error);
+                      console.error('Erreur lors de la souscription des clés étrangères:', error);
+                    }
+                  )
 
+                }
+                if (this.selectedFile2) {
+                  this.documentCandidatureService.uploadPdf(this.selectedFile2, this.nomDoc.nom!, postId).subscribe(
+                    (response) => {
+                      console.log('Test bien ajouté', response);
+                      alert('Test bien ajouté');
+                    },
+                    (error) => {
+                      console.log('Erreur lors de la souscription des clés étrangères:', error);
+                      console.error('Erreur lors de la souscription des clés étrangères:', error);
+                    }
+                  )
 
+                }
+              }
+            }
+          )
 
+        } else {
+          console.error('Nom de document non valide ou non sélectionné');
+          alert('Nom de document non valide ou non sélectionné');
+        }
+      }
 
+    }
 
-
-
-
-
-
-  // ajout() {
-  //   if (this.nomDoc.nom && this.candidature && this.pays && this.pays.designation && this.civilite && this.civilite.designation) {
-  //     this.test.nomPieceJointe = this.nomDoc;
-  //     this.test.candidature = this.candidature;
-
-  //     // Vérifie si this.candidature.posteVacant est défini avant d'assigner l'ID
-  //     if (this.candidature.posteVacant) {
-  //       this.candidature.posteVacant.id = this.posteId;
-  //     }
-
-
-  //     if (this.individu) {
-  //       this.candidature.individu = this.individu;
-
-  //       forkJoin([
-  //         this.nomDocService.getByNom(this.nomDoc.nom),
-  //         this.paysService.getByDesignation(this.pays.designation),
-  //         this.civiliteService.getByDesignation(this.civilite.designation)
-  //       ]).subscribe(
-  //         ([ses, pes, civ]) => {
-  //           // Assurez-vous que les deux requêtes ont réussi
-  //           if (ses && pes && civ) {
-  //             // Assignez le pays à l'individu de la candidature
-  //             if (this.test.candidature && this.test.candidature.individu) {
-  //               this.test.candidature.individu.pays = pes;
-  //               this.test.candidature.individu.civilite = civ
-
-  //             }
-  //             this.test.nomPieceJointe = ses;
-
-
-  //             this.testService.add1(this.test, this.posteVacant.id).subscribe(
-  //               (response) => {
-  //                 console.log('Test bien ajouté', response);
-  //                 alert('Test bien ajouté');
-  //               },
-  //               (error) => {
-  //                 console.log('Erreur lors de la souscription des clés étrangères:', error);
-  //                 console.error('Erreur lors de la souscription des clés étrangères:', error);
-  //               }
-  //             );
-
-  //           } else {
-  //             console.error('Erreur lors de la récupération des données nécessaires');
-  //             alert('Erreur lors de la récupération des données nécessaires');
-  //           }
-  //         },
-  //         (error) => {
-  //           console.error('Erreur lors de la récupération de l\'ID:', error);
-  //           console.log('Erreur lors de la récupération de l\'ID:', error);
-  //         }
-  //       );
-
-
-  //     } else {
-  //       console.error('Nom de document non valide ou non sélectionné');
-  //       alert('Nom de document non valide ou non sélectionné');
-  //     }
-
-  //   } else {
-  //     console.error('Nom de document non valide ou non sélectionné');
-  //     alert('Nom de document non valide ou non sélectionné');
-  //   }
-  // }
-
-
-
-
-
-
-
-
-
+  }
 
 
 }
+
+
+
+
+// toto: string = '';
+// toto1: string = '';
+
+
+
+// onFileSelected(event: any) {
+//   this.selectedFile = event.target.files[0];
+// }
+
+
+
+
+// this.posteVacantService.getById(id).subscribe(
+//   (response: PosteVacant) => {
+//     this.posteVacant = response;
+//   }
+// );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// if (this.selectedFile && this.posteSelectionne) {
+//   const postId = this.posteSelectionne.id;
+//   if (postId) {
+
+//     this.docCandidatureService.uploadPdf(this.selectedFile, this.toto, postId).subscribe(
+//       (response: DocCandidature) => {
+//         console.log('Upload successful', response);
+//         this.pdfInfo = response;
+//         //alert('Upload successful');
+//       },
+//       error => {
+//         console.error('Upload error', error);
+//       }
+//     );
+//   }
+// } else {
+//   console.error('No file selected or post not selected');
+// }
+// if (this.selectedFile1 && this.posteSelectionne) {
+//   const postId = this.posteSelectionne.id;
+//   if (postId) {
+
+//     this.docCandidatureService.uploadPdf(this.selectedFile1, this.toto1, postId).subscribe(
+//       (response: DocCandidature) => {
+//         console.log('Upload successful', response);
+//         this.pdfInfo1 = response;
+//         //alert('Upload successful');
+//       },
+//       error => {
+//         console.error('Upload error', error);
+//       }
+//     );
+//   }
+// } else {
+//   console.error('No file selected or post not selected');
+// }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ajout() {
+//   if (this.nomDoc.nom && this.posteVacant.id && this.individu
+//     && this.pays && this.pays.designation
+//     && this.civilite && this.civilite.designation
+//   ) {
+//     this.test.nomPieceJointe = this.nomDoc;
+//     this.test.candidature = this.candidature;
+//     this.candidature.individu = this.individu;
+//     this.candidature.posteVacant = this.posteVacant;
+
+//     forkJoin([
+//       this.nomDocService.getByNom(this.nomDoc.nom),
+//       this.paysService.getByDesignation(this.pays.designation),
+//       this.civiliteService.getByDesignation(this.civilite.designation),
+//       this.posteVacantService.getById(this.posteVacant.id)
+//     ]).subscribe(
+//       ([ses, pes, civ, pov]) => {
+//         if (ses && pes && civ && pov) {
+//           if (this.test.candidature && this.test.candidature.individu
+//             && this.test.candidature.posteVacant
+//           ) {
+//             this.test.candidature.individu.pays = pes;
+//             this.test.candidature.individu.civilite = civ;
+//             this.test.candidature.posteVacant = pov;
+//           }
+//           this.test.nomPieceJointe = ses;
+
+//           if (this.posteVacant.id && this.selectedFile) {
+//             //this.selectedFile = this.test.pieceJointe
+//             this.testService.add2(this.selectedFile, this.test, this.posteVacant.id).subscribe(
+//               (response) => {
+//                 console.log('Test bien ajouté', response);
+//                 alert('Test bien ajouté');
+//               },
+//               (error) => {
+//                 console.log('Erreur lors de la souscription des clés étrangères:', error);
+//                 console.error('Erreur lors de la souscription des clés étrangères:', error);
+//               }
+//             );
+//           } else {
+//             console.error('Erreur lors de la récupération des données nécessaires ou fichier non sélectionné');
+//             alert('Erreur lors de la récupération des données nécessaires ou fichier non sélectionné');
+//           }
+//         }
+//       },
+//       (error) => {
+//         console.error('Erreur lors de la récupération des clés étrangères', error);
+//         alert('Erreur lors de la récupération des clés étrangères');
+//       }
+//     );
+
+//   } else {
+//     console.error('Nom de document non valide ou non sélectionné');
+//     alert('Nom de document non valide ou non sélectionné');
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+//BONNE VERSION
+
+
+// ajout() {
+//   if (this.nomDoc.nom && this.posteVacant.id && this.individu
+//     && this.pays && this.pays.designation
+//     && this.civilite && this.civilite.designation
+//   ) {
+//     this.test.nomPieceJointe = this.nomDoc
+//     this.test.candidature = this.candidature
+//     this.candidature.individu = this.individu
+//     this.candidature.posteVacant = this.posteVacant
+
+//     forkJoin([
+//       this.nomDocService.getByNom(this.nomDoc.nom),
+//       this.paysService.getByDesignation(this.pays.designation),
+//       this.civiliteService.getByDesignation(this.civilite.designation),
+//       this.posteVacantService.getById(this.posteVacant.id)
+//     ]).subscribe(
+//       ([ses, pes, civ, pov]) => {
+//         if (ses && pes && civ && pov) {
+
+//           if (this.test.candidature && this.test.candidature.individu
+//             && this.test.candidature.posteVacant
+//           ) {
+//             this.test.candidature.individu.pays = pes;
+//             this.test.candidature.individu.civilite = civ
+//             this.test.candidature.posteVacant = pov
+//           }
+//           this.test.nomPieceJointe = ses;
+//           if (this.posteVacant.id) {
+//             this.testService.add2(this.test, this.posteId!).subscribe(
+//               (response) => {
+//                 console.log('Test bien ajouté', response);
+//                 alert('Test bien ajouté');
+//               },
+//               (error) => {
+//                 console.log('Erreur lors de la souscription des clés étrangères:', error);
+//                 console.error('Erreur lors de la souscription des clés étrangères:', error);
+//               }
+//             )
+
+//           } else {
+//             console.error('Erreur lors de la récupération des données nécessaires');
+//             alert('Erreur lors de la récupération des données nécessaires');
+//           }
+//         }
+//       }
+//     )
+
+//   } else {
+//     console.error('Nom de document non valide ou non sélectionné');
+//     alert('Nom de document non valide ou non sélectionné');
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -55,6 +55,10 @@ export class SaveDocumentCandidatureComponent implements OnInit {
     );
 
   }
+
+  add() {
+
+  }
   ajout() {
     // if (this.nomDoc.nom) {
     //   this.documentCandidature.nomPieceJointe = this.nomDoc;

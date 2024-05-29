@@ -53,19 +53,19 @@ export class TestService {
 
             );
     }
-    // add1(test: DocumentCandidature): Observable<DocumentCandidature> {
-    //     let api = `${this.endpoint}/add1`;
+    add1(test: DocumentCandidature): Observable<DocumentCandidature> {
+        let api = `${this.endpoint}/add`;
 
 
-    //     return this.http.post<DocumentCandidature>(api, test)
-    //         .pipe(
-    //             catchError((error: HttpErrorResponse) => {
-    //                 return this.handleError(error);
-    //             })
+        return this.http.post<DocumentCandidature>(api, test)
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    return this.handleError(error);
+                })
 
-    //         );
-    // }
-    add1(test: DocumentCandidature, posteId: Number): Observable<DocumentCandidature> {
+            );
+    }
+    add2(test: DocumentCandidature, posteId: Number): Observable<DocumentCandidature> {
         let api = `${this.endpoint}/add1?posteId=${posteId}`;
 
         return this.http.post<DocumentCandidature>(api, test)
@@ -75,6 +75,35 @@ export class TestService {
                 })
             );
     }
+
+    add3(file: File, test: DocumentCandidature, posteId: Number): Observable<DocumentCandidature> {
+        let api = `${this.endpoint}/add1?posteId=${posteId}`;
+        const formData = new FormData();
+        formData.append('file', file);
+        //formData.append('d', new Blob([JSON.stringify(test)], { type: 'application/json' }));
+        //formData.append('d', test);
+
+        /* this.http.post<any>(apiUrl, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+   .subscribe(response => {
+     // Handle successful response
+   }, error => {
+     // Handle error response
+   });*/
+
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let params = {
+            params: formData,
+            headers: headers
+        }
+        return this.http.post<any>(api, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    return this.handleError(error);
+                })
+            );
+    }
+
+
 
 
 }

@@ -116,4 +116,20 @@ export class DocumentCandidatureService {
     addCandidature(candidature: any, civilite: string, pays: string, nom: string): Observable<GestionCandidatureDto> {
         return this.htpp.post<GestionCandidatureDto>(`${this.endpoint}/add?civilite=${civilite}&pays=${pays}&nom=${nom}`, candidature);
     }
+
+
+
+
+    uploadPdf(file: File, doc: string, postId: Number): Observable<DocumentCandidature> {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('doc', doc);
+        formData.append('postId', postId.toString()); // Ajouter le postId à FormData
+
+        const api = `${this.endpoint}/ajout`
+        return this.htpp.post<DocumentCandidature>(api, formData)
+            .pipe(
+                catchError(this.handleError) // Gestion des erreurs
+            );
+    }
 }

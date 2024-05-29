@@ -54,7 +54,8 @@ export class DetailOffreComponent implements OnInit {
 
   candidater(id: Number | undefined) {
     if (id) {
-      this.router.navigate(['/a', id]);
+      this.router.navigate(['/b', id]);
+      // this.router.navigate(['/a', id]);
     } else {
       console.log('Id du poste vacant est undefined');
     }

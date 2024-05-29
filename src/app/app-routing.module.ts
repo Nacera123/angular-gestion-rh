@@ -33,6 +33,7 @@ import { DetailOffreComponent } from './pages/utilisateur/detail-offre/detail-of
 import { SaveNomDocumentComponent } from './forms/candidature/save-nom-document/save-nom-document.component';
 import { SaveDocumentCandidatureComponent } from './forms/candidature/save-document-candidature/save-document-candidature.component';
 import { AComponent } from './forms/candidature/a/a.component';
+import { BComponent } from './forms/candidature/b/b.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
   { path: 'offre/dtail/:id', component: DetailOffreComponent },
   //candidater
   { path: 'a/:id', component: AComponent },
+  { path: 'b/:id', component: BComponent },
 
 
   //1-poste de travail

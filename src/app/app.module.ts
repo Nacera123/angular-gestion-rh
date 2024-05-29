@@ -55,6 +55,7 @@ import { DetailOffreComponent } from './pages/utilisateur/detail-offre/detail-of
 import { SaveNomDocumentComponent } from './forms/candidature/save-nom-document/save-nom-document.component';
 import { SaveDocumentCandidatureComponent } from './forms/candidature/save-document-candidature/save-document-candidature.component';
 import { AComponent } from './forms/candidature/a/a.component';
+import { BComponent } from './forms/candidature/b/b.component';
 
 //http client
 
@@ -110,6 +111,7 @@ import { AComponent } from './forms/candidature/a/a.component';
     SaveNomDocumentComponent,
     SaveDocumentCandidatureComponent,
     AComponent,
+    BComponent,
 
   ],
   imports: [
