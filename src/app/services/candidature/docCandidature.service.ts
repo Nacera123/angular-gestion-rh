@@ -29,11 +29,13 @@ export class DocCandidatureService {
             );
     }
 
-    uploadCvLm(fileCV: File, fileLM: File, doc: string, postId: Number): Observable<GestionCandidatureDto> {
+    uploadCvLm(fileCV: File, fileLM: File, nomFileCV: string, nomFileLM: string, datas: string, postId: Number): Observable<GestionCandidatureDto> {
         const formData = new FormData();
         formData.append('fileCV', fileCV);
         formData.append('fileLM', fileLM);
-        formData.append('doc', doc);
+        formData.append('nomFileCV', nomFileCV);
+        formData.append('nomFileLM', nomFileLM);
+        formData.append('datas', datas);
         formData.append('postId', postId.toString()); // Ajouter le postId à FormData
 
         const api = `${this.baseUrl}/upload`;
