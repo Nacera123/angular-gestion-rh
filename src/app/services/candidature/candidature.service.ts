@@ -43,10 +43,23 @@ export class CandidatureService {
         return this.http.get<Candidature[]>(api)
             .pipe(
                 catchError(
-                    (error: HttpErrorResponse) => {
+                    error => {
+                        console.error('l\'erreur : ', error);
+                        throw error;
 
-                        console.error(this.handleError(error));
-                        return this.handleError(error)
+                    }
+                )
+            )
+    }
+
+    getByIndividu(id: number): Observable<Candidature[]> {
+        let api = `${this.endpoint}/b/${id}`;
+        return this.http.get<Candidature[]>(api)
+            .pipe(
+                catchError(
+                    error => {
+                        console.error('l\'erreur : ', error);
+                        throw error;
 
                     }
                 )

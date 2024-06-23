@@ -50,13 +50,17 @@
 
     <div class="container d-flex align-items-center justify-content-between">
 
-        <h1 class="logo"><a href="index.html">BizLand<span>.</span></a></h1>
+        <h1 class="logo"><a href="index.html">
+                <span> <img class="flex-shrink-0 img-fluid border rounded" src="../../../../assets/images/nestech.jpg"
+                        alt="" style="width: 50px; height: 30px;"></span>
+
+                NESTECH</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>-->
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                <li><a class="nav-link scrollto active" [routerLink]="['/']">Home</a></li>
                 <li><a class="nav-link scrollto" href="#about">About</a></li>
                 <li><a class="nav-link scrollto" href="#services">Services</a></li>
                 <li><a class="nav-link scrollto " [routerLink]="['/offre']">Nos offres</a></li>

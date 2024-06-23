@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { Candidature } from 'src/app/models/candidature/candidature';
 import { DocumentCandidature } from 'src/app/models/candidature/documentCandidature';
@@ -26,29 +26,29 @@ export class BComponent {
   // pdfInfo1: GestionCandidatureDto = new GestionCandidatureDto();
 
   ///selection de file
-  selectedFile: File | null = null;
-  selectedFile1: File | null = null;
+  selectedFile: File | null = null;//
+  selectedFile1: File | null = null;//
 
   //poste vacant
-  posteSelectionne: PosteVacant | undefined;
+  posteSelectionne: PosteVacant | undefined;//
 /********************* */
   //pays
-  pays: Pays = new Pays();
-  tabPays: String[] = [];
+  pays: Pays = new Pays();//
+  tabPays: String[] = [];//
 
   //civilite
-  civilite: Civilite = new Civilite();
-  tabCivilite: String[] = [];
+  civilite: Civilite = new Civilite();//
+  tabCivilite: String[] = [];//
 
-  candidature: Candidature = new Candidature();
-  individu: Individu = new Individu();
-  test: DocumentCandidature = new DocumentCandidature();
+  candidature: Candidature = new Candidature();//
+  individu: Individu = new Individu();//
+  test: DocumentCandidature = new DocumentCandidature();//
   /** */
 
-  nomDoc: NomDocument = new NomDocument();
-  nomDoc1: NomDocument = new NomDocument();
-  tabNomDoc: String[] = [];
-  tabNomDoc1: String[] = [];
+  nomDoc: NomDocument = new NomDocument();//
+  nomDoc1: NomDocument = new NomDocument();//
+  tabNomDoc: String[] = [];//
+  tabNomDoc1: String[] = [];//
 
 
   constructor(
@@ -58,6 +58,7 @@ export class BComponent {
     private civiliteService: CiviliteService,
     private nomDocService: NomDocumentService,
     private paysService: PaysService,
+    public router: Router,
 
   ) { }
 
@@ -144,6 +145,7 @@ export class BComponent {
 
   }
   uploadPdf1(): void {
+    let route = this.router;
     
     // Télécharger le premier fichier PDF
     if (this.selectedFile && this.posteSelectionne && this.selectedFile1) {
@@ -183,9 +185,24 @@ export class BComponent {
                       // objet qui content toute les infos à part les fichiers
                       this.docCandidatureService.uploadCvLm(this.selectedFile,this.selectedFile1,  this.nomDoc.nom, this.nomDoc1.nom, JSON.stringify(this.test.candidature.individu), postId).subscribe(
                         {
-                           next(response: DocumentCandidature) {
+                           next(response: any) {
                              console.log('Upload successful', response);
-             
+
+                              // Affiche la boîte de dialogue de confirmation
+                              var userConfirmed = confirm("Voulez-vous vraiment continuer ?");
+                              
+                              // Vérifie la réponse de l'utilisateur
+                              if (userConfirmed) {
+                                  alert("Vous avez cliqué sur OK");
+                                  route.navigate(['/individu/register', response.idIndividu]);
+
+                              } else {
+                                  // alert("Vous avez cliqué sur Annuler");
+                                  // redi vers la page des offres
+                                  route.navigate(['/'])
+                                  console.log('bien enregistré');
+  
+                              }
                            },
                            error(err) {
                              console.error('Upload error', err);

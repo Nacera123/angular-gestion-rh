@@ -1,0 +1,134 @@
+:root {
+  --white-color:                #FFFFFF;
+  --primary-color:              #FF4400;
+  --section-bg-color:           #f0f8ff;
+  --dark-color:                 #000000;
+  --grey-color:                 #d0d1d1;
+  --p-color:                    #717275;
+
+  --body-font-family:           'Inter', sans-serif;
+
+  --h5-font-size:               24px;
+  --p-font-size:                20px;
+  --copyright-text-font-size:   16px;
+  --product-link-font-size:     14px;
+  --custom-link-font-size:      12px;
+
+  --font-weight-thin:           100;
+  --font-weight-light:          300;
+  --font-weight-normal:         400;
+  --font-weight-bold:           700;
+  --font-weight-black:          900;
+}
+
+
+
+
+main{
+  background-color: aliceblue;
+    width: 100%; /* 100% de la largeur de la vue */
+    height: 100vh; /* 100% de la hauteur de la vue */
+    /* margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+
+
+    
+}
+
+  /*---------------------------------------
+    SECTION               
+  -----------------------------------------*/
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 700px;
+  }
+  
+  .section-padding {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+  
+  .featured {
+    background: #f0f8ff;
+  }
+
+/* .toto, .toto .row{
+  background-color: blue;
+} */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+h1,
+h2 {
+  font-weight: 900;
+}
+
+h1 {
+  font-size: 64px;
+  line-height: normal;
+}
+p {
+  color: #717275;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+a, 
+button {
+  touch-action: manipulation;
+  transition: all 0.3s;
+}
+
+::selection {
+  background: #00b7ff;
+  color: #FFFFFF;
+}
+
+
+
+.custom-btn {
+  background: #000000;
+
+  border-radius: 50px;
+  color: #FFFFFF;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 16.50px 20px;
+}
+
+
+.custom-btn:hover,
+.slick-slideshow .custom-btn:hover {
+  background: #00b7ff;
+  color: #FFFFFF;
+}
+
+
+@media screen and (max-width: 1200px) {
+  h1 {
+    font-size: 62px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  h1 {
+    font-size: 42px;
+    margin-bottom: 0;
+  }
+
+
+  .custom-btn {
+    font-size: 14px;
+    padding: 13.5px 20px;
+  }
+
+}

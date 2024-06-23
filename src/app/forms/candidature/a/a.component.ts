@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { Candidat } from 'src/app/models/candidature/candidat';
 import { Candidature } from 'src/app/models/candidature/candidature';
 import { DocumentCandidature } from 'src/app/models/candidature/documentCandidature';
+import { GestionCandidatureDto } from 'src/app/models/candidature/gestionCandidatureDto';
 import { NomDocument } from 'src/app/models/candidature/nomDocument';
 import { PosteVacant } from 'src/app/models/candidature/posteVacant';
-import { TestDto } from 'src/app/models/candidature/testDto';
 import { Civilite } from 'src/app/models/civilite';
 import { Individu } from 'src/app/models/individu';
 import { Pays } from 'src/app/models/pays';
-import { DocumentCandidatureService } from 'src/app/services/candidature/documentCandidature.service';
+import { User } from 'src/app/models/user';
+import { DocCandidatureService } from 'src/app/services/candidature/docCandidature.service';
 import { NomDocumentService } from 'src/app/services/candidature/nomDocument.service';
 import { PosteVacantService } from 'src/app/services/candidature/poste-vacant.service';
-import { TestService } from 'src/app/services/candidature/test.service';
 import { CiviliteService } from 'src/app/services/individu/civilite.service';
 import { PaysService } from 'src/app/services/individu/pays.service';
 
@@ -22,62 +21,76 @@ import { PaysService } from 'src/app/services/individu/pays.service';
   templateUrl: './a.component.html',
   styleUrls: ['./a.component.css']
 })
-export class AComponent implements OnInit {
+export class AComponent {
+  //pdf
+  // pdfInfo: GestionCandidatureDto = new GestionCandidatureDto();
+  // pdfInfo1: GestionCandidatureDto = new GestionCandidatureDto();
 
-  test: DocumentCandidature = new DocumentCandidature();
-  nomDoc: NomDocument = new NomDocument();
-  candidature: Candidature = new Candidature();
-  individu: Individu = new Individu();
+  ///selection de file
+  selectedFile: File | null = null;
+  selectedFile1: File | null = null;
+
+  //poste vacant
+  posteSelectionne: PosteVacant | undefined;
+/********************* */
+  //pays
   pays: Pays = new Pays();
-  civilite: Civilite = new Civilite();
-
-
-  tabNomDoc: String[] = [];
   tabPays: String[] = [];
+
+  //civilite
+  civilite: Civilite = new Civilite();
   tabCivilite: String[] = [];
 
+  candidature: Candidature = new Candidature();
+  individu: Individu = new Individu();
+  test: DocumentCandidature = new DocumentCandidature();
 
+  user: User = new User();
+  /** */
 
-  pdfInfo: DocumentCandidature = new DocumentCandidature();
-  pdfInfo1: DocumentCandidature = new DocumentCandidature();
-  selectedFile1: File | null = null;
-  selectedFile2: File | null = null;
+  nomDoc: NomDocument = new NomDocument();
+  nomDoc1: NomDocument = new NomDocument();
+  tabNomDoc: String[] = [];
+  tabNomDoc1: String[] = [];
 
-  posteSelectionne: PosteVacant | undefined;
-
-
-  posteId: Number | undefined;
-  posteVacant: PosteVacant = new PosteVacant();
 
   constructor(
-
-    private testService: TestService,
+    private docCandidatureService: DocCandidatureService,
+    private routeActivated: ActivatedRoute,
+    private posteService: PosteVacantService,
+    private civiliteService: CiviliteService,
     private nomDocService: NomDocumentService,
     private paysService: PaysService,
-    private civiliteService: CiviliteService,
-    private documentCandidatureService: DocumentCandidatureService,
-
-
-
-    private route: ActivatedRoute,
-    private posteVacantService: PosteVacantService
-
 
   ) { }
+
   ngOnInit(): void {
+    //recuperer l'id du poste vacant
+    const id = this.routeActivated.snapshot.paramMap.get('id');
+    if (id) {
+      this.getPosteById(Number(id));
+    } else {
+      console.error('ID est undefined');
+    }
+
+    // nom de document
     this.nomDocService.getAll().subscribe(
       (sessref) => {
         this.tabNomDoc = sessref
-          .filter(sessref => sessref.nom !== undefined) // Filtrer les valeurs 'undefined'
-          .map(sessref => sessref.nom!); // Utiliser le '!' pour indiquer que 'ref' ne sera pas 'undefined'
+          .filter(sessref => sessref.nom !== undefined) 
+          .map(sessref => sessref.nom!); 
+
+          this.tabNomDoc1 = sessref
+          .filter(sessref => sessref.nom !== undefined) 
+          .map(sessref => sessref.nom!); 
 
       },
       (error) => {
         console.error('Erreur lors de la récupération des sessions:', error);
       }
     );
-    //this.test.nomPieceJointe?.nom
 
+    //le pays
     this.paysService.getAll().subscribe(
       (abc) => {
         this.tabPays = abc
@@ -86,6 +99,7 @@ export class AComponent implements OnInit {
       }
     )
 
+    //civilite
     this.civiliteService.getAll().subscribe(
       data => {
         this.tabCivilite = data
@@ -93,34 +107,114 @@ export class AComponent implements OnInit {
           .map(data => data.designation!)
       }
     )
-
-
-    this.posteId = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.posteId) {
-      this.getPosteVacantById(this.posteId);
-    }
-
-
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.getPosteVacantById(Number(id));
-    } else {
-      console.error('ID est undefined');
-    }
   }
 
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
 
   onFileSelected1(event: any): void {
     this.selectedFile1 = event.target.files[0];
   }
-  onFileSelected2(event: any): void {
-    this.selectedFile2 = event.target.files[0];
+
+
+
+  uploadPdf(): void {
+    /*
+    // Télécharger le premier fichier PDF
+    if (this.selectedFile && this.posteSelectionne && this.selectedFile1) {
+      const postId = this.posteSelectionne.id;
+      if (postId) {
+
+        if (this.nomDoc && this.nomDoc.nom && this.nomDoc1.nom) {
+          
+          this.docCandidatureService.uploadCvLm(this.selectedFile,this.selectedFile1,  this.nomDoc.nom, this.nomDoc1.nom, postId).subscribe(
+           {
+              next(response: DocumentCandidature) {
+                console.log('Upload successful', response);
+
+              },
+              error(err) {
+                console.error('Upload error', err);
+              },
+           } 
+          );
+        }
+      }
+    } else {
+      console.error('No file selected or post not selected');
+    }*/
+
   }
-  getPosteVacantById(id: Number) {
+  uploadPdf1(): void {
+    
+    // Télécharger le premier fichier PDF
+    if (this.selectedFile && this.posteSelectionne && this.selectedFile1) {
+      const postId = this.posteSelectionne.id;
+      if (postId) {
 
+        if (this.nomDoc && this.nomDoc.nom && this.nomDoc1.nom) {
+          if ( this.individu
+            && this.pays && this.pays.designation
+            && this.civilite && this.civilite.designation
+          ){
+            this.test.candidature = this.candidature
+            this.candidature.individu = this.individu
+            alert("m1");
+            forkJoin([
+              this.paysService.getByDesignation(this.pays.designation),
+              this.civiliteService.getByDesignation(this.civilite.designation),
+ 
+  
+            ]).subscribe(
+              ([pes, civ]) => {
+                if (pes && civ) {
+                  alert("m2");
+                  console.log(this.test);
+                  if (this.test.candidature && this.test.candidature.individu
+                  ) {
+                    this.test.candidature.individu.pays = pes;
+                    this.test.candidature.individu.civilite = civ
+                    this.test.candidature.individu.nom = this.candidature.individu?.nom
+                    //this.test.candidature = this.candidature
+                    this.candidature.individu = this.individu
+                    alert("m3");
 
+                    if(this.selectedFile && this.posteSelectionne && this.selectedFile1 && this.nomDoc.nom && this.nomDoc1.nom){
+
+                      console.log(this.test.candidature.individu)
+                      // objet qui content toute les infos à part les fichiers
+                      this.docCandidatureService.uploadCvLm1(this.selectedFile,this.selectedFile1,  this.nomDoc.nom, this.nomDoc1.nom, JSON.stringify(this.test.candidature.individu), postId).subscribe(
+                        {
+                           next(response: DocumentCandidature) {
+                             console.log('Upload successful', response);
+             
+                           },
+                           error(err) {
+                             console.error('Upload error', err);
+                           },
+                        } 
+                       );
+                    }
+  
+                  }
+                }
+              }
+              
+            )
+          }
+
+        }
+      }
+    } else {
+      console.error('No file selected or post not selected');
+    }
+
+  }
+
+  getPosteById(id: Number): void {
     if (id) {
-      this.posteVacantService.getById(id).subscribe(
+      this.posteService.getById(id).subscribe(
         (response: PosteVacant) => {
           this.posteSelectionne = response;
         },
@@ -132,330 +226,43 @@ export class AComponent implements OnInit {
       console.error('ID est undefined');
     }
   }
-
-
-  uploadPdf(): void {
-    if (this.posteSelectionne) {
-      const postId = this.posteSelectionne.id;
-      if (postId) {
-        if (this.nomDoc.nom && this.individu
-          && this.pays && this.pays.designation
-          && this.civilite && this.civilite.designation
-        ) {
-          this.test.nomPieceJointe = this.nomDoc
-          this.test.candidature = this.candidature
-          this.candidature.individu = this.individu
-          this.candidature.posteVacant = this.posteVacant
-
-          forkJoin([
-            this.nomDocService.getByNom(this.nomDoc.nom),
-            this.paysService.getByDesignation(this.pays.designation),
-            this.civiliteService.getByDesignation(this.civilite.designation),
-
-          ]).subscribe(
-            ([ses, pes, civ]) => {
-              if (ses && pes && civ) {
-
-                if (this.test.candidature && this.test.candidature.individu
-                  && this.test.candidature.posteVacant
-                ) {
-                  this.test.candidature.individu.pays = pes;
-                  this.test.candidature.individu.civilite = civ
-
-                }
-                this.test.nomPieceJointe = ses;
-                if (this.selectedFile1) {
-                  this.documentCandidatureService.uploadPdf(this.selectedFile1, this.nomDoc.nom!, postId).subscribe(
-                    (response) => {
-                      console.log('Test bien ajouté', response);
-                      alert('Test bien ajouté');
-                    },
-                    (error) => {
-                      console.log('Erreur lors de la souscription des clés étrangères:', error);
-                      console.error('Erreur lors de la souscription des clés étrangères:', error);
-                    }
-                  )
-
-                }
-                if (this.selectedFile2) {
-                  this.documentCandidatureService.uploadPdf(this.selectedFile2, this.nomDoc.nom!, postId).subscribe(
-                    (response) => {
-                      console.log('Test bien ajouté', response);
-                      alert('Test bien ajouté');
-                    },
-                    (error) => {
-                      console.log('Erreur lors de la souscription des clés étrangères:', error);
-                      console.error('Erreur lors de la souscription des clés étrangères:', error);
-                    }
-                  )
-
-                }
-              }
-            }
-          )
-
-        } else {
-          console.error('Nom de document non valide ou non sélectionné');
-          alert('Nom de document non valide ou non sélectionné');
-        }
-      }
-
-    }
-
-  }
-
-
 }
 
-
-
-
-// toto: string = '';
-// toto1: string = '';
-
-
-
-// onFileSelected(event: any) {
-//   this.selectedFile = event.target.files[0];
-// }
-
-
-
-
-// this.posteVacantService.getById(id).subscribe(
-//   (response: PosteVacant) => {
-//     this.posteVacant = response;
-//   }
-// );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// if (this.selectedFile && this.posteSelectionne) {
-//   const postId = this.posteSelectionne.id;
-//   if (postId) {
-
-//     this.docCandidatureService.uploadPdf(this.selectedFile, this.toto, postId).subscribe(
-//       (response: DocCandidature) => {
-//         console.log('Upload successful', response);
-//         this.pdfInfo = response;
-//         //alert('Upload successful');
-//       },
-//       error => {
-//         console.error('Upload error', error);
-//       }
-//     );
-//   }
-// } else {
-//   console.error('No file selected or post not selected');
-// }
-// if (this.selectedFile1 && this.posteSelectionne) {
-//   const postId = this.posteSelectionne.id;
-//   if (postId) {
-
-//     this.docCandidatureService.uploadPdf(this.selectedFile1, this.toto1, postId).subscribe(
-//       (response: DocCandidature) => {
-//         console.log('Upload successful', response);
-//         this.pdfInfo1 = response;
-//         //alert('Upload successful');
-//       },
-//       error => {
-//         console.error('Upload error', error);
-//       }
-//     );
-//   }
-// } else {
-//   console.error('No file selected or post not selected');
-// }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ajout() {
-//   if (this.nomDoc.nom && this.posteVacant.id && this.individu
-//     && this.pays && this.pays.designation
-//     && this.civilite && this.civilite.designation
-//   ) {
-//     this.test.nomPieceJointe = this.nomDoc;
-//     this.test.candidature = this.candidature;
-//     this.candidature.individu = this.individu;
-//     this.candidature.posteVacant = this.posteVacant;
-
-//     forkJoin([
-//       this.nomDocService.getByNom(this.nomDoc.nom),
-//       this.paysService.getByDesignation(this.pays.designation),
-//       this.civiliteService.getByDesignation(this.civilite.designation),
-//       this.posteVacantService.getById(this.posteVacant.id)
-//     ]).subscribe(
-//       ([ses, pes, civ, pov]) => {
-//         if (ses && pes && civ && pov) {
-//           if (this.test.candidature && this.test.candidature.individu
-//             && this.test.candidature.posteVacant
-//           ) {
-//             this.test.candidature.individu.pays = pes;
-//             this.test.candidature.individu.civilite = civ;
-//             this.test.candidature.posteVacant = pov;
-//           }
-//           this.test.nomPieceJointe = ses;
-
-//           if (this.posteVacant.id && this.selectedFile) {
-//             //this.selectedFile = this.test.pieceJointe
-//             this.testService.add2(this.selectedFile, this.test, this.posteVacant.id).subscribe(
-//               (response) => {
-//                 console.log('Test bien ajouté', response);
-//                 alert('Test bien ajouté');
-//               },
-//               (error) => {
-//                 console.log('Erreur lors de la souscription des clés étrangères:', error);
-//                 console.error('Erreur lors de la souscription des clés étrangères:', error);
-//               }
-//             );
-//           } else {
-//             console.error('Erreur lors de la récupération des données nécessaires ou fichier non sélectionné');
-//             alert('Erreur lors de la récupération des données nécessaires ou fichier non sélectionné');
-//           }
+// uploadPdf(): void {
+    
+//   // Télécharger le premier fichier PDF
+//   if (this.selectedFile && this.posteSelectionne) {
+//     const postId = this.posteSelectionne.id;
+//     if (postId) {
+//       this.docCandidatureService.uploadPdf(this.selectedFile,this.selectedFile1,  this.toto, postId).subscribe(
+//         (response: DocumentCandidature) => {
+//           console.log('Upload successful', response);
+//           this.pdfInfo = response;
+//         },
+//         error => {
+//           console.error('Upload error', error);
 //         }
-//       },
-//       (error) => {
-//         console.error('Erreur lors de la récupération des clés étrangères', error);
-//         alert('Erreur lors de la récupération des clés étrangères');
-//       }
-//     );
-
+//       );
+//     }
 //   } else {
-//     console.error('Nom de document non valide ou non sélectionné');
-//     alert('Nom de document non valide ou non sélectionné');
+//     console.error('No file selected or post not selected');
 //   }
-// }
 
-
-
-
-
-
-
-
-
-
-//BONNE VERSION
-
-
-// ajout() {
-//   if (this.nomDoc.nom && this.posteVacant.id && this.individu
-//     && this.pays && this.pays.designation
-//     && this.civilite && this.civilite.designation
-//   ) {
-//     this.test.nomPieceJointe = this.nomDoc
-//     this.test.candidature = this.candidature
-//     this.candidature.individu = this.individu
-//     this.candidature.posteVacant = this.posteVacant
-
-//     forkJoin([
-//       this.nomDocService.getByNom(this.nomDoc.nom),
-//       this.paysService.getByDesignation(this.pays.designation),
-//       this.civiliteService.getByDesignation(this.civilite.designation),
-//       this.posteVacantService.getById(this.posteVacant.id)
-//     ]).subscribe(
-//       ([ses, pes, civ, pov]) => {
-//         if (ses && pes && civ && pov) {
-
-//           if (this.test.candidature && this.test.candidature.individu
-//             && this.test.candidature.posteVacant
-//           ) {
-//             this.test.candidature.individu.pays = pes;
-//             this.test.candidature.individu.civilite = civ
-//             this.test.candidature.posteVacant = pov
-//           }
-//           this.test.nomPieceJointe = ses;
-//           if (this.posteVacant.id) {
-//             this.testService.add2(this.test, this.posteId!).subscribe(
-//               (response) => {
-//                 console.log('Test bien ajouté', response);
-//                 alert('Test bien ajouté');
-//               },
-//               (error) => {
-//                 console.log('Erreur lors de la souscription des clés étrangères:', error);
-//                 console.error('Erreur lors de la souscription des clés étrangères:', error);
-//               }
-//             )
-
-//           } else {
-//             console.error('Erreur lors de la récupération des données nécessaires');
-//             alert('Erreur lors de la récupération des données nécessaires');
-//           }
+//   // Télécharger le deuxième fichier PDF
+//   if (this.selectedFile1 && this.posteSelectionne) {
+//     const postId = this.posteSelectionne.id;
+//     if (postId) {
+//       this.docCandidatureService.uploadPdf(this.selectedFile1, this.toto1, postId).subscribe(
+//         (response: DocumentCandidature) => {
+//           console.log('Upload successful', response);
+//           this.pdfInfo1 = response;
+//         },
+//         error => {
+//           console.error('Upload error', error);
 //         }
-//       }
-//     )
-
+//       );
+//     }
 //   } else {
-//     console.error('Nom de document non valide ou non sélectionné');
-//     alert('Nom de document non valide ou non sélectionné');
+//     console.error('No file selected or post not selected');
 //   }
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

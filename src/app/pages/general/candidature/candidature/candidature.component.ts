@@ -17,7 +17,6 @@ export class CandidatureComponent implements OnInit {
   errorMessage: string = '';
 
   constructor(
-    private readonly http: HttpClient,
     private candidatureService: CandidatureService
   ) { }
 
@@ -33,9 +32,9 @@ export class CandidatureComponent implements OnInit {
 
     this.candidatureService.getAll()
       .subscribe(
-        (response: Candidature[]) => {
-          console.log(response);
+        response => {
           this.candidature = response;
+          console.log(response);
 
         },
         (error) => {
@@ -47,7 +46,7 @@ export class CandidatureComponent implements OnInit {
   }
 
   // pagination 
-  pageSize = 10;
+  pageSize = 5;
 
   currentPage = 1;
 

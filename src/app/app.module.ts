@@ -56,6 +56,14 @@ import { SaveNomDocumentComponent } from './forms/candidature/save-nom-document/
 import { SaveDocumentCandidatureComponent } from './forms/candidature/save-document-candidature/save-document-candidature.component';
 import { AComponent } from './forms/candidature/a/a.component';
 import { BComponent } from './forms/candidature/b/b.component';
+import { IndividuUserComponent } from './forms/user/individu-user/individu-user.component';
+import { DetailDesUserComponent } from './forms/detail-des-user/detail-des-user.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MonDocTestComponent } from './forms/mon-doc-test/mon-doc-test.component';
+import { PagePersonnelleComponent } from './pages/utilisateur/page-personnelle/page-personnelle.component';
+import { Test1Component } from './test/test1/test1.component';
+import { Test2Component } from './test/test2/test2.component';
+
 
 //http client
 
@@ -112,6 +120,12 @@ import { BComponent } from './forms/candidature/b/b.component';
     SaveDocumentCandidatureComponent,
     AComponent,
     BComponent,
+    IndividuUserComponent,
+    DetailDesUserComponent,
+    MonDocTestComponent,
+    PagePersonnelleComponent,
+    Test1Component,
+    Test2Component,
 
   ],
   imports: [
@@ -121,7 +135,8 @@ import { BComponent } from './forms/candidature/b/b.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgConfirmModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgMultiSelectDropDownModule.forRoot()
 
   ],
   providers: [

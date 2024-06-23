@@ -19,6 +19,7 @@ import { UserService } from 'src/app/services/user/user.service';
 export class LoginComponent implements OnInit {
 
   private user: AuthDto = new AuthDto();
+  private user1: User = new User();
   signinForm: FormGroup;
 
   // role =  '';
@@ -35,7 +36,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   loginUser() {
     // Assigner les valeurs du formulaire à l'objet user
@@ -45,15 +47,31 @@ export class LoginComponent implements OnInit {
     // Appeler la méthode signin du service d'authentification en passant l'objet user
     this.authService.signin(this.user)
       .subscribe(
-        () => {
+        res => {
+          console.log('Response from signin:', res); // Vérifiez la réponse ici
+          if (res && res.token) {
+            localStorage.setItem('access_token', res.token);
+            if (res.id) {
+              console.log('id user', res.id);
+              localStorage.setItem('sub', res.id.toString());
+              localStorage.setItem('id_individu', res.id_individu.toString());
+              this.recupUtilisateur();
+              this.getRoleByUser();
 
-          this.recupUtilisateur();
-          this.getRoleByUser();
-          //this.close();
+              localStorage.setItem('sub', res.id.toString());
+              if (res.id_individu) {
+                console.log('id individu', res.id_individu);
+
+              }
+            } else {
+              console.error('ID de l\'utilisateur non défini dans la réponse de la connexion');
+            }
+          }
+        },
+        error => {
+          console.error('Erreur lors de la connexion:', error);
         }
-      )
-
-
+      );
     console.log(this.user);
 
   }
@@ -75,13 +93,18 @@ export class LoginComponent implements OnInit {
     )
   }
 
-
-  // logOut() {
-  //   localStorage.removeItem('access_token');
-  //   localStorage.removeItem('connectedUser');
-  //   this.router.navigate(['/']);
-  // }
-
+  getIdIndividu(userId: number) {
+    this.userService.getIdIndividu(userId)
+      .subscribe(
+        individuId => {
+          console.log('ID de l\'individu:', individuId);
+          // Utilisez individuId comme nécessaire
+        },
+        error => {
+          console.error('Erreur lors de la récupération de l\'ID de l\'individu:', error);
+        }
+      );
+  }
 
 
   getRoleByUser(): void {
@@ -93,7 +116,7 @@ export class LoginComponent implements OnInit {
         // Maintenant, vous pouvez utiliser la propriété "role" pour effectuer des vérifications.
         if (role === 'CANDIDAT') {
           console.log('Redirection vers user');
-          this.router.navigate(['test']);
+          this.router.navigate(['mon-espace']);
         } else if (role === 'ADMIN') {
           console.log('Redirection vers admin');
           this.router.navigate(['admin']);
@@ -108,6 +131,8 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+
 
 
 

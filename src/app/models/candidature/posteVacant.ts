@@ -7,6 +7,8 @@ export class PosteVacant {
 
     id?: Number;
 
+    nom?: String;
+
     descriptif?: String;
 
     session?: SessionCandidature;

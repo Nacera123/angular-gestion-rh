@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import { User } from 'src/app/models/user';
 
 @Injectable({
@@ -62,6 +62,25 @@ export class UserService {
   }
 
 
+  settoto(user: User) {
+    localStorage.setItem('id individu', JSON.stringify(user.individu?._id))
+  }
+
+
+  gettoto(): User {
+
+    if (localStorage.getItem('id individu')) {
+
+      return JSON.parse(localStorage.getItem('id individur') as string)
+    }
+    return {};
+  }
+
+
+  getUserByIndividu(id?: number) {
+    let url = this.endpointUser + `/b/${id}`
+    return this.http.get(url)
+  }
 
   /**
    * Recuperer l'email
@@ -88,8 +107,20 @@ export class UserService {
     return this.http.get<any>(url);
   }
 
+  getTest(id?: number) {
+    let url = this.endpointUser + `/bb/${id}`
+    return this.http.get<any>(url);
+  }
 
 
+  /************Recup Id Individu ************** */
+
+
+  // Méthode pour définir l'ID de l'individu
+  getIndividuId(): Observable<string | null> {
+    const indId = localStorage.getItem('individu_id');
+    return of(indId);
+  }
 
 
   /********************* */
@@ -112,5 +143,19 @@ export class UserService {
   }
 
   /********************* */
+  addUserForIndividu(id: Number, user: User): Observable<User> {
+    const api = `${this.endpoint}/${id}/register`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
+    return this.http.post<User>(api, user, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  getIdIndividu(id?: number) {
+    let url = this.endpointUser + `/bb/${id}`
+    return this.http.get<any>(url);
+  }
 }

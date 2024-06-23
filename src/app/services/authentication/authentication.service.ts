@@ -27,7 +27,7 @@ export class AuthenticationService {
   ) { }
 
   signin(user: AuthDto) {
-    return this.http.post<any>(`${this.endpoint}/login`, user, { headers: this.headers })
+    return this.http.post<any>(`${this.endpoint}/login1`, user, { headers: this.headers })
 
 
       .pipe(
@@ -40,6 +40,9 @@ export class AuthenticationService {
           if (user.email !== null && user.email !== undefined) {
             localStorage.setItem('user_email', user.email);
             this.currentUserEmailSubject.next(user.email);
+            // localStorage.setItem('id', user.individu?._id);
+            // this.currentUserEmailSubject.next(user.individu?._id);
+
           } else {
             console.log("ya un souucis");
 
@@ -49,6 +52,13 @@ export class AuthenticationService {
 
   }
 
+  aa(): Observable<string | null> {
+    // Récupérer la valeur de l'e-mail de l'utilisateur depuis le localStorage
+    const id = localStorage.getItem('id');
+
+    // Créer un Observable à partir de la valeur récupérée
+    return of(id);
+  }
   // toto: Observable<string | null> = this.getUserEmail();
 
   getUserEmail(): Observable<string | null> {
@@ -79,4 +89,14 @@ export class AuthenticationService {
     console.error(errorMessage);
     return throwError(errorMessage);
   }
+
+
+
+  getCurrentUserId(): number | null {
+    // Suppose you store user ID in localStorage after successful login
+    return localStorage.getItem('sub') ? parseInt(localStorage.getItem('sub')!, 10) : null;
+  }
+
+
+
 }

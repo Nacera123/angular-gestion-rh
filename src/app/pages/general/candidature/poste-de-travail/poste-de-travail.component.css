@@ -1,0 +1,26 @@
+.modal1{
+    /* background-color: #5cb85c; */
+    /* background-color: #d9534f;
+    background-color:#0009;
+    background-color:#fceaa4; */
+}
+
+.modal1[_ngcontent-ng-c1057558417] {
+    background-color: red;
+    position: relative;
+    margin: 0 auto;
+    /* background-color: #fceaa4; */
+    width: 350px;
+    max-width: 75rem;
+    min-height: 15rem;
+    padding: 1rem;
+    border-radius: 3px;
+    opacity: 0;
+    overflow-y: auto;
+    visibility: hidden;
+    box-shadow: 0 2px 10px #0000001a;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: scale(1.2);
+    transition: all .6s cubic-bezier(.55,0,.1,1);
+}

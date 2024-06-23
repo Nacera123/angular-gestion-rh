@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Individu } from 'src/app/models/individu';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user/user.service';
@@ -20,7 +20,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.registerForm = this.fb.group({
       nom: [''],
@@ -33,7 +34,14 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const idIndividu = params["idIndividu"];
+      console.log(idIndividu);
 
+      if (idIndividu) {
+        alert("coucou : " + idIndividu);
+      }
+    });
   }
 
   registerUser() {
@@ -57,7 +65,7 @@ export class RegisterComponent implements OnInit {
         data => {
           console.log(data);
           alert("Vous êtes bien enregistré");
-          this.router.navigate(['login']);
+          //this.router.navigate(['login']);
         },
         error => {
           console.error('Register failed : ', error);

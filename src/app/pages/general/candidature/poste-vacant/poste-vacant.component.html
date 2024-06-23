@@ -21,7 +21,7 @@
                 {{ errorMessage }}
             </div>
 
-            <tr *ngFor="let toto of postesVacants">
+            <tr *ngFor="let toto of postesVacants | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
                 <td>{{ toto.poste?.nom }}</td>
                 <td>{{ toto.poste?.reference }}</td>
                 <td>{{ toto.typeContrat?.type }}</td>

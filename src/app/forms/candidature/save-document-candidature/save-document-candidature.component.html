@@ -1,33 +1,307 @@
-<div class="card-body" style="width: 600px;margin-bottom: 200px;">
-
-
-    <form (ngSubmit)="ajout()">
-
-        <div class="col-12 mb-2">
-            <label for="inputState" class="form-label">Nom </label>
-            <select id="inputState" class="form-select" [(ngModel)]="nomDoc.nom" name="nom" required>
-                <option *ngFor="let nom of tabNomDoc" [value]="nom">{{ nom }}
-                </option>
-            </select>
+<div class="page-heading-shows-events">
+    <app-navbar></app-navbar>
+    <div class="container">
+        <div class="row" style="margin-top: 15%;">
+            <div class="col-lg-12">
+                <h1 style="font-size: 350%; font-weight:900; color: rgb(61, 12, 63); margin-top: -7%;">Apply For The Job
+                </h1>
+            </div>
         </div>
-
-
-
-        <div class="col-12 mb-12">
-            <label for="inputState" class="form-label">Description:</label>
-            <input type="text" [(ngModel)]="documentCandidature.pieceJointe" name="pieceJointe">
-
-        </div>
-
-
-
-
-        <div class="col-12 text-center pt-4 mt-4">
-            <app-submit></app-submit>
-
-        </div>
-
-
-    </form>
-
+    </div>
 </div>
+<div class="tickets-page">
+    <div class="container">
+        <div class="row">
+
+            <div class="tab-content">
+                <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="container">
+                        <div class="row gy-5 gx-4">
+                            <div class="col-lg-8">
+                                <div class="d-flex align-items-center mb-5">
+                                    <img class="flex-shrink-0 img-fluid border rounded"
+                                        src="../../../../assets/images/nestech.jpg" alt=""
+                                        style="width: 80px; height: 80px;">
+                                    <div class="text-start ps-4">
+                                        <h3 class="mb-3">
+                                            <p *ngIf="posteSelectionne">Apply For <span
+                                                    style="color: rgba(0, 0, 0, 0.641);">{{ posteSelectionne.poste?.nom
+                                                    }}</span>
+                                            </p>
+                                        </h3>
+                                        <span class="text-truncate me-3" *ngIf="posteSelectionne"><i
+                                                class="fa fa-map-marker-alt text-primary me-2"></i>Ref : {{
+                                            posteSelectionne.session?.reference }}</span>
+                                        <span class="text-truncate me-3" *ngIf="posteSelectionne"><i
+                                                class="far fa-clock text-primary me-2"></i>
+                                            {{ posteSelectionne.typeContrat?.type }}
+                                        </span>
+                                        <span class="text-truncate me-0"><i
+                                                class="far fa-money-bill-alt text-primary me-2"></i>A negocier</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-5">
+
+                                    <div class=" bg-white p-3">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="">
+                                    <form>
+                                        <div class="row g-3">
+
+                                            <div class="col-md-6">
+                                                <label for="inputState" class="form-label">Civilite</label>
+                                                <select id="inputState" class="form-select"
+                                                    [(ngModel)]="civilite.designation" name="designation" required>
+                                                    <option *ngFor="let designation of tabCivilite"
+                                                        [value]="designation">{{ designation }}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+
+                                            <div class="col-12 col-sm-8">
+                                                <label for="inputState" class="form-label">Prenom</label>
+                                                <input type="text" class="form-control" placeholder="First Name"
+                                                    type="text" [(ngModel)]="individu.prenom" name="prenom">
+                                            </div>
+                                            <div class="col-12 col-sm-8">
+                                                <label for="inputState" class="form-label">Nom</label>
+                                                <input type="text" class="form-control" [(ngModel)]="individu.nom"
+                                                    name="nom" placeholder="Last Name">
+                                            </div>
+
+
+                                            <div class="col-12 col-sm-6">
+                                                <label for="inputState" class="form-label">pays</label>
+                                                <select id="inputState" class="form-select"
+                                                    [(ngModel)]="pays.designation" name="designation" required>
+                                                    <option *ngFor="let designation of tabPays" [value]="designation">{{
+                                                        designation
+                                                        }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-sm-8">
+                                                <label for="inputState" class="form-label">Telephone</label>
+                                                <input type="text" class="form-control" [(ngModel)]="individu.telephone"
+                                                    name="telephone" placeholder="telephone">
+                                            </div>
+
+                                            <div class="col-12 col-sm-8 ">
+                                                <label for="inputState" class="form-label">Email</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                                    <input type="email" class="form-control" placeholder="your email"
+                                                        aria-label="Username" aria-describedby="basic-addon1"
+                                                        [(ngModel)]="individu.email" name="email">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12 col-sm-6">
+                                                <label for="inputState2" class="form-label">Piece jointe 1</label>
+                                                <select id="inputState2" class="form-select" [(ngModel)]="nomDoc.nom"
+                                                    name="nom" required>
+                                                    <option *ngFor="let nom of tabNomDoc" [value]="nom">{{ nom }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-sm-8">
+                                                <label for="inputState" class="form-label">Ajouter votre piece
+                                                    jointe</label>
+                                                <input type="file" class="form-control bg-white"
+                                                    (change)="onFileSelected($event)">
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <label for="inputState3" class="form-label">Piece jointe 2</label>
+                                                <select id="inputState3" class="form-select" [(ngModel)]="nomDoc1.nom"
+                                                    name="nom" required>
+                                                    <option *ngFor="let nom of tabNomDoc1" [value]="nom">{{ nom }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-sm-8">
+                                                <label for="inputState" class="form-label">Ajouter votre piece
+                                                    jointe</label>
+                                                <input type="file" class="form-control bg-white"
+                                                    (change)="onFileSelected1($event)">
+                                            </div> <br><br><br><br><br><br><br>
+
+
+
+                                            <div class="col-8 mt-5" style="margin-top: 30px;">
+                                                <div class="d-flex">
+                                                    <!-- <button class="btn btn-primary flex-grow-1 mx-2"
+                                                        (click)="uploadPdf()">Apply
+                                                        Now</button> -->
+                                                    <!-- <button class="btn btn-primary flex-grow-1 mx-2"
+                                                        (click)="uploadPdf()" data-bs-toggle="modal"
+                                                        data-bs-target="#confirmationModal">Apply
+                                                        Now</button> -->
+
+                                                    <button class="btn btn-primary flex-grow-1 mx-2"
+                                                        (click)="uploadPdf()">Apply
+                                                        Now</button>
+
+
+                                                    <!-- 
+
+                                                        <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                                                            <button type="submit" class="btn custom-btn cart-btn" data-bs-toggle="modal" data-bs-target="#cart-modal">Add to
+                                                                Cart</button>
+                                                        </div> -->
+
+                                                    <button class="btn btn-primary flex-grow-1 mx-2"
+                                                        [routerLink]="['/offre']">Return</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                                    <h4 class="mb-4">Job Summery</h4>
+
+
+                                    <p *ngIf="posteSelectionne"><i
+                                            class="fa fa-angle-right text-primary me-2"></i>Published On: {{
+                                        posteSelectionne.session?.dateOuverture }}</p>
+                                    <p *ngIf="posteSelectionne"><i class="fa fa-angle-right text-primary me-2"></i>Date
+                                        Line: {{ posteSelectionne.session?.dateCloture }}</p>
+
+                                    <p *ngIf="posteSelectionne"><i class="fa fa-angle-right text-primary me-2"></i>Job
+                                        Nature: {{ posteSelectionne.typeContrat?.type }}</p>
+                                    <p *ngIf="posteSelectionne"><i class="fa fa-angle-right text-primary me-2"></i>Ref
+                                        Session: {{ posteSelectionne.session?.reference }}</p>
+                                    <p *ngIf="posteSelectionne"><i class="fa fa-angle-right text-primary me-2"></i>Ref
+                                        Poste: {{
+                                        posteSelectionne.poste?.reference }}</p>
+                                    <p *ngIf="posteSelectionne"><i
+                                            class="fa fa-angle-right text-primary me-2"></i>Salary: A negocier</p>
+                                </div>
+                                <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
+                                    <h4 class="mb-4">Company Detail</h4>
+                                    <p class="m-0">Notre mission depuis 30 ans ? Être présent au bon moment !
+
+                                        Notre expertise ? Accompagner nos clients à capter l'attention de l'utilisateur
+                                        et transformer cette interaction furtive en une interaction mémorable. C'est
+                                        dans cette optique que nous accompagnons les entreprises dans la mise en oeuvre,
+                                        et le pilotage de dispositifs digitaux pour une expérience utilisateur
+                                        réinventée.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0">
+            <div class="modal-header flex-column">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-2 col-12 mt-4 mt-lg-0">
+                        <img src="../../../../assets/images/nestech.jpg" class="img-fluid product-image" alt="">
+                    </div>
+
+                    <div class="col-lg-10 col-12 mt-3 mt-lg-0">
+                        <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Votre Candidature est bien
+                            enregistrée</h3>
+
+                        <p class="product-price text-muted mt-3">Si vous souhaitez creer votre compte pour suivre vos
+                            candidatue ... </p>
+                        <h4 style="color: white;">Facile</h4>
+
+                        <span class="product-price text-muted mt-3">il suffit de cliquer sur
+                            <b>Continuer</b> et saisir votre mot de passe
+                        </span>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    id="cancelButton">Cancel</button> -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelButton"
+                    [routerLink]="['/']">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmButton" style=" background-color: #207297;"
+                    id="confirmButton" data-bs-dismiss="modal">Continuer</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0">
+            <div class="modal-header flex-column">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title" id="exampleModalLabel">Confirmation</h3>
+                <p>Do you really want to continue?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmButton">Yes, Continue</button>
+            </div>
+        </div>
+    </div>
+</div> -->

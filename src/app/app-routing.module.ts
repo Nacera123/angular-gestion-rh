@@ -34,9 +34,21 @@ import { SaveNomDocumentComponent } from './forms/candidature/save-nom-document/
 import { SaveDocumentCandidatureComponent } from './forms/candidature/save-document-candidature/save-document-candidature.component';
 import { AComponent } from './forms/candidature/a/a.component';
 import { BComponent } from './forms/candidature/b/b.component';
+import { IndividuUserComponent } from './forms/user/individu-user/individu-user.component';
+
+
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MonDocTestComponent } from './forms/mon-doc-test/mon-doc-test.component';
+import { PagePersonnelleComponent } from './pages/utilisateur/page-personnelle/page-personnelle.component';
+import { Test1Component } from './test/test1/test1.component';
+import { Test2Component } from './test/test2/test2.component';
 
 
 const routes: Routes = [
+  ///test
+  { path: 'test1', component: Test1Component },
+  { path: 'test2', component: Test2Component },
+  /**************** */
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
@@ -54,6 +66,13 @@ const routes: Routes = [
   //candidater
   { path: 'a/:id', component: AComponent },
   { path: 'b/:id', component: BComponent },
+  { path: 'individu/register/:id', component: IndividuUserComponent },
+  { path: 'save-document-candidature/:id', component: SaveDocumentCandidatureComponent },
+  { path: 'mon-doc-test/:id', component: MonDocTestComponent },
+
+  //page personnelle candidat
+  { path: 'mon-espace', component: PagePersonnelleComponent, canActivate: [AuthGuard] },
+
 
 
   //1-poste de travail
@@ -81,7 +100,6 @@ const routes: Routes = [
       { path: 'candidature', component: CandidatureComponent },
       //document candidature
       { path: 'document-candidature', component: DocumentCandidatureComponent },
-      { path: 'save-document-candidature', component: SaveDocumentCandidatureComponent },
       //nom des documents
       { path: 'nom-document', component: NomDocumentComponent },
       { path: 'nom-document/add', component: SaveNomDocumentComponent },
@@ -103,9 +121,12 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
     RouterModule

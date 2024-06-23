@@ -1,24 +1,248 @@
-<div class="card-body">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <table class="table datatable">
 
-        <tbody>
-
-            <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
-                {{ errorMessage }}
+<!-- ***** About Us Page ***** -->
+<div class="page-heading-shows-events">
+    <app-navbar class="nav-user" style="background-color: #a91a1a"></app-navbar>
+    <div class="container">
+        <div class="row" style="margin-top: 15%;">
+            <div class="col-lg-12">
+                <h1 style="font-size: 320%; font-weight:900; color: rgb(61, 12, 63);">Nos offres d'emploi
+                </h1>
             </div>
+        </div>
+    </div>
+</div>
 
-            <tr *ngFor="let toto of postesVacants">
-                <td>{{ toto.poste?.nom }}</td>
+<div class="tickets-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="search-box">
+                    <form id="subscribe" (ngSubmit)="filterAll()">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="search-heading">
+                                    <h4>Filtrez votre recherche d'emplois </h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
 
 
-                <button [routerLink]="['/offre/dtail', toto.id]">Detail</button>
 
-            </tr>
+                                <div class="row">
 
-        </tbody>
-    </table>
 
-    <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+
+
+                                    <div class="col-lg-3">
+                                        <select class="form-select" [(ngModel)]="typeContrat.type" name="type">
+                                            <option value="tout contrat">tout les contrats</option>
+                                            <option *ngFor="let type of tabTypeContrat" [value]="type">{{ type }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+
+
+
+                                        <select class="form-select" [(ngModel)]="poste.nom" name="nom">
+                                            <option value="par metier">par metier</option>
+                                            <option *ngFor="let nom of tabPooste" [value]="nom">{{
+                                                nom }}</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <select class="form-select" [(ngModel)]="posteV.nom" name="nom">
+                                            <option value="poste disponible">poste disponible</option>
+                                            <option *ngFor="let nom of tabPosteVacant" [value]="nom">{{ nom }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <fieldset>
+                                            <button type="submit" id="form-submit" class="btn btn-dark"
+                                                style="background-color: rgba(103, 6, 108, 0.827);">
+                                                Submit
+                                            </button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="heading"></div>
+            </div>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="job-item p-4 mb-4"
+                        *ngFor="let toto of filteredPostesVacants | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+                        <div class="row g-4">
+                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                <img class="flex-shrink-0 img-fluid border rounded"
+                                    src="../../../../assets/images/nestech.jpg" alt=""
+                                    style="width: 80px; height: 80px;">
+                                <div class="text-start ps-4 poste_detail">
+                                    <h5 class="mb-3">{{ toto.nom }}</h5>
+                                    <span class="text-truncate me-3">
+                                        <i class="far fa-user me-2"></i>{{ toto.poste?.nom
+                                        }}</span>
+                                    <span class="text-truncate me-3"><i class="far fa-clock  me-2"></i>{{
+                                        toto.typeContrat?.type }}</span>
+                                    <span class="text-truncate me-0"><i class="fas fa-info-circle me-2"></i>{{
+                                        toto.poste?.reference
+                                        }}</span>
+                                </div>
+                            </div>
+                            <div
+                                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                <div class="d-flex mb-3">
+                                    <a class="btn btn-light btn-square me-3" href=""><i
+                                            class="far fa-heart text-primary"></i></a>
+                                    <a class="btn btn-primary" [routerLink]="['/offre/dtail', toto.id]">Detail du
+                                        poste</a>
+                                </div>
+                                <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date
+                                    Line: {{ toto.session?.dateCloture }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <pagination-controls _ngcontent-ng-c4229731598 (pageChange)="pageChanged($event)"
+                    class="pagination"></pagination-controls>
+            </div>
+            <!-- <div class="col-lg-12">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div> -->
+
+        </div>
+    </div>
 
 </div>
+
+
+
+<!-- <div class="tickets-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="search-box">
+                    <form id="subscribe" (ngSubmit)="filterByTypeContrat()">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="search-heading">
+                                    <h4>Filtrez votre recherche d'emplois </h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="row">
+                                    <div class="col-lg-3">
+
+
+                                        <select class="form-select" [(ngModel)]="typeContrat.type" name="type">
+                                            <option value="">type de contrat</option>
+                                            <option *ngFor="let type of tabTypeContrat" [value]="type">{{ type }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <select class="form-select" [(ngModel)]="poste.nom" name="nom">
+                                            <option value="location">Metier</option>
+                                            <option id="Brazil" id="June" *ngFor="let nom of tabPooste" value="nom">{{
+                                                nom }}</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <select class="form-select" [(ngModel)]="posteV.nom" name="nom">
+                                            <option value="location">poste Vacant</option>
+                                            <option id="Brazil" id="June" *ngFor="let nom of tabPosteVacant"
+                                                value="nom">{{
+                                                nom }}</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <fieldset>
+                                            <button class="btn btn-dark"
+                                                style="background-color: rgba(103, 6, 108, 0.827);">Submit
+                                            </button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="heading">
+                </div>
+            </div>
+
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+
+                    <div class="job-item p-4 mb-4" *ngFor="let toto of postesVacants">
+                        <div class="row g-4">
+                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                <img class="flex-shrink-0 img-fluid border rounded"
+                                    src="../../../../assets/images/com-logo-4.jpg" alt=""
+                                    style="width: 80px; height: 80px;">
+                                <div class="text-start ps-4">
+                                    <h5 class="mb-3">{{ toto.nom }}</h5>
+                                    <span class="text-truncate me-3"><i
+                                            class="fa fa-map-marker-alt text-primary me-2"></i>{{ toto.poste?.nom
+                                        }}</span>
+                                    <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{
+                                        toto.typeContrat?.type }}</span>
+                                    <span class="text-truncate me-0"><i
+                                            class="far fa-money-bill-alt text-primary me-2"></i>{{
+                                        toto.poste?.reference }}</span>
+                                </div>
+                            </div>
+                            <div
+                                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                <div class="d-flex mb-3">
+                                    <a class="btn btn-light btn-square me-3" href=""><i
+                                            class="far fa-heart text-primary"></i></a>
+                                    <a class="btn btn-primary" href="" [routerLink]="['/offre/dtail', toto.id]">Detail
+                                        du poste</a>
+                                </div>
+                                <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date
+                                    Line: {{
+                                    toto.session?.dateCloture }}</small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div> -->

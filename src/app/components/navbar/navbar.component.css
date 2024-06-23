@@ -6,7 +6,8 @@ a {
   text-decoration: none;
 }
 #header {
-  background: #fff;
+  background: #ffffff20;
+  /* background: #fff; */
   transition: all 0.5s;
   z-index: 997;
   height: 86px;

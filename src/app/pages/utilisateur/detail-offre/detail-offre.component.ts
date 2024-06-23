@@ -54,7 +54,9 @@ export class DetailOffreComponent implements OnInit {
 
   candidater(id: Number | undefined) {
     if (id) {
-      this.router.navigate(['/b', id]);
+      // this.router.navigate(['/mon-doc-test', id]);
+      // this.router.navigate(['/b', id]);
+      this.router.navigate(['/save-document-candidature', id]);
       // this.router.navigate(['/a', id]);
     } else {
       console.log('Id du poste vacant est undefined');
@@ -62,8 +64,8 @@ export class DetailOffreComponent implements OnInit {
   }
 
   getPosteVacantById(id?: Number) {
-    console.log(id);
     if (id !== undefined) {
+      console.log(id);
 
       this.posteVacantService.getById(id).subscribe(
         (response: PosteVacant) => {

@@ -22,15 +22,7 @@ export class PosteVacantComponent implements OnInit {
 
 
 
-  // pagination 
-  pageSize = 10;
 
-  currentPage = 1;
-
-
-  pageChanged(event: any): void {
-    this.currentPage = event;
-  }
 
 
   postesVacants: PosteVacant[] = [];
@@ -78,6 +70,17 @@ export class PosteVacantComponent implements OnInit {
     }
 
 
+  }
+
+
+  // pagination 
+  pageSize = 5;
+
+  currentPage = 1;
+
+
+  pageChanged(event: any): void {
+    this.currentPage = event;
   }
 
 

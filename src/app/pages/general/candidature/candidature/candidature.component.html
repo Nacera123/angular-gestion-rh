@@ -17,9 +17,9 @@
 
             <tr
                 *ngFor="let candidature of candidature | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
-                <td>{{ candidature.posteVacant }}</td>
-                <td>{{ candidature.individu }}</td>
-                <td>{{ candidature.etatCandidature }}</td>
+                <td>{{ candidature.posteVacant?.nom }}</td>
+                <td>{{ candidature.individu?.nom }} &nbsp; {{ candidature.individu?.prenom }}</td>
+                <td>{{ candidature.etatCandidature?.etat }}</td>
 
 
                 <!-- <td>

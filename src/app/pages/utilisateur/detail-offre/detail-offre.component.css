@@ -1,0 +1,420 @@
+/*
+---------------------------------------------
+Tickets Page
+---------------------------------------------
+*/
+
+
+.tickets-page {
+    margin-bottom: 100px;
+    }
+    
+    .tickets-page .search-box {
+    background-color: #7c838b;
+    padding: 30px;
+    }
+    
+    .tickets-page .search-box h4 {
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 8px;
+    }
+    
+    .tickets-page .search-box select {
+    margin-top: 10px;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(250, 250, 250, 0.5);
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    width: 100%;
+    padding: 5px;
+    }
+    
+    .tickets-page .search-box option {
+    background-color: #343a3e;
+    }
+    
+    .tickets-page .search-box .main-dark-button {
+    display: inline-block;
+    font-size: 14px;
+    padding: 12px 18px;
+    background-color: #343a3e;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    text-transform: capitalize;
+    transition: all .3s;
+    border: none;
+    outline: none;
+    width: 100%;
+    }
+    
+    .tickets-page .search-box .main-dark-button:hover {
+    background-color: #656c74;
+    }
+    
+    .tickets-page .heading h2 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #2a2a2a;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 80px;
+    }
+    
+    .tickets-page .ticket-item .thumb {
+    position: relative;
+    }
+    
+    .tickets-page .ticket-item .thumb img {
+    width: 100%;
+    overflow: hidden;
+    }
+    
+    .tickets-page .ticket-item .thumb .price {
+    background-color: rgba(101,108,116,0.9);
+    display: inline-block;
+    padding: 20px;
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    }
+    
+    .tickets-page .ticket-item .thumb .price span {
+    color: #fff;
+    font-size: 14px;
+    line-height: 25px;
+    }
+    
+    .tickets-page .ticket-item .thumb .price span em {
+    font-weight: 700;
+    font-size: 20px;
+    font-style: normal;
+    }
+    
+    .tickets-page .ticket-item {
+    margin-bottom: 30px;
+    }
+    
+    .tickets-page .ticket-item .down-content {
+    background-color: #fafafa;
+    padding: 30px;;
+    }
+    
+    .tickets-page .ticket-item .down-content span {
+    font-size: 14px;
+    color: #656c74;
+    font-weight: 700;
+    }
+    
+    .tickets-page .ticket-item .down-content h4 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2a2a2a;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    }
+    
+    .tickets-page .ticket-item .down-content ul li {
+    font-size: 14px;
+    color: #2a2a2a;
+    font-weight: 300;
+    margin-bottom: 15px;
+    }
+    
+    .tickets-page .ticket-item .down-content ul li i {
+    color: #7c838b;
+    margin-right: 10px;
+    width: 15px;
+    height: 25px;
+    float: left;
+    }
+    
+    .tickets-page .ticket-item .down-content .main-dark-button {
+    margin-top: 30px;
+    }
+    
+    .tickets-page .pagination ul {
+    text-align: center;
+    width: 100%;
+    margin-top: 30px;
+    }
+    
+    .tickets-page .pagination ul li {
+    display: inline-block;
+    margin: 0px 10px!important;
+    }
+    
+    .tickets-page .pagination ul li a {
+    display: inline-block;
+    font-size: 14px;
+    padding: 12px 20px;
+    background-color: #e6e7e8;
+    color: #2a2a2a;
+    text-align: center;
+    font-weight: 500;
+    text-transform: capitalize;
+    transition: all .3s;
+    }
+      
+    .tickets-page .pagination ul li a:hover,
+    .tickets-page .pagination ul li.active a {
+    background-color: #343a3e;
+    color: #fff!important;
+    }
+    
+    @media (max-width: 1036px) {
+    
+        .owl-show-events .owl-nav {
+          display: none;
+        }
+      
+      }
+      
+      @media (max-width: 992px) {
+      
+        .amazing-venues .right-content {
+          margin-left: 0;
+          margin-top: 45px;
+        }
+      
+        .subscribe,
+        .subscribe input,
+        footer .address,
+        footer .hours {
+          text-align: center; 
+        }
+      
+        .subscribe h4 {
+          margin-bottom: 20px;
+        }
+      
+        .subscribe .main-dark-button {
+          margin-top: 20px;
+        }
+      
+        footer .address {
+          margin-bottom: 45px;
+        }
+      
+        footer .hours {
+          margin-top: 45px;
+        }
+      
+        .sub-footer,
+        .sub-footer .social-links {
+          text-align: center;
+        }
+      
+        .coming-events .event-item {
+          margin-bottom: 30px;
+        }
+      
+        .coming-events .left-button {
+          display: none;
+        }
+      
+        .under-footer,
+        footer p.copyright {
+          text-align: center;
+        }
+      
+        .about-item .right-content {
+          margin-left: 0px;
+        }
+      
+        .about-item .down-content {
+          border-left: 1px dotted #d7dadc;
+        }
+      
+        .about-upcoming-shows .next-shows {
+          margin-top: 30px;
+        }
+        
+        .also-like .like-item {
+          margin-bottom: 30px;
+        }
+      
+        .page-heading-rent-venue span,
+        .page-heading-shows-events span {
+          padding: 0px;
+        }
+      
+        .rent-venue-tabs .heading-tabs .main-dark-button,
+        .shows-events-tabs .heading-tabs .main-dark-button {
+          display: none;
+        }
+      
+        .shows-events-tabs #tabs ul li {
+          margin-bottom: 15px;
+        }
+      
+        .shows-events-tabs .tabs-content .event-item .right-content ul li i {
+          height: 40px;
+        }
+        .shows-events-tabs .tabs-content .event-item .right-content {
+          padding: 30px;
+        }
+      
+        .shows-events-tabs #tabs ul li:last-child {
+          margin-bottom: 0px;
+        }
+      
+        .shows-events-tabs .tabs-content .sidebar {
+          margin-bottom: 45px;
+        }
+      
+        .tickets-page .search-box {
+          text-align: center;
+        }
+        
+        .tickets-page .search-box .main-dark-button,
+        .tickets-page .search-box select {
+          margin-top: 30px;
+        }
+      
+        .shows-events-tabs .tabs-content .pagination ul li,
+        .shows-events-schedule .pagination ul li,
+        .tickets-page .pagination ul li {
+          margin: 0px 2px!important;
+        }
+      
+        .ticket-details-page .right-content {
+          margin-left: 0px;
+          margin-top: 30px;
+        }
+      
+        .shows-events-schedule ul li,
+        .shows-events-schedule ul li .main-dark-button {
+          text-align: center;
+        }
+      
+        .shows-events-schedule ul li .title,
+        .shows-events-schedule ul li .time,
+        .shows-events-schedule ul li .place {
+          margin-bottom: 15px;
+        }
+      
+      }
+      
+      @media (max-width: 450px) {
+      
+        .rent-venue-tabs #tabs ul li {
+          text-align: center;
+          margin-right: 0px;
+          display: block;
+          margin-bottom: 5px;
+          margin-top: 5px;
+        } 
+      
+        .rent-venue-tabs #tabs ul .ui-tabs-active a:after,
+        .shows-events-tabs #tabs ul .ui-tabs-active a:after {
+          display: none;
+        }
+      
+        .rent-venue-tabs .tabs-content ul.list {
+          text-align: center;
+        }
+      
+        .rent-venue-tabs .tabs-content ul.list li {
+          text-align: center;
+          width: 100%;
+        }
+      
+        .pre-header {
+          display: none;
+        }
+      
+      }
+      
+      
+      @-webkit-keyframes move-up-down {
+        0% {
+          -webkit-transform: translateY(0px);
+                  transform: translateY(0px); }
+        50% {
+          -webkit-transform: translateY(-5px);
+                  transform: translateY(-5px); }
+        100% {
+          -webkit-transform: translateY(0px);
+                  transform: translateY(0px); } 
+      }
+    
+    /*** Job Listing ***/
+    .nav-pills .nav-item .active {
+    border-bottom: 2px solid var(--primary);
+    }
+    
+    .job-item {
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+    transition: .5s;
+    }
+    
+    .job-item:hover {
+    border-color: rgba(0, 0, 0, .08);
+    box-shadow: none;
+    } 
+    
+      
+    
+    /*** Button ***/
+    .btn {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        transition: .5s;
+    }
+    
+    .btn.btn-primary,
+    .btn.btn-secondary {
+        color: #FFFFFF;
+        background-color: #2086ab;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /********** Template CSS **********/
+    :root {
+        --primary: #00B074;
+        --secondary: #2B9BFF;
+        --light: #EFFDF5;
+        --dark: #2B3940;
+    }
+    
+    
+
+.page-heading-shows-events {
+  /* background-image: url("https://img.freepik.com/photos-gratuite/contexte-energie-nucleaire-ia-innovation-future-technologie-rupture_53876-129783.jpg?w=996&t=st=1717546493~exp=1717547093~hmac=33248673b15da52a61934da1f1a99a5180cd0a69f915df76265359dc8c567d07"); */
+  /* background-image: url(../../../../assets/images/user_bg.png); */
+  background-image: url(../../../../assets/images/main.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 20px 0px 70px 0px;
+  /* padding: 20px 0px 200px 0px; */
+  text-align: center;
+}
+.page-heading-rent-venue span,
+.page-heading-shows-events span {
+  padding: 0px;
+}

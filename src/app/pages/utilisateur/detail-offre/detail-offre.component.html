@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
 
     <p *ngIf="posteSelectionne">Nom du poste : {{ posteSelectionne.poste?.nom }}</p>
     <p *ngIf="posteSelectionne">Reference du poste : {{ posteSelectionne.poste?.reference }}</p>
@@ -18,4 +18,114 @@
 </div>
 
 <button (click)="candidater(posteSelectionne?.id)">Candidater</button>
-<button [routerLink]="['/offre']">retour</button>
+<button [routerLink]="['/offre']">retour</button> -->
+
+
+
+
+
+
+
+<div class="page-heading-shows-events">
+    <app-navbar></app-navbar>
+    <div class="container">
+        <div class="row" style="margin-top: 15%;">
+            <div class="col-lg-12">
+                <h1 style="font-size: 350%; font-weight:900; color: rgb(61, 12, 63); margin-top: -7%;">Detail de
+                    l'offre
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tickets-page">
+    <div class="container">
+        <div class="row">
+
+            <div class="tab-content">
+                <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="container">
+                        <div class="row gy-5 gx-4">
+                            <div class="col-lg-8">
+                                <div class="d-flex align-items-center mb-5">
+                                    <img class="flex-shrink-0 img-fluid border rounded"
+                                        src="../../../../assets/images/nestech.jpg" alt=""
+                                        style="width: 80px; height: 80px;">
+                                    <div class="text-start ps-4">
+                                        <h3 class="mb-3">
+                                            <p *ngIf="posteSelectionne">{{ posteSelectionne.poste?.nom }}
+                                            </p>
+                                        </h3>
+                                        <span class="text-truncate me-3" *ngIf="posteSelectionne"><i
+                                                class="fa fa-map-marker-alt text-primary me-2"></i>Ref : {{
+                                            posteSelectionne.session?.reference }}</span>
+                                        <span class="text-truncate me-3" *ngIf="posteSelectionne"><i
+                                                class="far fa-clock text-primary me-2"></i>
+                                            {{ posteSelectionne.typeContrat?.type }}
+                                        </span>
+                                        <span class="text-truncate me-0"><i
+                                                class="far fa-money-bill-alt text-primary me-2"></i>A negocier</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-5">
+
+                                    <div class=" bg-white p-5" *ngIf="posteSelectionne" [innerHTML]="contenuHtml">
+                                        {{ posteSelectionne.descriptif }}
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex">
+                                        <button class="btn btn-primary flex-grow-1 mx-2" type="submit"
+                                            (click)="candidater(posteSelectionne?.id)">Apply Now</button>
+                                        <button class="btn btn-primary flex-grow-1 mx-2"
+                                            [routerLink]="['/offre']">Return</button>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                                    <h4 class="mb-4">Job Summery</h4>
+
+
+                                    <p *ngIf="posteSelectionne"><i
+                                            class="fa fa-angle-right text-primary me-2"></i>Published On: {{
+                                        posteSelectionne.session?.dateOuverture }}</p>
+                                    <p *ngIf="posteSelectionne"><i class="fa fa-angle-right text-primary me-2"></i>Date
+                                        Line: {{ posteSelectionne.session?.dateCloture }}</p>
+
+                                    <p *ngIf="posteSelectionne"><i class="fa fa-angle-right text-primary me-2"></i>Job
+                                        Nature: {{ posteSelectionne.typeContrat?.type }}</p>
+                                    <p *ngIf="posteSelectionne"><i class="fa fa-angle-right text-primary me-2"></i>Ref
+                                        Session: {{ posteSelectionne.session?.reference }}</p>
+                                    <p *ngIf="posteSelectionne"><i class="fa fa-angle-right text-primary me-2"></i>Ref
+                                        Poste: {{
+                                        posteSelectionne.poste?.reference }}</p>
+                                    <p *ngIf="posteSelectionne"><i
+                                            class="fa fa-angle-right text-primary me-2"></i>Salary: A negocier</p>
+                                </div>
+                                <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
+                                    <h4 class="mb-4">Company Detail</h4>
+                                    <p class="m-0">Notre mission depuis 30 ans ? Être présent au bon moment !
+
+                                        Notre expertise ? Accompagner nos clients à capter l'attention de l'utilisateur
+                                        et transformer cette interaction furtive en une interaction mémorable. C'est
+                                        dans cette optique que nous accompagnons les entreprises dans la mise en oeuvre,
+                                        et le pilotage de dispositifs digitaux pour une expérience utilisateur
+                                        réinventée.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

@@ -32,5 +32,19 @@ export class IndividuService {
       )
   }
 
+  getById(_id: number): Observable<Individu> {
+
+    let api = `${this.endpoint}/get/individu/${_id}`
+    return this.http.get<Individu>(api)
+
+  }
+
+  getByEmail(email: String): Observable<Individu> {
+
+    let api = `${this.endpoint}/nom/email/${email}`
+    return this.http.get<Individu>(api)
+
+  }
+
 
 }

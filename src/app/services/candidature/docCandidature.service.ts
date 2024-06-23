@@ -29,7 +29,7 @@ export class DocCandidatureService {
             );
     }
 
-    uploadCvLm(fileCV: File, fileLM: File, nomFileCV: string, nomFileLM: string, datas: string, postId: Number): Observable<GestionCandidatureDto> {
+    uploadCvLm(fileCV: File, fileLM: File, nomFileCV: string, nomFileLM: string, datas: string, postId: Number): Observable<any> {
         const formData = new FormData();
         formData.append('fileCV', fileCV);
         formData.append('fileLM', fileLM);
@@ -39,6 +39,21 @@ export class DocCandidatureService {
         formData.append('postId', postId.toString()); // Ajouter le postId à FormData
 
         const api = `${this.baseUrl}/upload`;
+        return this.http.post<any>(api, formData)
+            .pipe(
+                catchError(this.handleError) // Gestion des erreurs
+            );
+    }
+    uploadCvLm1(fileCV: File, fileLM: File, nomFileCV: string, nomFileLM: string, datas: string, postId: Number): Observable<GestionCandidatureDto> {
+        const formData = new FormData();
+        formData.append('fileCV', fileCV);
+        formData.append('fileLM', fileLM);
+        formData.append('nomFileCV', nomFileCV);
+        formData.append('nomFileLM', nomFileLM);
+        formData.append('datas', datas);
+        formData.append('postId', postId.toString()); // Ajouter le postId à FormData
+
+        const api = `${this.baseUrl}/upload-user`;
         return this.http.post<GestionCandidatureDto>(api, formData)
             .pipe(
                 catchError(this.handleError) // Gestion des erreurs
