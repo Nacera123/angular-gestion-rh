@@ -1,10 +1,60 @@
+<!-- ======= Header ======= -->
+<header id="header" class="d-flex align-items-center">
+
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <h1 class="logo"><a href="index.html">
+                <span> <img class="flex-shrink-0 img-fluid border rounded" src="../../../../assets/images/nestech.jpg"
+                        alt="" style="width: 50px; height: 30px;"></span>
+
+                NESTECH</a></h1>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto active" [routerLink]="['/']">Home</a></li>
+                <li><a class="nav-link scrollto" href="#about">About</a></li>
+                <li><a class="nav-link scrollto" href="#services">Services</a></li>
+                <li><a class="nav-link scrollto " [routerLink]="['/offre']">Nos offres</a></li>
+                <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="#">Drop Down 1</a></li>
+                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
+                                    class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">Deep Drop Down 1</a></li>
+                                <li><a href="#">Deep Drop Down 2</a></li>
+                                <li><a href="#">Deep Drop Down 3</a></li>
+                                <li><a href="#">Deep Drop Down 4</a></li>
+                                <li><a href="#">Deep Drop Down 5</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Drop Down 2</a></li>
+                        <li><a href="#">Drop Down 3</a></li>
+                        <li><a href="#">Drop Down 4</a></li>
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-#header h1 {
-  color: #2b2320;
-  font-family: "Lato",  sans-serif;
-}
 a {
   color: #106eea;
   text-decoration: none;
@@ -26,24 +76,22 @@ a {
 }
 
 #header .logo {
-  color: #2b2320;
   font-size: 30px;
   margin: 0;
   padding: 0;
   line-height: 1;
-  /* font-weight: 600; */
+  font-weight: 600;
   letter-spacing: 0.8px;
-  font-family: "Lato",  sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 #header .logo a {
-  color: #2b2320;
-  /* color: #222222; */
+  color: #222222;
 }
 
-/* #header .logo a span {
+#header .logo a span {
   color: #106eea;
-} */
+}
 
 #header .logo img {
   max-height: 40px;
@@ -82,17 +130,14 @@ a {
 
 .navbar a,
 .navbar a:focus {
-  color: #212529;
-  /* padding: 0 3px; */
-  padding: 18px 12px;
-  font-size: 13px;
-  font-family: "Raleway",  sans-serif; 
-  font-weight:500;
-  text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  white-space: nowrap;
+  padding: 0 3px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #222222;
+  /* white-space: nowrap; */
   transition: 0.3s;
   position: relative;
 }
@@ -128,7 +173,7 @@ a {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #f03c02;
+  color: #106eea;
 }
 
 .navbar .dropdown ul {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgConfirmComponent, NgConfirmService } from 'ng-confirm-box';
@@ -65,6 +65,7 @@ export class SaveDocumentCandidatureComponent implements OnInit {
 
 
 
+  idIndividu: number | null = null;
   private modal: any;
 
   constructor(
@@ -160,9 +161,129 @@ export class SaveDocumentCandidatureComponent implements OnInit {
   }
 
 
+
+
+
+  uploadPdf(): void {
+    console.log('step 1');
+    let route = this.router;
+
+    if (this.selectedFile && this.posteSelectionne && this.selectedFile1) {
+      const postId = this.posteSelectionne.id;
+      if (postId) {
+        if (this.nomDoc && this.nomDoc.nom && this.nomDoc1.nom) {
+          if (this.individu && this.pays && this.pays.designation && this.civilite && this.civilite.designation) {
+            this.docCandidature.candidature = this.candidature;
+            this.candidature.individu = this.individu;
+            this.individu._id = this.candidat.individu?._id;
+            alert(this.candidat.individu?._id);
+
+            forkJoin([
+              this.paysService.getByDesignation(this.pays.designation),
+              this.civiliteService.getByDesignation(this.civilite.designation),
+            ]).subscribe(([pes, civ]) => {
+              if (pes && civ) {
+                alert(this.candidat.individu?._id);
+                alert("m2");
+                alert(this.candidat.individu?._id);
+                console.log(this.docCandidature);
+
+                if (this.docCandidature.candidature && this.docCandidature.candidature.individu) {
+                  this.docCandidature.candidature.individu.pays = pes;
+                  this.docCandidature.candidature.individu.civilite = civ;
+                  this.docCandidature.candidature.individu.nom = this.candidature.individu?.nom;
+                  this.candidature.individu = this.individu;
+
+                  alert("m3");
+                  alert(this.candidat.individu?._id);
+
+                  if (this.selectedFile && this.posteSelectionne && this.selectedFile1 && this.nomDoc.nom && this.nomDoc1.nom) {
+                    console.log(this.docCandidature.candidature.individu);
+
+                    this.documentcandidatureService.uploadCvLm1(
+                      this.selectedFile,
+                      this.selectedFile1,
+                      this.nomDoc.nom,
+                      this.nomDoc1.nom,
+                      JSON.stringify(this.docCandidature.candidature.individu),
+                      postId
+                    ).subscribe(
+
+                      (response: any) => {
+                        console.log('Upload successful', response);
+
+                        this.idIndividu = response.idIndividu;
+                        console.log('ID individu:', this.idIndividu);
+
+                        const modalElement = document.getElementById('cart-modal');
+                        if (modalElement) {
+                          const modal = new bootstrap.Modal(modalElement);
+                          modal.show();
+
+                        }
+
+                      },
+                      (err) => {
+                        console.error('Upload error', err);
+                      }
+                    );
+                  }
+                }
+              }
+            });
+          }
+        }
+      }
+    } else {
+      console.error('No file selected or post not selected');
+    }
+  }
+
+
+
+
+  redirectToHome(): void {
+    this.router.navigate(['/']);
+  }
+
+
+
+  redirectToRegister(): void {
+    this.closeModal();
+    if (this.idIndividu) {
+      this.router.navigate(['/individu/register', this.idIndividu]);
+    } else {
+      console.error('ID individu manquant');
+    }
+  }
+
+  @ViewChild('cartModal', { static: false }) cartModal?: ElementRef;
+
+
+  closeModal(): void {
+    if (this.cartModal) {
+      const modalElement = this.cartModal.nativeElement;
+      const modalInstance = bootstrap.Modal.getInstance(modalElement);
+      if (modalInstance) {
+        modalInstance.hide();
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
+
   // uploadPdf(): void {
   //   console.log('step 1');
+  //   let route = this.router;
 
+  //   // Télécharger le premier fichier PDF
   //   if (this.selectedFile && this.posteSelectionne && this.selectedFile1) {
   //     const postId = this.posteSelectionne.id;
   //     if (postId) {
@@ -171,306 +292,75 @@ export class SaveDocumentCandidatureComponent implements OnInit {
   //           && this.pays && this.pays.designation
   //           && this.civilite && this.civilite.designation
   //         ) {
-  //           this.docCandidature.candidature = this.candidature;
-  //           this.candidature.individu = this.individu;
-  //           this.individu._id = this.candidat.individu?._id;
-  //           // alert(this.candidat.individu?._id);
-
+  //           this.docCandidature.candidature = this.candidature
+  //           this.candidature.individu = this.individu
+  //           this.individu._id = this.candidat.individu?._id
+  //           alert(this.candidat.individu?._id);
   //           forkJoin([
   //             this.paysService.getByDesignation(this.pays.designation),
   //             this.civiliteService.getByDesignation(this.civilite.designation),
+
+
   //           ]).subscribe(
   //             ([pes, civ]) => {
   //               if (pes && civ) {
-
+  //                 alert(this.candidat.individu?._id);
+  //                 alert("m2");
+  //                 alert(this.candidat.individu?._id);
   //                 console.log(this.docCandidature);
-
-  //                 if (this.docCandidature.candidature && this.docCandidature.candidature.individu) {
+  //                 if (this.docCandidature.candidature && this.docCandidature.candidature.individu
+  //                 ) {
   //                   this.docCandidature.candidature.individu.pays = pes;
-  //                   this.docCandidature.candidature.individu.civilite = civ;
-  //                   this.docCandidature.candidature.individu.nom = this.candidature.individu?.nom;
-  //                   this.candidature.individu = this.individu;
+  //                   this.docCandidature.candidature.individu.civilite = civ
+  //                   this.docCandidature.candidature.individu.nom = this.candidature.individu?.nom
+  //                   this.candidature.individu = this.individu
 
+  //                   alert("m3");
+  //                   alert(this.candidat.individu?._id);
   //                   if (this.selectedFile && this.posteSelectionne && this.selectedFile1 && this.nomDoc.nom && this.nomDoc1.nom) {
-  //                     console.log(this.docCandidature.candidature.individu);
+  //                     console.log(this.docCandidature.candidature.individu)
+
 
   //                     this.documentcandidatureService.uploadCvLm1(this.selectedFile, this.selectedFile1, this.nomDoc.nom, this.nomDoc1.nom, JSON.stringify(this.docCandidature.candidature.individu), postId)
 
-
-
   //                       .subscribe(
-  //                         {
-  //                           next: (response: any) => {
+  //                         (response: any) => {
+  //                           console.log('Upload successful', response);
 
-
-  //                             console.log('Upload successful', response);
-  //                             const modalElement = document.getElementById('cart-modal');
-  //                             if (modalElement) {
-  //                               const modal = new bootstrap.Modal(modalElement);
-  //                               modal.show();
-
-  //                               const confirmButton = document.getElementById('confirmButton');
-
-  //                               confirmButton?.addEventListener('click', () => {
-  //                                 modal.hide();
-  //                                 this.router.navigate(['/individu/register', response.idIndividu]);
-  //                               }, { once: true });
-  //                               const cancelButton = document.getElementById('cancelButton');
-
-  //                               cancelButton?.addEventListener('click', () => {
-
-  //                                 modal.hide();
-
-  //                                 this.router.navigate(['/']);
-  //                               }, { once: true });
-
-
-
+  //                           this.confirmService.showConfirm("Voulez-vous vraiment continuer ?",
+  //                             () => {
+  //                               this.router.navigate(['/individu/register', response.idIndividu]);
+  //                             }, () => {
+  //                               console.log('Bien enregistré');
+  //                               this.router.navigate(['/']);
   //                             }
-  //                           },
-  //                           error: (err) => {
-  //                             console.error('Upload error', err);
-  //                           }
+
+  //                           );
+  //                         },
+  //                         (err) => {
+  //                           console.error('Upload error', err);
   //                         }
   //                       );
+
+
   //                   }
+
   //                 }
   //               }
   //             }
-  //           );
+  //           )
   //         }
   //       }
+
   //     }
   //   } else {
   //     console.error('No file selected or post not selected');
   //   }
+
+
   // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  uploadPdf(): void {
-    console.log('step 1');
-    let route = this.router;
-
-    // Télécharger le premier fichier PDF
-    if (this.selectedFile && this.posteSelectionne && this.selectedFile1) {
-      const postId = this.posteSelectionne.id;
-      if (postId) {
-        if (this.nomDoc && this.nomDoc.nom && this.nomDoc1.nom) {
-          if (this.individu
-            && this.pays && this.pays.designation
-            && this.civilite && this.civilite.designation
-          ) {
-            this.docCandidature.candidature = this.candidature
-            this.candidature.individu = this.individu
-            this.individu._id = this.candidat.individu?._id
-            alert(this.candidat.individu?._id);
-            forkJoin([
-              this.paysService.getByDesignation(this.pays.designation),
-              this.civiliteService.getByDesignation(this.civilite.designation),
-
-
-            ]).subscribe(
-              ([pes, civ]) => {
-                if (pes && civ) {
-                  alert(this.candidat.individu?._id);
-                  alert("m2");
-                  alert(this.candidat.individu?._id);
-                  console.log(this.docCandidature);
-                  if (this.docCandidature.candidature && this.docCandidature.candidature.individu
-                  ) {
-                    this.docCandidature.candidature.individu.pays = pes;
-                    this.docCandidature.candidature.individu.civilite = civ
-                    this.docCandidature.candidature.individu.nom = this.candidature.individu?.nom
-                    this.candidature.individu = this.individu
-
-                    alert("m3");
-                    alert(this.candidat.individu?._id);
-                    if (this.selectedFile && this.posteSelectionne && this.selectedFile1 && this.nomDoc.nom && this.nomDoc1.nom) {
-                      console.log(this.docCandidature.candidature.individu)
-
-
-                      this.documentcandidatureService.uploadCvLm1(this.selectedFile, this.selectedFile1, this.nomDoc.nom, this.nomDoc1.nom, JSON.stringify(this.docCandidature.candidature.individu), postId)
-
-                        .subscribe(
-                          (response: any) => {
-                            console.log('Upload successful', response);
-
-                            this.confirmService.showConfirm("Voulez-vous vraiment continuer ?",
-                              () => {
-                                this.router.navigate(['/individu/register', response.idIndividu]);
-                              }, () => {
-                                console.log('Bien enregistré');
-                                this.router.navigate(['/']);
-                              }
-
-                            );
-                          },
-                          (err) => {
-                            console.error('Upload error', err);
-                          }
-                        );
-
-
-                    }
-
-                  }
-                }
-              }
-            )
-          }
-        }
-
-      }
-    } else {
-      console.error('No file selected or post not selected');
-    }
-
-
-  }
 
 }
 
 
-
-// uploadPdf(): void {
-//   console.log('step 1');
-//   let route = this.router;
-
-//   // Télécharger le premier fichier PDF
-//   if (this.selectedFile && this.posteSelectionne && this.selectedFile1) {
-//     const postId = this.posteSelectionne.id;
-//     if (postId) {
-//       if (this.nomDoc && this.nomDoc.nom && this.nomDoc1.nom) {
-//         if (this.individu
-//           && this.pays && this.pays.designation
-//           && this.civilite && this.civilite.designation
-//         ) {
-//           this.docCandidature.candidature = this.candidature
-//           this.candidature.individu = this.individu
-//           this.individu._id = this.candidat.individu?._id
-//           alert(this.candidat.individu?._id);
-//           forkJoin([
-//             this.paysService.getByDesignation(this.pays.designation),
-//             this.civiliteService.getByDesignation(this.civilite.designation),
-
-
-//           ]).subscribe(
-//             ([pes, civ]) => {
-//               if (pes && civ) {
-//                 alert(this.candidat.individu?._id);
-//                 alert("m2");
-//                 alert(this.candidat.individu?._id);
-//                 console.log(this.docCandidature);
-//                 if (this.docCandidature.candidature && this.docCandidature.candidature.individu
-//                 ) {
-//                   this.docCandidature.candidature.individu.pays = pes;
-//                   this.docCandidature.candidature.individu.civilite = civ
-//                   this.docCandidature.candidature.individu.nom = this.candidature.individu?.nom
-//                   this.candidature.individu = this.individu
-
-//                   alert("m3");
-//                   alert(this.candidat.individu?._id);
-//                   if (this.selectedFile && this.posteSelectionne && this.selectedFile1 && this.nomDoc.nom && this.nomDoc1.nom) {
-//                     console.log(this.docCandidature.candidature.individu)
-
-//                     this.documentcandidatureService.uploadCvLm1(this.selectedFile, this.selectedFile1, this.nomDoc.nom, this.nomDoc1.nom, JSON.stringify(this.docCandidature.candidature.individu), postId)
-//                       .subscribe(
-//                         {
-//                           next(response: any) {
-//                             console.log('Upload successful', response);
-
-//                             // Affiche la boîte de dialogue de confirmation
-//                             var userConfirmed = confirm("Voulez-vous vraiment continuer ?");
-
-//                             // Vérifie la réponse de l'utilisateur
-//                             if (userConfirmed) {
-//                               alert("Vous avez cliqué sur OK");
-//                               route.navigate(['/individu/register', response.idIndividu]);
-
-//                             } else {
-
-//                               route.navigate(['/'])
-//                               console.log('bien enregistré');
-
-//                             }
-
-
-
-//                           },
-//                           error(err) {
-//                             console.error('Upload error', err);
-//                           }
-//                         }
-//                       )
-
-
-//                   }
-
-//                 }
-//               }
-//             }
-//           )
-//         }
-//       }
-
-//     }
-//   } else {
-//     console.error('No file selected or post not selected');
-//   }
-
-
-// }
 

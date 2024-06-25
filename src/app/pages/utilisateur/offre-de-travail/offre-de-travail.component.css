@@ -46,44 +46,47 @@ padding: 0px 0px 0px 0px;
 
 
 
-.nav-user{
+/* .nav-user{
   background-color: #a91a1a;
-}
+} */
 .page-heading-shows-events {
-  /* background-image: url("https://img.freepik.com/photos-gratuite/contexte-energie-nucleaire-ia-innovation-future-technologie-rupture_53876-129783.jpg?w=996&t=st=1717546493~exp=1717547093~hmac=33248673b15da52a61934da1f1a99a5180cd0a69f915df76265359dc8c567d07"); */
-  /* background-image: url(../../../../assets/images/user_bg.png); */
-  background-image: url(../../../../assets/images/main.png);
+  background-image: url(../../../../assets/img/slides/nivo/bg-3.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   padding: 20px 0px 150px 0px;
-  /* padding: 20px 0px 200px 0px; */
   text-align: center;
+}
+.page-heading-shows-events h1{
+  font-size: 40px; 
+  font-weight: 500;  
+  color: #ffffff91;
+  font-family: "Lato",  sans-serif;
 }
 
 .tickets-page {
 margin-bottom: 100px;
+background-color: #ffffff;
 }
 
 .tickets-page .search-box {
-/* background-color: #0960b677; */
-/* background-color: #2086ab; */
-background-color: #458eca71;
-/* background-color: #2061ab; */
-/* background-color: #7c838b; */
+background-color: #2b2320;
 padding: 30px;
+color: #ffffff;
 }
 
 .tickets-page .search-box h4 {
 /* color: #fff; */
-font-weight: 700;
+font-weight: 400;
 font-size: 20px;
 margin-top: 8px;
+font-family: "Lato",  sans-serif;
 }
 
 .tickets-page .search-box select {
 margin-top: 10px;
 background-color: transparent;
-border-bottom: 1px solid rgba(103, 6, 108, 0.5);
+border-bottom: 1px solid #ffffff;
+/* border-bottom: 1px solid rgba(103, 6, 108, 0.5); */
 border-top: none;
 border-right: none;
 border-left: none;
@@ -91,18 +94,19 @@ outline: none;
 font-size: 14px;
 width: 100%;
 padding: 5px;
+color: #ffffff;
 }
 
 .tickets-page .search-box option {
-  background-color: #458eca2b;
+  background-color: #2b2320ba;
+  color: #ffffff;
+  /* background-color: #2b232011; */
 }
 
 .tickets-page .search-box .main-dark-button {
 display: inline-block;
 font-size: 14px;
 padding: 12px 18px;
-/* background-color: #343a3e; */
-/* color: #fff; */
 text-align: center;
 font-weight: 500;
 text-transform: capitalize;
@@ -127,7 +131,7 @@ margin-bottom: 80px;
 .tickets-page .heading  {
 font-size: 30px;
 font-weight: 800;
-color: #2a2a2a;
+color: #2b2320;
 text-align: center;
 margin-top: 100px;
 margin-bottom: 80px;
@@ -187,7 +191,9 @@ margin-top: 10px;
 margin-bottom: 25px;
 }
 .search-heading h4{
-  color: rgba(103, 6, 108, 0.827);
+  color: #f03c02;
+  font-family: "Lato",  sans-serif;
+  /* color: rgba(103, 6, 108, 0.827); */
 }
 
 .tickets-page .ticket-item .down-content ul li {
@@ -401,7 +407,19 @@ color: #fff!important;
     }
   
   }
-  
+  .btn{
+    font-family: "Roboto", sans-serif;
+   /* text-transform: uppercase; */
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 28px;
+    border-radius: 4px;
+    transition: 0.5s;
+    color: #fff;
+    background: #f03c02;
+  }
   
   @-webkit-keyframes move-up-down {
     0% {
@@ -443,12 +461,18 @@ box-shadow: none;
 
 .btn.btn-primary,
 .btn.btn-secondary {
-    color: #FFFFFF;
-    background-color: #2086ab;
+    color: #f03c02;
+    /* color: #FFFFFF; */
+    background-color: #130e0e;
+    /* background-color: #2086ab; */
 }
 
 .poste_detail i{
-  color: #2086ab;
+  color: #f03c02;
+}
+
+.tab-content{
+  background-color: #ffffff;
 }
 
 

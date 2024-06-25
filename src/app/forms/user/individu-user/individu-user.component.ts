@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Individu } from 'src/app/models/individu';
 import { User } from 'src/app/models/user';
@@ -28,6 +28,7 @@ export class IndividuUserComponent implements OnInit {
     private route: ActivatedRoute,
     private individuService: IndividuService,
     private authService: AuthenticationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -49,10 +50,9 @@ export class IndividuUserComponent implements OnInit {
             console.log('individuSelect', data.email);
 
 
+
           }
         )
-
-
       } else {
         console.log('id undefined');
       }
@@ -109,6 +109,7 @@ export class IndividuUserComponent implements OnInit {
         () => {
           console.log('Utilisateur enregistré avec succès.');
           this.user = new User();
+          this.router.navigate(['/']);
         },
         (error) => {
           console.error('Erreur lors de l\'enregistrement de l\'utilisateur :', error);

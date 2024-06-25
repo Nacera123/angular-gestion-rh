@@ -19,8 +19,8 @@ export class PagePersonnelleComponent implements OnInit {
   tabEtatCandidature: String[] = [];
 
   currentUserEmail: string | null = null;
-  tabCandidatures: Number[] = [];
-  // tabCandidatures: Candidature[] = [];
+  // tabCandidatures: Number[] = [];
+  tabCandidatures: Candidature[] = [];
 
   candidature: Candidature = new Candidature();
 
@@ -50,10 +50,8 @@ export class PagePersonnelleComponent implements OnInit {
       this.candidatureService.getByIndividu(id).subscribe(
         data => {
           this.tabCandidatures = data
-            .filter(data => data.id !== undefined)
-            .map(data => data.id!)
-          console.log(data);
 
+          console.log(data);
 
         }
       )

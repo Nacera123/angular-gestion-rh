@@ -54,7 +54,9 @@ Tickets Page
 
 .modal-body {
   padding: 4rem;
-  background-color: #207297;
+  background-color: #130e0e;
+  color: #FFFFFF;
+  /* background-color: #207297; */
 }
 
 .modal-header {
@@ -456,12 +458,16 @@ Tickets Page
         transition: .5s;
     }
     
-    .btn.btn-primary,
-    .btn.btn-secondary {
-        color: #FFFFFF;
-        background-color: #2086ab;
-    }
     
+
+  
+  .btn.btn-primary,
+  .btn.btn-secondary {
+    color: #fff;
+    background: #f03c02;
+    border: none;
+  }
+  
     
     
     

@@ -25,7 +25,8 @@
 
 
 main{
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
+  background-color: #ffffff7f;
     width: 100%; /* 100% de la largeur de la vue */
     height: 100vh; /* 100% de la hauteur de la vue */
     /* margin: 0;
@@ -73,8 +74,10 @@ h2 {
 }
 
 h1 {
-  font-size: 64px;
+  font-size: 60px;
   line-height: normal;
+  font-family: "Raleway",  sans-serif;
+  color: #f03c02;;
 }
 p {
   color: #717275;
@@ -108,7 +111,7 @@ button {
 
 .custom-btn:hover,
 .slick-slideshow .custom-btn:hover {
-  background: #00b7ff;
+  background: #f03c02;
   color: #FFFFFF;
 }
 

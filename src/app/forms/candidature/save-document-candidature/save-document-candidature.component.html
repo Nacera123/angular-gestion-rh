@@ -136,25 +136,11 @@
 
                                             <div class="col-8 mt-5" style="margin-top: 30px;">
                                                 <div class="d-flex">
-                                                    <!-- <button class="btn btn-primary flex-grow-1 mx-2"
-                                                        (click)="uploadPdf()">Apply
-                                                        Now</button> -->
-                                                    <!-- <button class="btn btn-primary flex-grow-1 mx-2"
-                                                        (click)="uploadPdf()" data-bs-toggle="modal"
-                                                        data-bs-target="#confirmationModal">Apply
-                                                        Now</button> -->
 
                                                     <button class="btn btn-primary flex-grow-1 mx-2"
-                                                        (click)="uploadPdf()">Apply
+                                                        (click)="uploadPdf()" data-bs-target="#exampleModal"
+                                                        data-bs-toggle="modal">Apply
                                                         Now</button>
-
-
-                                                    <!-- 
-
-                                                        <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-                                                            <button type="submit" class="btn custom-btn cart-btn" data-bs-toggle="modal" data-bs-target="#cart-modal">Add to
-                                                                Cart</button>
-                                                        </div> -->
 
                                                     <button class="btn btn-primary flex-grow-1 mx-2"
                                                         [routerLink]="['/offre']">Return</button>
@@ -212,96 +198,47 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Confirmation Modal -->
 <div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0">
             <div class="modal-header flex-column">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-2 col-12 mt-4 mt-lg-0">
                         <img src="../../../../assets/images/nestech.jpg" class="img-fluid product-image" alt="">
                     </div>
-
                     <div class="col-lg-10 col-12 mt-3 mt-lg-0">
-                        <h3 class="modal-title" id="exampleModalLabel" style="color: white;">Votre Candidature est bien
+                        <h3 class="modal-title" id="exampleModalLabel" style="color: #f03c02;">Votre Candidature est
+                            bien
                             enregistrée</h3>
-
-                        <p class="product-price text-muted mt-3">Si vous souhaitez creer votre compte pour suivre vos
-                            candidatue ... </p>
+                        <p class="product-price text-white mt-3">Si vous n'avez pas encore de
+                            compte et que vous
+                            souhaitez en créer un pour suivre vos
+                            candidatures ... </p>
                         <h4 style="color: white;">Facile</h4>
-
-                        <span class="product-price text-muted mt-3">il suffit de cliquer sur
-                            <b>Continuer</b> et saisir votre mot de passe
-                        </span>
-
-
-
+                        <span class="product-price  mt-3" style="color: #8e7f79;">il suffit de cliquer sur
+                            <b>Continuer</b> et saisir
+                            votre mot de passe</span>
                     </div>
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    id="cancelButton">Cancel</button> -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelButton"
-                    [routerLink]="['/']">Cancel</button>
-                <button type="button" class="btn btn-primary" id="confirmButton" style=" background-color: #207297;"
-                    id="confirmButton" data-bs-dismiss="modal">Continuer</button>
+
+
+
+            <div class="modal-footer mt-4">
+                <form>
+
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="redirectToHome()">Cancel</button>
+
+                    <button type="submit" class="btn btn-secondary mx-2" data-bs-dismiss="modal"
+                        (click)="redirectToRegister()" style="background-color: #4d4643;">Continuer</button>
+
+                </form>
             </div>
         </div>
-
     </div>
 </div>
-
-
-<!-- <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content border-0">
-            <div class="modal-header flex-column">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h3 class="modal-title" id="exampleModalLabel">Confirmation</h3>
-                <p>Do you really want to continue?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="confirmButton">Yes, Continue</button>
-            </div>
-        </div>
-    </div>
-</div> -->

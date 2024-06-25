@@ -373,8 +373,9 @@ Tickets Page
     
     .btn.btn-primary,
     .btn.btn-secondary {
-        color: #FFFFFF;
-        background-color: #2086ab;
+      color: #fff;
+      background: #f03c02;
+      border: none;
     }
     
     
@@ -407,7 +408,7 @@ Tickets Page
 .page-heading-shows-events {
   /* background-image: url("https://img.freepik.com/photos-gratuite/contexte-energie-nucleaire-ia-innovation-future-technologie-rupture_53876-129783.jpg?w=996&t=st=1717546493~exp=1717547093~hmac=33248673b15da52a61934da1f1a99a5180cd0a69f915df76265359dc8c567d07"); */
   /* background-image: url(../../../../assets/images/user_bg.png); */
-  background-image: url(../../../../assets/images/main.png);
+  background-image: url(../../../../assets/img/slides/nivo/bg-1.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   padding: 20px 0px 70px 0px;
