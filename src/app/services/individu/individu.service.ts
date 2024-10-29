@@ -3,13 +3,19 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError } from 'rxjs';
 import { Individu } from 'src/app/models/individu';
+import { environment } from 'src/environement/environement.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IndividuService {
 
-  endpoint: string = 'http://localhost:1234/individu'
+  // endpoint: string = 'http://localhost:1234/individu'
+
+  private endpoint = (environment.production)
+    ? 'https://ws.nestech.fr/individu'
+    : 'http://localhost:1234/individu';
+
 
   constructor(
     private readonly http: HttpClient,

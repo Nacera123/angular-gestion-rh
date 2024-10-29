@@ -62,7 +62,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MonDocTestComponent } from './forms/mon-doc-test/mon-doc-test.component';
 import { PagePersonnelleComponent } from './pages/utilisateur/page-personnelle/page-personnelle.component';
 import { Test1Component } from './test/test1/test1.component';
-import { Test2Component } from './test/test2/test2.component';
+import { CandidaturesComponent } from './pages/general/candidature/candidatures/candidatures.component';
+import { FicheDocumentCandidatureComponent } from './components/candidature/fiche/fiche-document-candidature/fiche-document-candidature.component';
+import { FicheCandidatureComponent } from './components/candidature/fiche/fiche-candidature/fiche-candidature.component';
+import { StatusCandidatureComponent } from './components/forms/candidature/status-candidature/status-candidature.component';
+import { StatusCandidatComponent } from './forms/candidature/status-candidat/status-candidat.component';
 
 
 //http client
@@ -125,7 +129,11 @@ import { Test2Component } from './test/test2/test2.component';
     MonDocTestComponent,
     PagePersonnelleComponent,
     Test1Component,
-    Test2Component,
+    CandidaturesComponent,
+    FicheDocumentCandidatureComponent,
+    FicheCandidatureComponent,
+    StatusCandidatureComponent,
+    StatusCandidatComponent,
 
   ],
   imports: [

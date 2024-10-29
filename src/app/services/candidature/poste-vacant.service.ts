@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, catchError, throwError } from "rxjs";
 import { PosteVacant } from "src/app/models/candidature/posteVacant";
+import { environment } from "src/environement/environement.dev";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,11 @@ import { PosteVacant } from "src/app/models/candidature/posteVacant";
 
 export class PosteVacantService {
 
-    private endpoint: string = 'http://localhost:1234/poste-vacant';
+    // private endpoint: string = 'http://localhost:1234/poste-vacant';
+
+    private endpoint = (environment.production)
+        ? 'https://ws.nestech.fr/poste-vacant'
+        : 'http://localhost:1234/poste-vacant';
 
     constructor(
         private readonly http: HttpClient
@@ -77,5 +82,29 @@ export class PosteVacantService {
 
     }
 
+    //4- modification d'un poste de travail
+    update(posteDeTravail: PosteVacant): Observable<PosteVacant> {
+        let api = `${this.endpoint}/${posteDeTravail.id}/update`;
+        return this.http.post<PosteVacant>(api, posteDeTravail)
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    return this.handleError(error);
+                })
 
+            );
+    }
+
+    //5- suppression d'un poste de travail
+    delete(id?: Number) {
+        let api = `${this.endpoint}/delete/${id}`;
+        return this.http.delete<void>(api)
+            .pipe(
+                catchError(error => {
+                    console.log(error);
+                    throw error;
+                })
+            );
+
+
+    }
 }

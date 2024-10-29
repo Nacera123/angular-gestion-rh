@@ -1,34 +1,55 @@
-<app-add [routerLink]="['/admin/session-candidature/add']"></app-add>
 <div class="card-body">
+    <app-add [routerLink]="['/admin/session-candidature/add']"></app-add>
+
+    <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+
 
     <table class="table datatable">
-        <thead class="table table-info">
+        <thead class="table table-secondary ">
             <tr>
+                <th scope="col">Ref Poste</th>
+                <th scope="col">Ref Session</th>
+                <th scope="col">Candidats</th>
                 <th scope="col">Candidature</th>
                 <th scope="col">Nom de la piece jointe</th>
                 <th scope="col"> Piece jointe</th>
-            </tr>
-        </thead>
-        <tbody>
+                <th scope="col"> Detail</th>
 
-            <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
-                {{ errorMessage }}
-            </div>
+            </tr>
+
+        </thead>
+
+
+        <tbody class="">
+
+
 
             <tr
                 *ngFor="let document of documentCandidature | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
-                <td>{{ document.candidature }}</td>
-                <td>{{ document.nomPieceJointe }}</td>
-                <td>{{ document.pieceJointe }}</td>
-
+                <td>{{ document.candidature?.posteVacant?.poste?.reference }}</td>
+                <td>{{ document.candidature?.posteVacant?.session?.reference }}</td>
+                <td>{{ document.candidature?.individu?.nom }} &nbsp; {{ document.candidature?.individu?.prenom }}</td>
+                <td>{{ document.candidature?.id }}</td>
+                <td>{{ document.nomPieceJointe?.nom }}</td>
+                <!-- <td>{{ document.nomFichier }}</td> -->
 
                 <!-- <td>
-                    <app-view (click)="toto(poste.id)"></app-view>
-                    <app-delete (click)="deletePoste(poste.id)"></app-delete>
-                    <app-update [routerLink]="['/admin/poste-de-travail/edit', poste.id]"></app-update>
-
-
+                    <a href="javascript:void(0)" (click)="downloadFile(document.nomFichier!)">
+                        {{ document.nomFichier }}</a>
                 </td> -->
+
+                <td>
+                    <a href="javascript:void(0)" (click)="test1(document.nomFichier!)">
+                        {{ document.nomFichier }}
+                    </a>
+                </td>
+
+                <app-voir (click)="getId(document.id)"
+                    [routerLink]="['/admin/fiche-document-candidature', document.id]"></app-voir>
+
+
             </tr>
 
         </tbody>

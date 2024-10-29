@@ -1,77 +1,31 @@
-/*
----------------------------------------------
-Tickets Page
----------------------------------------------
-*/
 
-
-
-
-/* .form-floating{
-
-  width: 100%; height: 70%;
-}
-.test {
-opacity: 0.4;
-padding-bottom: 0px !important;
-padding: 0px 0px 0px 0px;
-}
-
-.form-floating .form-select{
-  margin-top: 10px;
-  background-color: transparent;
-  border-bottom: 1px solid black;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  outline: none;
-  font-size: 14px;
-  width: 100%;
-  padding: 5px;
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* .nav-user{
-  background-color: #a91a1a;
-} */
 .page-heading-shows-events {
   background-image: url(../../../../assets/img/slides/nivo/bg-3.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 20px 0px 150px 0px;
+  padding: 10px 0px 150px 0px;
+  /* padding: 20px 0px 150px 0px; */
   text-align: center;
 }
 .page-heading-shows-events h1{
-  font-size: 40px; 
+  font-size: 70px; 
+  /* font-size: 40px;  */
   font-weight: 500;  
-  color: #ffffff91;
-  font-family: "Lato",  sans-serif;
+  color: #ffffff19;
+  font-family:serif;
+
 }
 
 .tickets-page {
 margin-bottom: 100px;
-background-color: #ffffff;
+background-color: #FFFFFF;
 }
 
 .tickets-page .search-box {
-background-color: #2b2320;
-padding: 30px;
-color: #ffffff;
+  /* background-color: pink; */
+  background-color: #4d464316;
+  padding: 30px;
+  color: #ffffff;
 }
 
 .tickets-page .search-box h4 {
@@ -84,9 +38,8 @@ font-family: "Lato",  sans-serif;
 
 .tickets-page .search-box select {
 margin-top: 10px;
-background-color: transparent;
+/* background-color: transparent; */
 border-bottom: 1px solid #ffffff;
-/* border-bottom: 1px solid rgba(103, 6, 108, 0.5); */
 border-top: none;
 border-right: none;
 border-left: none;
@@ -94,12 +47,13 @@ outline: none;
 font-size: 14px;
 width: 100%;
 padding: 5px;
-color: #ffffff;
+color: #2b2320;
 }
 
 .tickets-page .search-box option {
-  background-color: #2b2320ba;
-  color: #ffffff;
+  background-color: white;
+  /* background-color: #2b2320ba; */
+  color: #2b2320;
   /* background-color: #2b232011; */
 }
 
@@ -120,18 +74,12 @@ width: 100%;
 background-color: #656c74;
 }
 
-/* .tickets-page .heading h2 {
-font-size: 30px;
-font-weight: 800;
-color: #2a2a2a;
-text-align: center;
-margin-top: 100px;
-margin-bottom: 80px;
-} */
+
 .tickets-page .heading  {
 font-size: 30px;
 font-weight: 800;
-color: #2b2320;
+color: #4d4643;
+/* color: #2b2320; */
 text-align: center;
 margin-top: 100px;
 margin-bottom: 80px;
@@ -147,7 +95,8 @@ overflow: hidden;
 }
 
 .tickets-page .ticket-item .thumb .price {
-background-color: rgba(101,108,116,0.9);
+/* background-color: rgba(101,108,116,0.9); */
+background-color: pink;
 display: inline-block;
 padding: 20px;
 position: absolute;
@@ -240,29 +189,16 @@ transition: all .3s;
   
 .tickets-page .pagination ul li a:hover,
 .tickets-page .pagination ul li.active a {
-background-color: #343a3e;
+/* background-color: #343a3e; */
+background-color: palevioletred;
 color: #fff!important;
 }
 
-@media (max-width: 1036px) {
 
-    .owl-show-events .owl-nav {
-      display: none;
-    }
-  
-  }
-  
   @media (max-width: 992px) {
-  
-    .amazing-venues .right-content {
-      margin-left: 0;
-      margin-top: 45px;
-    }
-  
+
     .subscribe,
-    .subscribe input,
-    footer .address,
-    footer .hours {
+    .subscribe input {
       text-align: center; 
     }
   
@@ -273,76 +209,9 @@ color: #fff!important;
     .subscribe .main-dark-button {
       margin-top: 20px;
     }
-  
-    footer .address {
-      margin-bottom: 45px;
-    }
-  
-    footer .hours {
-      margin-top: 45px;
-    }
-  
-    .sub-footer,
-    .sub-footer .social-links {
-      text-align: center;
-    }
-  
-    .coming-events .event-item {
-      margin-bottom: 30px;
-    }
-  
-    .coming-events .left-button {
-      display: none;
-    }
-  
-    .under-footer,
-    footer p.copyright {
-      text-align: center;
-    }
-  
-    .about-item .right-content {
-      margin-left: 0px;
-    }
-  
-    .about-item .down-content {
-      border-left: 1px dotted #d7dadc;
-    }
-  
-    .about-upcoming-shows .next-shows {
-      margin-top: 30px;
-    }
-    
-    .also-like .like-item {
-      margin-bottom: 30px;
-    }
-  
-    .page-heading-rent-venue span,
+
     .page-heading-shows-events span {
       padding: 0px;
-    }
-  
-    .rent-venue-tabs .heading-tabs .main-dark-button,
-    .shows-events-tabs .heading-tabs .main-dark-button {
-      display: none;
-    }
-  
-    .shows-events-tabs #tabs ul li {
-      margin-bottom: 15px;
-    }
-  
-    .shows-events-tabs .tabs-content .event-item .right-content ul li i {
-      height: 40px;
-    }
-    .shows-events-tabs .tabs-content .event-item .right-content {
-      padding: 30px;
-    }
-  
-    .shows-events-tabs #tabs ul li:last-child {
-      margin-bottom: 0px;
-    }
-  
-    .shows-events-tabs .tabs-content .sidebar {
-      margin-bottom: 45px;
     }
   
     .tickets-page .search-box {
@@ -354,62 +223,14 @@ color: #fff!important;
       margin-top: 30px;
     }
   
-    .shows-events-tabs .tabs-content .pagination ul li,
-    .shows-events-schedule .pagination ul li,
     .tickets-page .pagination ul li {
       margin: 0px 2px!important;
     }
   
-    .ticket-details-page .right-content {
-      margin-left: 0px;
-      margin-top: 30px;
-    }
-  
-    .shows-events-schedule ul li,
-    .shows-events-schedule ul li .main-dark-button {
-      text-align: center;
-    }
-  
-    .shows-events-schedule ul li .title,
-    .shows-events-schedule ul li .time,
-    .shows-events-schedule ul li .place {
-      margin-bottom: 15px;
-    }
-  
   }
-  
-  @media (max-width: 450px) {
-  
-    .rent-venue-tabs #tabs ul li {
-      text-align: center;
-      margin-right: 0px;
-      display: block;
-      margin-bottom: 5px;
-      margin-top: 5px;
-    } 
-  
-    .rent-venue-tabs #tabs ul .ui-tabs-active a:after,
-    .shows-events-tabs #tabs ul .ui-tabs-active a:after {
-      display: none;
-    }
-  
-    .rent-venue-tabs .tabs-content ul.list {
-      text-align: center;
-    }
-  
-    .rent-venue-tabs .tabs-content ul.list li {
-      text-align: center;
-      width: 100%;
-    }
-  
-    .pre-header {
-      display: none;
-    }
-  
-  }
+
   .btn{
     font-family: "Roboto", sans-serif;
-   /* text-transform: uppercase; */
     font-weight: 500;
     font-size: 14px;
     letter-spacing: 1px;
@@ -417,8 +238,8 @@ color: #fff!important;
     padding: 10px 28px;
     border-radius: 4px;
     transition: 0.5s;
-    color: #fff;
-    background: #f03c02;
+    /* color: #fff;
+    background: #f03c02; */
   }
   
   @-webkit-keyframes move-up-down {
@@ -434,9 +255,6 @@ color: #fff!important;
   }
 
 /*** Job Listing ***/
-.nav-pills .nav-item .active {
-border-bottom: 2px solid var(--primary);
-}
 
 .job-item {
 border: 1px solid transparent;
@@ -460,11 +278,9 @@ box-shadow: none;
 }
 
 .btn.btn-primary,
-.btn.btn-secondary {
+.btn.btn-secondary, .btn.btn-outline-danger {
     color: #f03c02;
-    /* color: #FFFFFF; */
-    background-color: #130e0e;
-    /* background-color: #2086ab; */
+    background-color: #4d4643;
 }
 
 .poste_detail i{
@@ -475,7 +291,16 @@ box-shadow: none;
   background-color: #ffffff;
 }
 
-
+.btn.btn-outline-dark:hover{
+  background-color: #f03c02;
+  color: #ffffff;
+  border: #f03c02;
+}
+.btn.btn-outline-danger:hover{
+  background-color: #f03c02;
+  color: #ffffff;
+  border: #f03c02;
+}
 
 
 

@@ -19,6 +19,8 @@ export class IndividuUserComponent implements OnInit {
   individuSelect: Individu | undefined;
   _id: number | undefined;
 
+  passwordError: string | null = null; // Ajoutez cette propriété
+
   currentUserEmail: string | null = null;
 
   private currentUserEmailSubject = new BehaviorSubject<string>('');
@@ -73,6 +75,41 @@ export class IndividuUserComponent implements OnInit {
 
   }
 
+  validatePassword() {
+    const password = this.user.password;
+    const lengthValid = password && password.length >= 8;
+    const uppercaseValid = password && /[A-Z]/.test(password);
+    const numberValid = password && /[0-9]/.test(password);
+
+    // Réinitialisez l'erreur
+    this.passwordError = null;
+
+    if (!lengthValid) {
+      this.passwordError = "Le mot de passe doit contenir au moins 8 caractères.";
+    } else if (!uppercaseValid) {
+      this.passwordError = "Le mot de passe doit contenir au moins une majuscule.";
+    } else if (!numberValid) {
+      this.passwordError = "Le mot de passe doit contenir au moins un chiffre.";
+    }
+  }
+
+  get isPasswordRequired() {
+    return !this.user.password;
+  }
+
+  get isPasswordLengthInvalid() {
+    return this.user.password && this.user.password.length < 8;
+  }
+
+  get isPasswordUppercaseInvalid() {
+    return this.user.password && !/[A-Z]/.test(this.user.password);
+  }
+
+  get isPasswordNumberInvalid() {
+    return this.user.password && !/[0-9]/.test(this.user.password);
+  }
+
+
   getIndividuById(_id?: number) {
 
 
@@ -84,27 +121,18 @@ export class IndividuUserComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
   submitUser(): void {
-    if (!this.user.password) {
-      console.error('Le mot de passe est requis.');
+    this.validatePassword(); // Validez le mot de passe avant la soumission
+
+    // Si des erreurs de mot de passe existent, ne soumettez pas
+    if (this.passwordError) {
+      console.error('Erreur de validation du mot de passe:', this.passwordError);
       return;
     }
-    console.log("methode marche");
-    console.log(this._id);
-    this.individu._id = this._id
-    //console.log(this.individu._id);
+
+    this.individu._id = this._id;
+
     if (this.individu._id) {
-      console.log(this.individu._id);
       this.userService.addUserForIndividu(this.individu._id, this.user).subscribe(
         () => {
           console.log('Utilisateur enregistré avec succès.');
@@ -115,9 +143,34 @@ export class IndividuUserComponent implements OnInit {
           console.error('Erreur lors de l\'enregistrement de l\'utilisateur :', error);
         });
     }
-
-
   }
+
+
+
+  // submitUser(): void {
+
+  //   if (!this.user.password) {
+  //     console.error('Le mot de passe est requis.');
+  //     return;
+  //   }
+  //   console.log("methode marche");
+  //   console.log(this._id);
+  //   this.individu._id = this._id
+  //   if (this.individu._id) {
+  //     console.log(this.individu._id);
+  //     this.userService.addUserForIndividu(this.individu._id, this.user).subscribe(
+  //       () => {
+  //         console.log('Utilisateur enregistré avec succès.');
+  //         this.user = new User();
+  //         this.router.navigate(['/']);
+  //       },
+  //       (error) => {
+  //         console.error('Erreur lors de l\'enregistrement de l\'utilisateur :', error);
+  //       });
+  //   }
+
+
+  // }
 
 
 

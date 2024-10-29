@@ -1,0 +1,160 @@
+<app-retour [routerLink]="['/admin/candidatures']"></app-retour>
+
+<section class="section profile mt-4" style="margin-bottom: 100%;">
+    <div class="row">
+        <!-- <div class="col-xl-4">
+
+            <div class="card">
+                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                    <h3>Documents candidat</h3>
+                    <tr *ngFor="let document of documentCandidature">
+
+                        <td>
+                            <a href="javascript:void(0)" (click)="test1(document.nomFichier!)">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png"
+                                    alt="Profile" height="50" width="50">
+                                {{ document.nomPieceJointe?.nom }}
+                            </a>
+                        </td>
+
+                    </tr>
+
+
+                </div>
+            </div>
+
+        </div> -->
+        <div class="col-xl-4 ">
+
+            <div class="card mb-2" *ngFor="let document of documentCandidature" style="border-radius: 4%;">
+                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                    <h2>{{ document.nomPieceJointe?.nom }}</h2>
+
+
+                    <a href="javascript:void(0)" (click)="test1(document.nomFichier!)">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1200px-PDF_file_icon.svg.png"
+                            alt="Profile">
+
+                    </a>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+            <div class="card">
+                <div class="card-body pt-3">
+
+                    <div class="tab-content pt-3">
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                    data-bs-target="#profile-overview">Profile</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit etat
+                                    candidature</button>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Edit
+                                    profil</button>
+                            </li>
+
+
+
+                        </ul>
+
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                            {{
+                            posteSelectionne?.etatCandidature?.etat }}
+
+                            <h5 class="card-title">Profile Details</h5>
+                            <p><b>Nom :</b> </p>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Civilite</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.individu?.civilite?.designation }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Nom</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.individu?.nom }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Prenom</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.individu?.prenom }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Date de naissance</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.individu?.dateDeNaissance }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Email</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.individu?.email }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Pays</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.individu?.pays?.designation }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Telephone</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">( +{{
+                                    posteSelectionne.individu?.pays?.abreviation }}){{
+                                    posteSelectionne.individu?.telephone }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Adresse</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.individu?.adresse}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Code Postal</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.individu?.cp}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Ville</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.individu?.ville}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Etat de la candidature</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="posteSelectionne">{{
+                                    posteSelectionne.etatCandidature?.etat}}</div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                            <app-status-candidat></app-status-candidat>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

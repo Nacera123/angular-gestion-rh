@@ -1,12 +1,11 @@
-<div *ngIf="errorMessage" class="alert alert-danger">
-    {{ errorMessage }}
-</div>
-
-<app-add [routerLink]="['/admin/session-candidature/add']"></app-add>
 <div class="card-body">
+    <app-add [routerLink]="['/admin/session-candidature/add']"></app-add>
+    <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
 
     <table class="table datatable">
-        <thead class="table table-info">
+        <thead class="table table-secondary">
             <tr>
                 <th scope="col">Reference</th>
                 <th scope="col">Date d'ouverture</th>

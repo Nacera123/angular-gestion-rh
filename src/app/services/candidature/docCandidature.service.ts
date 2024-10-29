@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { DocumentCandidature } from 'src/app/models/candidature/documentCandidature';
 import { GestionCandidatureDto } from 'src/app/models/candidature/gestionCandidatureDto';
+import { environment } from 'src/environement/environement.dev';
 
 
 @Injectable({
@@ -10,9 +11,11 @@ import { GestionCandidatureDto } from 'src/app/models/candidature/gestionCandida
 })
 export class DocCandidatureService {
 
-    private baseUrl = 'http://localhost:1234/candidature';
+    // private baseUrl = 'http://localhost:1234/candidature';
 
-
+    private baseUrl = (environment.production)
+        ? 'https://ws.nestech.fr/candidature'
+        : 'http://localhost:1234/candidature';
     constructor(private http: HttpClient) { }
 
     // Méthode pour uploader un PDF avec un postId

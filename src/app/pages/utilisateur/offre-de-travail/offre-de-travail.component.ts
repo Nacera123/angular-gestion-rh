@@ -15,7 +15,8 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-offre-de-travail',
   templateUrl: './offre-de-travail.component.html',
-  styleUrls: ['./offre-de-travail.component.css', './bootstrap.min.css']
+  styleUrls: ['./offre-de-travail.component.css']
+  // styleUrls: ['./offre-de-travail.component.css', './bootstrap.min.css']
 
 
 })

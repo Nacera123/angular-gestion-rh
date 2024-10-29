@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { NomDocument } from "src/app/models/candidature/nomDocument";
+import { environment } from "src/environement/environement.dev";
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +12,11 @@ import { NomDocument } from "src/app/models/candidature/nomDocument";
 export class NomDocumentService {
 
 
-    private endpoint: string = 'http://localhost:1234/nom-document'
+    // private endpoint: string = 'http://localhost:1234/nom-document'
 
+    private endpoint = (environment.production)
+        ? 'https://ws.nestech.fr/nom-document'
+        : 'http://localhost:1234/nom-document';
 
     constructor(
         private readonly http: HttpClient

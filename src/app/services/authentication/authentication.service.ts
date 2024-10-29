@@ -4,12 +4,17 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthDto } from 'src/app/models/authDto';
+import { environment } from 'src/environement/environement.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private readonly endpoint: string = 'http://localhost:1234/api';
+  private readonly endpoint = (environment.production)
+    ? 'https://ws.nestech.fr/api'
+    : 'http://localhost:1234/api';
+
+
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
 

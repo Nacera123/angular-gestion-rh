@@ -1,13 +1,18 @@
-<app-add [routerLink]="['/admin/poste-vacant/add']"></app-add>
 <div class="card-body">
+    <app-add [routerLink]="['/admin/poste-vacant/add']"></app-add>
+
+    <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
 
     <table class="table datatable">
-        <thead class="table table-info">
+        <thead class="table table-secondary ">
             <tr>
-                <th scope="col">Poste Vacant</th>
-                <th scope="col">Reference du poste</th>
-                <th scope="col">Type de Contrat</th>
-                <th scope="col">Descriptif</th>
+                <th scope="col">Reference</th>
+                <th scope="col">Poste vacant</th>
+                <th scope="col">Poste</th>
+                <th scope="col">Contrat</th>
+                <!-- <th scope="col">Descriptif</th> -->
                 <th scope="col">Session d'ouverture</th>
                 <th scope="col">Session de fermeture</th>
                 <th scope="col">Position</th>
@@ -15,26 +20,36 @@
 
             </tr>
         </thead>
-        <tbody>
-
-            <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
-                {{ errorMessage }}
-            </div>
+        <tbody class="">
 
             <tr *ngFor="let toto of postesVacants | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+                <td>
+                    <button type="button" class="btn-reference rounded-pill mt-1">{{ toto.poste?.reference }}</button>
+
+                </td>
+                <td>{{ toto.nom }}</td>
                 <td>{{ toto.poste?.nom }}</td>
-                <td>{{ toto.poste?.reference }}</td>
                 <td>{{ toto.typeContrat?.type }}</td>
-                <td>{{ toto.descriptif }}</td>
+                <!-- <td>{{ toto.descriptif }}</td> -->
                 <td>{{ toto.session?.dateOuverture }}</td>
                 <td>{{ toto.session?.dateCloture }}</td>
-                <td>{{ toto.session?.status }}</td>
 
-                <app-voir (click)="getPosteVacantById(toto.id)"
-                    [routerLink]="['/admin/poste-vacant/fiche', toto.id]"></app-voir>
-                <app-delete></app-delete>
-                <app-update></app-update>
+                <td>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                            [checked]="toto.session?.status" disabled>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">{{ toto.session?.status ? 'Activé'
+                            :
+                            'Désactivé' }}</label>
+                    </div>
+                </td>
 
+                <td>
+                    <app-voir (click)="getPosteVacantById(toto.id)"
+                        [routerLink]="['/admin/poste-vacant/fiche', toto.id]"></app-voir>
+                    <app-delete (click)="deletePosteVacant(toto.id)"></app-delete>
+                    <app-update [routerLink]="['/admin/poste-vacant/edit', toto.id]"></app-update>
+                </td>
             </tr>
 
         </tbody>

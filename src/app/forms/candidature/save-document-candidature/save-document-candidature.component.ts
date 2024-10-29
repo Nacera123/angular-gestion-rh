@@ -176,16 +176,16 @@ export class SaveDocumentCandidatureComponent implements OnInit {
             this.docCandidature.candidature = this.candidature;
             this.candidature.individu = this.individu;
             this.individu._id = this.candidat.individu?._id;
-            alert(this.candidat.individu?._id);
+            // alert(this.candidat.individu?._id);
 
             forkJoin([
               this.paysService.getByDesignation(this.pays.designation),
               this.civiliteService.getByDesignation(this.civilite.designation),
             ]).subscribe(([pes, civ]) => {
               if (pes && civ) {
-                alert(this.candidat.individu?._id);
-                alert("m2");
-                alert(this.candidat.individu?._id);
+                // alert(this.candidat.individu?._id);
+                // alert("m2");
+                // alert(this.candidat.individu?._id);
                 console.log(this.docCandidature);
 
                 if (this.docCandidature.candidature && this.docCandidature.candidature.individu) {
@@ -194,8 +194,8 @@ export class SaveDocumentCandidatureComponent implements OnInit {
                   this.docCandidature.candidature.individu.nom = this.candidature.individu?.nom;
                   this.candidature.individu = this.individu;
 
-                  alert("m3");
-                  alert(this.candidat.individu?._id);
+                  // alert("m3");
+                  // alert(this.candidat.individu?._id);
 
                   if (this.selectedFile && this.posteSelectionne && this.selectedFile1 && this.nomDoc.nom && this.nomDoc1.nom) {
                     console.log(this.docCandidature.candidature.individu);

@@ -1,0 +1,34 @@
+<!-- {{
+posteSelectionne?.etatCandidature?.etat }} -->
+
+
+<!-- <option *ngFor="let etat of etatCandidature">
+    {{etat.etat }}
+</option> -->
+
+
+<!-- <div class="col-12 mb-2">
+    <label for="etatCandidature" class="form-label">État de la candidature</label>
+    <select id="etatCandidature" class="form-select" [(ngModel)]="etatSelectionne"
+        (ngModelChange)="posteSelectionne && posteSelectionne.etatCandidature && (posteSelectionne.etatCandidature.etat = $event)"
+        name="etat" required>
+        <option *ngFor="let etat of etatcandidature" [value]="etat">{{ etat }}</option>
+    </select>
+</div> -->
+
+
+<div class="col-12 mb-2">
+    <label for="etatCandidature" class="form-label">État de la candidature</label>
+    <select id="etatCandidature" class="form-select" [(ngModel)]="etatSelectionne"
+        (ngModelChange)="posteSelectionne && posteSelectionne.etatCandidature && (posteSelectionne.etatCandidature.etat = $event)"
+        name="etat" required>
+        <option *ngFor="let etat of etatcandidature" [value]="etat">{{ etat }}</option>
+    </select>
+</div>
+
+<!-- Ajoutez ce bouton pour mettre à jour l'état -->
+<div class="col-12 text-center pt-4">
+    <button (click)="etatSelectionne ? updateEtatCandidature(etatSelectionne) : null" class="btn btn-primary">
+        Update
+    </button>
+</div>

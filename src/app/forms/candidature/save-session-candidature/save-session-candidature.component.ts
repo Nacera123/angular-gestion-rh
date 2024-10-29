@@ -26,7 +26,7 @@ export class SaveSessionCandidatureComponent implements OnInit {
       reference: ['', Validators.required],
       dateOuverture: ['', Validators.required],
       dateCloture: ['', Validators.required],
-      status: ['', Validators.required]
+      status: [true, Validators.required]
     });
 
     this.route.params

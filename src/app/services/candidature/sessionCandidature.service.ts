@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, catchError, throwError } from "rxjs";
 import { SessionCandidature } from "src/app/models/candidature/sessionCandidature";
+import { environment } from "src/environement/environement.dev";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,12 @@ import { SessionCandidature } from "src/app/models/candidature/sessionCandidatur
 
 export class sessionCandidatureService {
 
-    private endpoint: string = 'http://localhost:1234/session-candidature';
+    // private endpoint: string = 'http://localhost:1234/session-candidature';
+
+    private endpoint = (environment.production)
+        ? 'https://ws.nestech.fr/session-candidature'
+        : 'http://localhost:1234/session-candidature';
+
 
     constructor(
         private readonly http: HttpClient,

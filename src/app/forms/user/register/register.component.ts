@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
       prenom: [''],
       telephone: [''],
       email: [''],
-      password: ['']
+      password: ['', this.passwordValidator]
     })
   }
 
@@ -43,6 +43,22 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
+  passwordValidator(control: any) {
+    const password = control.value;
+    const lengthValid = password && password.length >= 8;
+    const uppercaseValid = password && /[A-Z]/.test(password);
+    const numberValid = password && /[0-9]/.test(password);
+
+    const errors = {
+      length: !lengthValid,
+      uppercase: !uppercaseValid,
+      number: !numberValid
+    };
+
+    // Return errors if any validation fails
+    return lengthValid && uppercaseValid && numberValid ? null : errors;
+  }
+
 
   registerUser() {
 

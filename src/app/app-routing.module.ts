@@ -41,13 +41,15 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MonDocTestComponent } from './forms/mon-doc-test/mon-doc-test.component';
 import { PagePersonnelleComponent } from './pages/utilisateur/page-personnelle/page-personnelle.component';
 import { Test1Component } from './test/test1/test1.component';
-import { Test2Component } from './test/test2/test2.component';
+import { CandidaturesComponent } from './pages/general/candidature/candidatures/candidatures.component';
+import { FicheDocumentCandidatureComponent } from './components/candidature/fiche/fiche-document-candidature/fiche-document-candidature.component';
+import { FicheCandidatureComponent } from './components/candidature/fiche/fiche-candidature/fiche-candidature.component';
+import { StatusCandidatComponent } from './forms/candidature/status-candidat/status-candidat.component';
 
 
 const routes: Routes = [
   ///test
   { path: 'test1', component: Test1Component },
-  { path: 'test2', component: Test2Component },
   /**************** */
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
@@ -97,9 +99,12 @@ const routes: Routes = [
       { path: 'session-candidature/add', component: SaveSessionCandidatureComponent },
       { path: 'session-candidature/edit/:id', component: SaveSessionCandidatureComponent },
       //candidature
-      { path: 'candidature', component: CandidatureComponent },
+      { path: 'candidatures', component: CandidaturesComponent },
+      { path: 'candidature/:nom', component: CandidatureComponent },
+      { path: 'candidature/fiche/:id', component: FicheCandidatureComponent },
       //document candidature
       { path: 'document-candidature', component: DocumentCandidatureComponent },
+      { path: 'fiche-document-candidature/:id', component: FicheDocumentCandidatureComponent },
       //nom des documents
       { path: 'nom-document', component: NomDocumentComponent },
       { path: 'nom-document/add', component: SaveNomDocumentComponent },
@@ -108,6 +113,9 @@ const routes: Routes = [
       { path: 'poste-vacant', component: PosteVacantComponent },
       { path: 'poste-vacant/add', component: SavePosteVacantComponent },
       { path: 'poste-vacant/fiche/:id', component: FichePosteVacantComponent },
+      { path: 'poste-vacant/edit/:id', component: SavePosteVacantComponent },
+      //status candidature
+      { path: 'status-candidat/:id', component: StatusCandidatComponent },
 
     ]
   },

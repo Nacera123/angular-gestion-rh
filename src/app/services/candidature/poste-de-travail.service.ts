@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { PosteDeTravail } from "src/app/models/candidature/posteDeTravail";
+import { environment } from "src/environement/environement.dev";
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +11,11 @@ import { PosteDeTravail } from "src/app/models/candidature/posteDeTravail";
 
 export class PosteDeTravailService {
 
-    private endpoint: string = 'http://localhost:1234/poste-de-travail'
+    // private endpoint: string = 'http://localhost:1234/poste-de-travail'
 
+    private endpoint = (environment.production)
+        ? 'https://ws.nestech.fr/poste-de-travail'
+        : 'http://localhost:1234/poste-de-travail';
 
     constructor(
         private readonly http: HttpClient

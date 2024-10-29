@@ -2,13 +2,19 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { Pays } from 'src/app/models/pays';
+import { environment } from 'src/environement/environement.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaysService {
 
-  private endpoint: string = 'http://localhost:1234/pays';
+  // private endpoint: string = 'http://localhost:1234/pays';
+
+  private endpoint = (environment.production)
+    ? 'https://ws.nestech.fr/pays'
+    : 'http://localhost:1234/pays';
+
 
   constructor(
     private readonly http: HttpClient

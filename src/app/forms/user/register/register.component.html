@@ -73,6 +73,18 @@
                 class="text-danger">Email is required</div>
         </div>
 
+        <!-- <div class="control-group">
+            <label class="control-label" for="inputSigninPassword">Password</label>
+            <div class="controls">
+                <input type="password" id="inputSigninPassword" placeholder="Password" formControlName="password">
+            </div>
+            <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
+                class="text-danger">Password is required</div>
+        </div> -->
+
+
+
+
         <div class="control-group">
             <label class="control-label" for="inputSigninPassword">Password</label>
             <div class="controls">
@@ -80,7 +92,14 @@
             </div>
             <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched"
                 class="text-danger">Password is required</div>
+            <div *ngIf="registerForm.get('password')?.hasError('length') && registerForm.get('password')?.touched"
+                class="text-danger">Le mot de passe doit contenir au moins 8 caractères.</div>
+            <div *ngIf="registerForm.get('password')?.hasError('uppercase') && registerForm.get('password')?.touched"
+                class="text-danger">Le mot de passe doit contenir au moins une majuscule.</div>
+            <div *ngIf="registerForm.get('password')?.hasError('number') && registerForm.get('password')?.touched"
+                class="text-danger">Le mot de passe doit contenir au moins un chiffre.</div>
         </div>
+
         <div class="control-group">
             <div class="controls">
                 <button type="submit" class="btn">Register</button>

@@ -1,9 +1,4 @@
-@import "~bootstrap-icons/font/bootstrap-icons.css";
-@import "~boxicons/css/boxicons.min.css";
-@import "~quill/dist/quill.core.css";
-@import "~quill/dist/quill.bubble.css";
- 
- 
+
 .dropdown-menu .dropdown-footer {
     text-align: center;
     font-size: 15px;
@@ -31,18 +26,26 @@
     font-size: 14px;
     transition: all 0.3s;
     border-top: 1px solid #cddfff;
+
+    background-color: rgb(15, 78, 119);
+    margin-top: 100%;
   }
   
   .footer .copyright {
     text-align: center;
-    color: #012970;
+    color: #ffffff75;
   }
   
   .footer .credits {
     padding-top: 5px;
     text-align: center;
     font-size: 13px;
-    color: #012970;
+    color: #ffffff75;
+  }
+  .footer .credits a{
+
+    color: #ffffffdd;
+    text-decoration: none;
   }
 
 

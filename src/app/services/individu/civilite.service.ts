@@ -2,13 +2,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { Civilite } from 'src/app/models/civilite';
+import { environment } from 'src/environement/environement.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CiviliteService {
 
-  private endpoint: string = 'http://localhost:1234/civilite';
+  // private endpoint: string = 'http://localhost:1234/civilite';
+
+  private endpoint = (environment.production)
+    ? 'https://ws.nestech.fr/civilite'
+    : 'http://localhost:1234/civilite';
 
   constructor(
     private readonly http: HttpClient

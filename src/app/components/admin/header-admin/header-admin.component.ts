@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { SidebarService } from 'src/app/sidebar.service';
 
 @Component({
   selector: 'app-header-admin',
@@ -10,17 +11,23 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 export class HeaderAdminComponent implements OnInit {
 
 
+
+
   currentUserEmail: string | null = null; // Initialisez currentUserEmail à null pour éviter l'erreur
 
   imgAdmin: any;
 
-  constructor(private authService: AuthenticationService,
-    private router: Router) {
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router,
+    private sidebarService: SidebarService) {
     this.imgAdmin = {
       img1: './assets/img/admin/profile.PNG'
     };
   }
-
+  toggleSidebar() {
+    this.sidebarService.toggleSidebar();
+  }
   ngOnInit(): void {
 
 
@@ -40,6 +47,7 @@ export class HeaderAdminComponent implements OnInit {
     localStorage.removeItem('user_email');
     localStorage.removeItem('access_token');
     localStorage.removeItem('connectedUser');
+    localStorage.removeItem('id_individu');
 
     // localStorage.removeItem('user');
     this.router.navigate(['/']);

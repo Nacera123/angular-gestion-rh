@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { GestionCandidatureDto } from '../models/candidature/gestionCandidatureDto';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from 'src/environement/environement.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MonDocTestService {
 
-  private baseUrl = 'http://localhost:1234/mon-doc';
+  // private baseUrl = 'http://localhost:1234/mon-doc';
+
+
+  private baseUrl = (environment.production)
+    ? 'https://ws.nestech.fr/mon-doc'
+    : 'http://localhost:1234/mon-doc';
 
   constructor(private http: HttpClient) { }
 

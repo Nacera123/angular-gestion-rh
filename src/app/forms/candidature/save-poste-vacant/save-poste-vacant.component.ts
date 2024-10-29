@@ -19,9 +19,7 @@ import { TypeDeContratService } from 'src/app/services/candidature/type-de-contr
 
 
 export class SavePosteVacantComponent implements OnInit {
-
-
-
+  errorMessage: string = '';
 
 
 
@@ -49,6 +47,25 @@ export class SavePosteVacantComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+
+    this.route.params
+      .subscribe(params => {
+        const id = params['id'];
+        if (id) {
+          this.posteVacantService.getById(id).subscribe(data => {
+            this.posteVacant = data;
+            this.posteVacant.nom = data.nom;
+
+
+
+            this.sessionCan.reference = data.session?.reference
+            this.posteDeTravail.nom = data.poste?.nom
+            this.typeDeContrat.type = data.typeContrat?.type
+            this.editor?.clipboard.dangerouslyPasteHTML(this.posteVacant.descriptif?.toString() || '');
+          });
+        }
+      });
 
 
     //1-recup session by ref
@@ -101,11 +118,16 @@ export class SavePosteVacantComponent implements OnInit {
       // Mettez à jour le contenu de l'éditeur dans le modèle
       this.posteVacant.descriptif = editor.root.innerHTML;
     });
+
+    this.editor = editor;
   }
 
 
-  //3- Methode register dont j'ai besoin
-  ajoutPoste() {
+
+
+
+
+  ajoutPoste(): void {
     if (this.sessionCan.reference && this.typeDeContrat.type && this.posteDeTravail.nom) {
       forkJoin([
         this.sessionService.getSessionByref(this.sessionCan.reference),
@@ -113,36 +135,83 @@ export class SavePosteVacantComponent implements OnInit {
         this.posteDeTravailService.getPosteByNom(this.posteDeTravail.nom)
       ]).subscribe(
         ([ses, tyC, poTr]) => {
-          this.posteVacant.session = ses
-          this.posteVacant.typeContrat = tyC
-          this.posteVacant.poste = poTr
+          this.posteVacant.session = ses;
+          this.posteVacant.typeContrat = tyC;
+          this.posteVacant.poste = poTr;
 
-          this.posteVacantService.add(this.posteVacant).subscribe(
-            (response) => {
-              console.log(' poste vacan bien ajouté ', response);
-              alert(' poste vacan bien ajouté ')
-
-            },
-            (error) => {
-              console.log('Erreur lors de la souscription des cles etrangeres:', error);
-
-              console.error('Erreur lors de la souscription des cles etrangeres :', error);
-            }
-          )
+          if (this.posteVacant.id) {
+            // Mise à jour
+            this.posteVacantService.update(this.posteVacant).subscribe(
+              (response) => {
+                console.log('Poste vacant mis à jour avec succès', response);
+                alert('Poste vacant mis à jour avec succès');
+                this.router.navigate(['admin/poste-vacant']);
+              },
+              (error) => {
+                console.error(error);
+                this.errorMessage = error;
+              }
+            );
+          } else {
+            // Ajout
+            this.posteVacantService.add(this.posteVacant).subscribe(
+              (response) => {
+                console.log('Poste vacant ajouté avec succès', response);
+                alert('Poste vacant ajouté avec succès');
+                this.router.navigate(['admin/poste-vacant']);
+              },
+              (error) => {
+                console.error(error);
+                this.errorMessage = error;
+              }
+            );
+          }
         },
         (error) => {
-          console.error('Erreur lors de la récupération de l\'ID :', error);
-          console.log('Erreur lors de la récupération de l\'ID :', error);
-
+          console.error('Erreur lors de la récupération des clés étrangères :', error);
         }
-      )
-
+      );
     }
   }
 
-
-
-
 }
+
+
+
+//3- Methode register dont j'ai besoin
+// ajoutPoste() {
+//   if (this.sessionCan.reference && this.typeDeContrat.type && this.posteDeTravail.nom) {
+//     forkJoin([
+//       this.sessionService.getSessionByref(this.sessionCan.reference),
+//       this.typeDeContratService.getContratByType(this.typeDeContrat.type),
+//       this.posteDeTravailService.getPosteByNom(this.posteDeTravail.nom)
+//     ]).subscribe(
+//       ([ses, tyC, poTr]) => {
+//         this.posteVacant.session = ses
+//         this.posteVacant.typeContrat = tyC
+//         this.posteVacant.poste = poTr
+
+//         this.posteVacantService.add(this.posteVacant).subscribe(
+//           (response) => {
+//             console.log(' poste vacan bien ajouté ', response);
+//             alert(' poste vacan bien ajouté ')
+
+//           },
+//           (error) => {
+//             console.log('Erreur lors de la souscription des cles etrangeres:', error);
+
+//             console.error('Erreur lors de la souscription des cles etrangeres :', error);
+//           }
+//         )
+//       },
+//       (error) => {
+//         console.error('Erreur lors de la récupération de l\'ID :', error);
+//         console.log('Erreur lors de la récupération de l\'ID :', error);
+
+//       }
+//     )
+
+//   }
+// }
 
 

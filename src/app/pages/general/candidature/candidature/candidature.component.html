@@ -1,4 +1,4 @@
-<app-add [routerLink]="['/admin/session-candidature/add']"></app-add>
+<!-- <app-add [routerLink]="['/admin/session-candidature/add']"></app-add>
 <div class="card-body">
 
     <table class="table datatable">
@@ -7,6 +7,7 @@
                 <th scope="col">Poste Vacant</th>
                 <th scope="col">Candidat</th>
                 <th scope="col"> Etat Candidature</th>
+                <th scope="col"> Ficher</th>
             </tr>
         </thead>
         <tbody>
@@ -20,20 +21,63 @@
                 <td>{{ candidature.posteVacant?.nom }}</td>
                 <td>{{ candidature.individu?.nom }} &nbsp; {{ candidature.individu?.prenom }}</td>
                 <td>{{ candidature.etatCandidature?.etat }}</td>
+                <td>{{ candidature.posteVacant?.id }}</td>
 
 
-                <!-- <td>
-                    <app-view (click)="toto(poste.id)"></app-view>
-                    <app-delete (click)="deletePoste(poste.id)"></app-delete>
-                    <app-update [routerLink]="['/admin/poste-de-travail/edit', poste.id]"></app-update>
-
-
-                </td> -->
             </tr>
 
         </tbody>
     </table>
 
     <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+
+</div> -->
+
+
+<div class="card-body">
+    <!-- <app-add [routerLink]="['/admin/poste-de-travail/add']"></app-add> -->
+
+    <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
+
+
+    <table class="table datatable">
+        <thead class="table table-secondary">
+            <tr>
+                <th scope="col">Ref Session</th>
+                <th scope="col">Ref poste</th>
+                <th scope="col">Poste</th>
+                <th scope="col"> Candidat</th>
+                <th scope="col"> Etat </th>
+                <th scope="col"> Detail</th>
+
+            </tr>
+        </thead>
+
+
+        <tbody class="">
+
+
+            <tr
+                *ngFor="let candidature of candidature | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+                <td>{{ candidature.posteVacant?.session?.reference }}</td>
+                <td>{{ candidature.posteVacant?.poste?.reference }}</td>
+                <td>{{ candidature.posteVacant?.nom }}</td>
+                <td>{{ candidature.individu?.nom }} &nbsp; {{ candidature.individu?.prenom }}</td>
+                <td>{{ candidature.etatCandidature?.etat }}</td>
+                <td>
+                    <app-voir></app-voir>
+                    <app-delete></app-delete>
+                    <app-update></app-update>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="pageChanged($event)" class="pagination "></pagination-controls>
 
 </div>

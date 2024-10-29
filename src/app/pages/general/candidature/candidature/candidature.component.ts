@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Candidature } from 'src/app/models/candidature/candidature';
 import { CandidatureService } from 'src/app/services/candidature/candidature.service';
 
@@ -17,16 +18,32 @@ export class CandidatureComponent implements OnInit {
   errorMessage: string = '';
 
   constructor(
-    private candidatureService: CandidatureService
+    private candidatureService: CandidatureService,
+    private route: ActivatedRoute
   ) { }
 
 
 
   ngOnInit(): void {
-
-    this.getAllCandidature();
-
+    this.route.paramMap.subscribe(params => {
+      const nomPoste = params.get('nom');
+      if (nomPoste) {
+        // const formattedNom = this.cleanNameForUrl(nomPoste);
+        const formattedNom = nomPoste.replace(/-/g, ' ');
+        this.getCandidatureByNomPoste(formattedNom);
+        console.log('Nom du poste récupéré des paramètres de l\'URL:', formattedNom);
+      } else {
+        this.getAllCandidature();
+      }
+    });
   }
+  cleanNameForUrl(name: string): string {
+    return name
+      .toLowerCase()
+      .replace(/\s+/g, '-')  // Remplace les espaces par des tirets
+      .replace(/[^\w-]/g, '');  // Supprime les caractères non-alphanumériques sauf les tirets
+  }
+  // this.getAllCandidature();
 
   getAllCandidature() {
 
@@ -43,6 +60,20 @@ export class CandidatureComponent implements OnInit {
 
         }
       )
+  }
+
+  getCandidatureByNomPoste(nom: string) {
+    this.candidatureService.getByNomPosteVacant(nom)
+      .subscribe(
+        response => {
+          this.candidature = response;
+          console.log(response);
+        },
+        error => {
+          console.error(error);
+          this.errorMessage = error;
+        }
+      );
   }
 
   // pagination 

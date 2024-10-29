@@ -1,109 +1,26 @@
-/**
-* Template Name: NiceAdmin
-* Updated: Sep 18 2023 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
-/* @import "~bootstrap-icons/font/bootstrap-icons.css";
-@import "~boxicons/css/boxicons.min.css";
-@import "~quill/dist/quill.core.css";
-@import "~quill/dist/quill.bubble.css"; */
-
-:root {
-    scroll-behavior: smooth;
-  }
   
   body {
     font-family: "Open Sans", sans-serif;
-    background: #f6f9ff;
     color: #444444;
   }
   
   a {
-    color: #4154f1;
+    color: rgb(15, 78, 119);
     text-decoration: none;
   }
   
   a:hover {
-    color: #717ff5;
+    color: rgba(15, 77, 119, 0.741);
     text-decoration: none;
   }
   
   h1,
   h2,
   h3,
-  h4,
-  h5,
-  h6 {
+  h4{
     font-family: "Nunito", sans-serif;
   }
-  
-  /*--------------------------------------------------------------
-  # Main
-  --------------------------------------------------------------*/
-  #main {
-    margin-top: 60px;
-    padding: 20px 30px;
-    transition: all 0.3s;
-  }
-  
-  @media (max-width: 1199px) {
-    #main {
-      padding: 20px;
-    }
-  }
-  
-  /*--------------------------------------------------------------
-  # Page Title
-  --------------------------------------------------------------*/
-  .pagetitle {
-    margin-bottom: 10px;
-  }
-  
-  .pagetitle h1 {
-    font-size: 24px;
-    margin-bottom: 0;
-    font-weight: 600;
-    color: #012970;
-  }
-  
-  /*--------------------------------------------------------------
-  # Back to top button
-  --------------------------------------------------------------*/
-  .back-to-top {
-    position: fixed;
-    visibility: hidden;
-    opacity: 0;
-    right: 15px;
-    bottom: 15px;
-    z-index: 99999;
-    background: #4154f1;
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    transition: all 0.4s;
-  }
-  
-  .back-to-top i {
-    font-size: 24px;
-    color: #fff;
-    line-height: 0;
-  }
-  
-  .back-to-top:hover {
-    background: #6776f4;
-    color: #fff;
-  }
-  
-  .back-to-top.active {
-    visibility: visible;
-    opacity: 1;
-  }
+
   
   /*--------------------------------------------------------------
   # Override some default Bootstrap stylings
@@ -185,97 +102,14 @@
     }
   }
   
-  /* Light Backgrounds */
-  .bg-primary-light {
-    background-color: #cfe2ff;
-    border-color: #cfe2ff;
-  }
-  
-  .bg-secondary-light {
-    background-color: #e2e3e5;
-    border-color: #e2e3e5;
-  }
-  
-  .bg-success-light {
-    background-color: #d1e7dd;
-    border-color: #d1e7dd;
-  }
-  
-  .bg-danger-light {
-    background-color: #f8d7da;
-    border-color: #f8d7da;
-  }
-  
-  .bg-warning-light {
-    background-color: #fff3cd;
-    border-color: #fff3cd;
-  }
-  
-  .bg-info-light {
-    background-color: #cff4fc;
-    border-color: #cff4fc;
-  }
-  
-  .bg-dark-light {
-    background-color: #d3d3d4;
-    border-color: #d3d3d4;
-  }
-  
-  /* Card */
-  .card {
-    margin-bottom: 30px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
-  }
-  
-  .card-header,
-  .card-footer {
-    border-color: #ebeef4;
-    background-color: #fff;
-    color: #798eb3;
-    padding: 15px;
-  }
-  
-  .card-title {
-    padding: 20px 0 15px 0;
-    font-size: 18px;
-    font-weight: 500;
-    color: #012970;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  .card-title span {
-    color: #899bbd;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  
-  .card-body {
-    padding: 0 20px 20px 20px;
-  }
-  
-  .card-img-overlay {
-    background-color: rgba(255, 255, 255, 0.6);
-  }
-  
+
   /* Alerts */
   .alert-heading {
     font-weight: 500;
     font-family: "Poppins", sans-serif;
     font-size: 20px;
   }
-  
-  /* Close Button */
-  .btn-close {
-    background-size: 25%;
-  }
-  
-  .btn-close:focus {
-    outline: 0;
-    box-shadow: none;
-  }
-  
+
   /* Accordion */
   .accordion-item {
     border: 1px solid #ebeef4;
@@ -325,40 +159,6 @@
     color: #51678f;
   }
   
-  .breadcrumb .breadcrumb-item::before {
-    color: #899bbd;
-  }
-  
-  .breadcrumb .active {
-    color: #51678f;
-    font-weight: 600;
-  }
-  
-  /* Bordered Tabs */
-  .nav-tabs-bordered {
-    border-bottom: 2px solid #ebeef4;
-  }
-  
-  .nav-tabs-bordered .nav-link {
-    margin-bottom: -2px;
-    border: none;
-    color: #2c384e;
-  }
-  
-  .nav-tabs-bordered .nav-link:hover,
-  .nav-tabs-bordered .nav-link:focus {
-    color: #4154f1;
-  }
-  
-  .nav-tabs-bordered .nav-link.active {
-    background-color: #fff;
-    color: #4154f1;
-    border-bottom: 2px solid #4154f1;
-  }
-  
-  /*--------------------------------------------------------------
-  # Header
-  --------------------------------------------------------------*/
   .logo {
     line-height: 1;
   }
@@ -377,8 +177,8 @@
   .logo span {
     font-size: 26px;
     font-weight: 700;
-    color: #012970;
-    font-family: "Nunito", sans-serif;
+    color: #ffffff89;
+    font-family:serif;
   }
   
   .header {
@@ -386,10 +186,9 @@
     z-index: 997;
     height: 60px;
     box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-    background-color: #fff;
+    background-color: rgb(15, 78, 119);
+    /* background-color: rgb(135, 63, 235); */
     padding-left: 20px;
-    /* Toggle Sidebar Button */
-    /* Search Bar */
   }
   
   .header .toggle-sidebar-btn {
@@ -441,13 +240,6 @@
     width: 100%;
   }
   
-  .header .search-form input:focus,
-  .header .search-form input:hover {
-    outline: none;
-    box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
-    border: 1px solid rgba(1, 41, 112, 0.3);
-  }
-  
   .header .search-form button {
     border: 0;
     padding: 0;
@@ -455,10 +247,7 @@
     background: none;
   }
   
-  .header .search-form button i {
-    color: #012970;
-  }
-  
+
   /*--------------------------------------------------------------
   # Header Nav
   --------------------------------------------------------------*/
@@ -473,9 +262,9 @@
   
   .header-nav .nav-icon {
     font-size: 22px;
-    color: #012970;
     margin-right: 25px;
     position: relative;
+    color: #ffffffc5;
   }
   
   .header-nav .nav-profile {
@@ -489,6 +278,8 @@
   .header-nav .nav-profile span {
     font-size: 14px;
     font-weight: 600;
+    margin-right: 30px;
+    color: #ffffffc5;
   }
   
   .header-nav .badge-number {
@@ -499,104 +290,19 @@
     padding: 3px 6px;
   }
   
-  .header-nav .notifications {
-    inset: 8px -15px auto auto !important;
-  }
+
+
   
-  .header-nav .notifications .notification-item {
-    display: flex;
-    align-items: center;
-    padding: 15px 10px;
-    transition: 0.3s;
-  }
+
+
+
   
-  .header-nav .notifications .notification-item i {
-    margin: 0 20px 0 10px;
-    font-size: 24px;
-  }
+
+
+
+
+
   
-  .header-nav .notifications .notification-item h4 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-  
-  .header-nav .notifications .notification-item p {
-    font-size: 13px;
-    margin-bottom: 3px;
-    color: #919191;
-  }
-  
-  .header-nav .notifications .notification-item:hover {
-    background-color: #f6f9ff;
-  }
-  
-  .header-nav .messages {
-    inset: 8px -15px auto auto !important;
-  }
-  
-  .header-nav .messages .message-item {
-    padding: 15px 10px;
-    transition: 0.3s;
-  }
-  
-  .header-nav .messages .message-item a {
-    display: flex;
-  }
-  
-  .header-nav .messages .message-item img {
-    margin: 0 20px 0 10px;
-    max-height: 40px;
-  }
-  
-  .header-nav .messages .message-item h4 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #444444;
-  }
-  
-  .header-nav .messages .message-item p {
-    font-size: 13px;
-    margin-bottom: 3px;
-    color: #919191;
-  }
-  
-  .header-nav .messages .message-item:hover {
-    background-color: #f6f9ff;
-  }
-  
-  .header-nav .profile {
-    min-width: 240px;
-    padding-bottom: 0;
-    top: 8px !important;
-  }
-  
-  .header-nav .profile .dropdown-header h6 {
-    font-size: 18px;
-    margin-bottom: 0;
-    font-weight: 600;
-    color: #444444;
-  }
-  
-  .header-nav .profile .dropdown-header span {
-    font-size: 14px;
-  }
-  
-  .header-nav .profile .dropdown-item {
-    font-size: 14px;
-    padding: 10px 15px;
-    transition: 0.3s;
-  }
-  
-  .header-nav .profile .dropdown-item i {
-    margin-right: 10px;
-    font-size: 18px;
-    line-height: 0;
-  }
-  
-  .header-nav .profile .dropdown-item:hover {
-    background-color: #f6f9ff;
-  }
+ 
   
  

@@ -1,13 +1,19 @@
 /********** Template CSS **********/
 
 .page-heading-shows-events {
-    background-image: url(../../../../assets/images/main.png);
+    background-image: url(../../../../assets/img/slides/nivo/bg-3.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    padding: 20px 0px 150px 0px;
+    padding: 10px 0px 150px 0px;
     text-align: center;
 }
-
+.page-heading-shows-events h1{
+    font-size: 70px; 
+    /* font-size: 40px;  */
+    font-weight: 500;  
+    color: #ffffff19;
+    font-family:serif;
+}
 
 
 /*** Button ***/
@@ -18,10 +24,16 @@
 }
 
 .btn.btn-primary,
-.btn.btn-secondary {
-    color: #FFFFFF;
+.btn.btn-secondary, .btn.btn-outline-danger {
+    color: #f03c02;
+    background-color: #4d4643;
 }
-
+.poste_detail i{
+    color: #f03c02;
+}
+.tab-content{
+    background-color: #ffffff;
+}
 .btn-square {
     width: 38px;
     height: 38px;
@@ -47,24 +59,34 @@
     font-weight: normal;
     border-radius: 2px;
 }
-
+.btn.btn-outline-dark:hover{
+    background-color: #f03c02;
+    color: #ffffff;
+    border: #f03c02;
+}
+.btn.btn-outline-danger:hover{
+    background-color: #f03c02;
+    color: #ffffff;
+    border: #f03c02;
+}
 
 
 
 /*** Job Listing ***/
 .nav-pills .nav-item .active {
-    border-bottom: 2px solid var(--primary);
-}
-
-.job-item {
+    border-bottom: 2px solid ;
+    }
+    
+    .job-item {
     border: 1px solid transparent;
     border-radius: 2px;
     box-shadow: 0 0 45px rgba(0, 0, 0, .08);
     transition: .5s;
-}
-
-.job-item:hover {
+    }
+    
+    .job-item:hover {
     border-color: rgba(0, 0, 0, .08);
     box-shadow: none;
-}
-
+    } 
+    
+      

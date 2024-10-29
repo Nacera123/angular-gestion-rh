@@ -10,7 +10,7 @@ import { IndividuService } from 'src/app/services/individu/individu.service';
 @Component({
   selector: 'app-page-personnelle',
   templateUrl: './page-personnelle.component.html',
-  styleUrls: ['./page-personnelle.component.css', './bootstrap.min.css']
+  styleUrls: ['./page-personnelle.component.css']
 })
 export class PagePersonnelleComponent implements OnInit {
 

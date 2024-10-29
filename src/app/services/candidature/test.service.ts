@@ -5,6 +5,7 @@ import { Observable, catchError, throwError } from "rxjs";
 import { Candidature } from "src/app/models/candidature/candidature";
 import { DocumentCandidature } from "src/app/models/candidature/documentCandidature";
 import { TestDto } from "src/app/models/candidature/testDto";
+import { environment } from "src/environement/environement.dev";
 
 
 
@@ -13,8 +14,11 @@ import { TestDto } from "src/app/models/candidature/testDto";
 })
 
 export class TestService {
-    private endpoint: string = 'http://localhost:1234/testtest';
+    // private endpoint: string = 'http://localhost:1234/testtest';
 
+    private endpoint = (environment.production)
+        ? 'https://ws.nestech.fr/testtest'
+        : 'http://localhost:1234/testtest';
 
     constructor(
         private readonly http: HttpClient

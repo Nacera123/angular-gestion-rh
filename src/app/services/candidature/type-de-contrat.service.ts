@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, catchError } from "rxjs";
 import { TypeDeContrat } from "src/app/models/candidature/typeDeContrat";
+import { environment } from "src/environement/environement.dev";
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +11,11 @@ import { TypeDeContrat } from "src/app/models/candidature/typeDeContrat";
 
 export class TypeDeContratService {
 
-    private endpoint: string = 'http://localhost:1234/type-contrat'
+    // private endpoint: string = 'http://localhost:1234/type-contrat'
 
+    private endpoint = (environment.production)
+        ? 'https://ws.nestech.fr/type-contrat'
+        : 'http://localhost:1234/type-contrat';
 
     constructor(
         private readonly http: HttpClient,

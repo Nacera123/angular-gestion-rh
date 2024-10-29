@@ -6,6 +6,7 @@ import { PosteVacantService } from 'src/app/services/candidature/poste-vacant.se
 import { SessionCandidatureComponent } from '../session-candidature/session-candidature.component';
 import { sessionCandidatureService } from 'src/app/services/candidature/sessionCandidature.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgConfirmService } from 'ng-confirm-box';
 
 @Component({
   selector: 'app-poste-vacant',
@@ -29,7 +30,8 @@ export class PosteVacantComponent implements OnInit {
 
   constructor(
     private posteVacantService: PosteVacantService,
-    private routeActivated: ActivatedRoute
+    private routeActivated: ActivatedRoute,
+    private confirmService: NgConfirmService
 
   ) { }
 
@@ -72,6 +74,34 @@ export class PosteVacantComponent implements OnInit {
 
   }
 
+
+
+  // DELETE
+  deletePosteVacant(id?: Number): void {
+
+    this.confirmService.showConfirm("Are you sure want to Delete?",
+      () => {
+
+        this.posteVacantService.delete(id)
+          .subscribe(
+
+            () => {
+              console.log('Le poste de travail a été supprimé avec succès.');
+              // Mettre à jour les données après la suppression réussie
+              this.fetchPostesVacants();
+            },
+            (error) => {
+              console.error('Une erreur s\'est produite lors de la suppression du poste de travail :', error);
+            }
+          )
+      },
+      () => {
+
+      })
+
+
+
+  }
 
   // pagination 
   pageSize = 5;

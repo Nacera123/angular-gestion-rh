@@ -1,18 +1,21 @@
-<div>
+<app-retour [routerLink]="['/admin/poste-de-travail']"></app-retour>
+
+<div class="the-details mt-4">
+
     <div>
         <div>
             <div>
-                <h5 class="modal-title">Détails du poste de travail</h5>
+                <h4 class="modal-title" *ngIf="posteSelectionne">Détails pour le poste : {{ posteSelectionne.nom }}</h4>
             </div>
-            <div>
-                <p *ngIf="posteSelectionne">Référence : {{ posteSelectionne.reference }}</p>
-                <p *ngIf="posteSelectionne">Nom : {{ posteSelectionne.nom }}</p>
+            <div class="mt-4">
+                <p *ngIf="posteSelectionne"><b>Référence :</b> {{ posteSelectionne.reference }}</p>
+                <p *ngIf="posteSelectionne"><b>Nom :</b> {{ posteSelectionne.nom }}</p>
 
             </div>
-            <div>
+            <!-- <div style="text-align: center;">
                 <app-retour [routerLink]="['/admin/poste-de-travail']"></app-retour>
 
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

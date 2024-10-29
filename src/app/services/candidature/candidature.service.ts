@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, catchError, throwError } from "rxjs";
 import { Candidature } from "src/app/models/candidature/candidature";
-
+import { environment } from "../../../environement/environement.dev";
 
 
 @Injectable({
@@ -12,8 +12,11 @@ import { Candidature } from "src/app/models/candidature/candidature";
 
 export class CandidatureService {
 
+    private readonly endpoint = (environment.production)
+        ? 'https://ws.nestech.fr/candidature'
+        : 'http://localhost:1234/candidature';
 
-    private endpoint: string = 'http://localhost:1234/candidature'
+    // private endpoint: string = 'http://localhost:1234/candidature'
 
     constructor(
         private readonly http: HttpClient,
@@ -53,7 +56,7 @@ export class CandidatureService {
     }
 
     getByIndividu(id: number): Observable<Candidature[]> {
-        let api = `${this.endpoint}/b/${id}`;
+        let api = `${this.endpoint}/byid/${id}`;
         return this.http.get<Candidature[]>(api)
             .pipe(
                 catchError(
@@ -68,9 +71,45 @@ export class CandidatureService {
 
 
 
+    getByNomPosteVacant(nom: String) {
+        const formattedNom = this.cleanNameForUrl(nom.toString());
+        let api = `${this.endpoint}/poste-vacant/${nom}`;
+        return this.http.get<Candidature[]>(api)
+            .pipe(
+                catchError(
+                    error => {
+                        console.error('l\'erreur : ', error);
+                        throw error;
+
+                    }
+                )
+            )
+    }
+
+
+    cleanNameForUrl(name: string): string {
+        return name
+            .toLowerCase()
+            .replace(/\s+/g, '-')  // Remplace les espaces par des tirets
+            .replace(/[^\w-]/g, '');  // Supprime les caractères non-alphanumériques sauf les tirets
+    }
 
 
 
+    //3- recuperation d'un poste de travail par id
+    getById(id?: Number): Observable<Candidature> {
 
+        let api = `${this.endpoint}/list/${id}`;
+        return this.http.get<Candidature>(api)
+            .pipe(
+                catchError(
+                    (error) => {
+                        console.log(error);
+                        throw error;
+
+                    }
+                )
+            );
+    }
 
 }

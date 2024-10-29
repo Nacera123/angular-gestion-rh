@@ -1,0 +1,44 @@
+<div class="card-body">
+
+    <table class="table datatable">
+        <thead class="table table-secondary ">
+            <tr>
+                <th scope="col">Poste Vacant</th>
+                <th scope="col">Ref Session</th>
+                <th scope="col">Ref Metier</th>
+                <th scope="col">Candidat</th>
+                <th scope="col"> Etat Candidature</th>
+                <!-- <th scope="col"> Ficher</th> -->
+                <th scope="col"> Detail</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
+                {{ errorMessage }}
+            </div>
+
+            <tr
+                *ngFor="let candidature of candidature | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+                <td>{{ candidature.posteVacant?.nom }}</td>
+                <td>{{ candidature.posteVacant?.session?.reference }}</td>
+                <td>{{ candidature.posteVacant?.poste?.reference }}</td>
+                <td>{{ candidature.individu?.nom }} &nbsp; {{ candidature.individu?.prenom }}</td>
+                <td>{{ candidature.etatCandidature?.etat }}</td>
+                <!-- <td>{{ candidature.posteVacant?.id }}</td> -->
+                <td>
+
+                    <app-voir (click)="getId(candidature.id)"
+                        [routerLink]="['/admin/candidature/fiche', candidature.id]"></app-voir>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+
+</div>

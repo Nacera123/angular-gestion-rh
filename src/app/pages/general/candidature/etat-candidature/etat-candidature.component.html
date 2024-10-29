@@ -1,45 +1,25 @@
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Etat de la candidature</h5>
-
-        <app-nav-tab></app-nav-tab>
-        <div class="tab-content pt-2" id="myTabjustifiedContent">
-            <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
+<div class="card-body">
+    <app-add disabled></app-add>
 
 
 
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Table with stripped rows</h5>
-
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Etat de la candidature</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let etat of etatCandidature">
-                                    <th scope="row">{{ etat.id }}</th>
-                                    <td>{{ etat.etat }}</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
+    <table class="table datatable">
+        <thead class="table table-secondary">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Etat de candidature</th>
+            </tr>
+        </thead>
 
 
+        <tbody class="">
+            <tr *ngFor="let etat of etatCandidature">
+                <td> <button type="button" class="btn-reference rounded-pill mt-1">{{ etat.id }}</button>
+                </td>
+                <td>{{ etat.etat }}</td>
 
-            </div>
-            <div class="tab-pane fade" id="profile-justified" role="tabpanel" aria-labelledby="profile-tab">
-                Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio
-                omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil
-                recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
-            </div>
-        </div>
+            </tr>
 
-    </div>
+        </tbody>
+    </table>
 </div>

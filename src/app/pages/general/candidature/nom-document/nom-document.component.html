@@ -1,15 +1,14 @@
-<div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
-    {{ errorMessage }}
-</div>
-
-
-<app-add [routerLink]="['/admin/nom-document/add']"></app-add>
 <div class="card-body">
+    <app-add [routerLink]="['/admin/nom-document/add']"></app-add>
 
+    <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+    </div>
     <table class="table datatable">
-        <thead class="table table-info">
+        <thead class="table table-secondary">
             <tr>
                 <th scope="col">Nom</th>
+                <th scope="col"> Detail</th>
             </tr>
         </thead>
         <tbody>

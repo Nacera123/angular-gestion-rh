@@ -3,17 +3,25 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import { User } from 'src/app/models/user';
+import { environment } from 'src/environement/environement.dev';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  endpoint: string = 'http://localhost:1234/api'
+  // endpoint: string = 'http://localhost:1234/api'
 
-  endpointUser: string = 'http://localhost:1234/user'
+  // endpointUser: string = 'http://localhost:1234/user'
 
 
+  private endpoint = (environment.production)
+    ? 'https://ws.nestech.fr/api'
+    : 'http://localhost:1234/api';
+
+  private endpointUser = (environment.production)
+    ? 'https://ws.nestech.fr/user'
+    : 'http://localhost:1234/user';
 
 
   constructor(

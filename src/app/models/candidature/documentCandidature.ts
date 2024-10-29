@@ -5,7 +5,10 @@ export class DocumentCandidature {
 
 
     id?: Number;
+
     pieceJointe?: string;
+
+    nomFichier?: string;
 
     nomPieceJointe?: NomDocument;
 

@@ -1,6 +1,6 @@
-<h2 class="card-title pt-4 pb-4">
+<h2 class="card-title pt-4 pb-4 text-secondary">
 
-    {{ formulaire ? 'Poste de Travail Register' : 'toto' }}
+    {{ formulaire ? 'Mise à jour des sessions' : 'Ajouter une session' }}
 
 </h2>
 
@@ -28,10 +28,23 @@
             <input type="date" class="form-control" id="dateCloture" formControlName="dateCloture">
         </div>
 
-        <div class="col-12">
+        <!-- <div class="col-12">
             <label for="inputEmail4" class="form-label">status</label>
             <input type="text" class="form-control" id="inputEmail4" formControlName="status">
+        </div> -->
+
+        <div class="col-12">
+            <label for="statusSwitch" class="form-label">Status</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="statusSwitch" formControlName="status">
+                <label class="form-check-label" for="statusSwitch">{{ form.get('status')?.value ? 'Activé' : 'Désactivé'
+                    }}</label>
+            </div>
         </div>
+
+
+
+
 
         <div class="col-12 text-center pt-4" *ngIf="formulaire">
             <app-submit></app-submit>

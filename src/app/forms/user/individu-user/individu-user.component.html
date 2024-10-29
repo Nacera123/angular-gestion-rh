@@ -3,6 +3,57 @@
     <section class="sign-in-form section-padding">
         <div class="container">
             <div class="row">
+                <div class="col-lg-8 mx-auto col-12 toto">
+                    <h1 class="hero-title text-center mb-5">Crée ton compte </h1>
+                    <div class="row">
+                        <div class="col-lg-8 col-11 mx-auto">
+                            <form (ngSubmit)="submitUser()">
+                                <div class="form-floating p-0 mb-3">
+                                    <input type="email" name="email" id="email" class="form-control"
+                                        [attr.placeholder]="individuSelect?.email" disabled>
+                                    <label for="email">{{ individuSelect?.email }}</label>
+                                </div>
+
+                                <div class="form-floating p-0">
+                                    <input type="password" [(ngModel)]="user.password" name="password" id="password"
+                                        class="form-control" placeholder="Password" required>
+                                    <label for="password">Password</label>
+                                </div>
+
+                                <!-- Messages d'erreur pour le mot de passe -->
+                                <div style=" margin-top: 3%;">
+
+                                    <div *ngIf="isPasswordLengthInvalid">
+                                        Le mot de passe doit contenir au moins 8 caractères.
+                                    </div>
+                                    <div *ngIf="isPasswordUppercaseInvalid">
+                                        Le mot de passe doit contenir au moins une majuscule.
+                                    </div>
+                                    <div *ngIf="isPasswordNumberInvalid">
+                                        Le mot de passe doit contenir au moins un chiffre.
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn custom-btn form-control mt-4 mb-3">
+                                    Create
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+<!-- <main>
+    <section class="sign-in-form section-padding">
+        <div class="container">
+            <div class="row">
 
                 <div class="col-lg-8 mx-auto col-12 toto">
 
@@ -43,5 +94,5 @@
         </div>
     </section>
 
-</main>
+</main>  -->
 <app-footer></app-footer>

@@ -1,13 +1,13 @@
-<h2 class="card-title pt-4 pb-4">
+<h2 class="card-title pt-4 pb-4 text-secondary">
 
-    {{ formulaire ? 'Poste de Travail Register' : 'toto' }}
+    {{ formulaire ? 'Mise à jour du Poste' : 'Ajouter un poste' }}
 
 </h2>
 <div *ngIf="errorMessage" class="alert alert-danger text-center p-4 m-4">
     {{ errorMessage }}
 </div>
 
-<div class="card-body" style="width: 500px;margin-bottom: 200px;" *ngIf="form">
+<div class="card-body mt-4" style="width: 500px;margin-bottom: 200px;" *ngIf="form">
 
 
 

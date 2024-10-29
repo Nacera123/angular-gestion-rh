@@ -1,28 +1,31 @@
 <!-- <app-add></app-add> -->
-<app-add [routerLink]="['/admin/poste-de-travail/add']"></app-add>
 
 
 
 <div class="card-body">
+    <app-add [routerLink]="['/admin/poste-de-travail/add']"></app-add>
 
-    <div *ngIf="errorMessage" class="alert alert-danger">
+
+
+    <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
         {{ errorMessage }}
     </div>
-
     <table class="table datatable">
-        <thead class="table table-info">
+        <thead class="table table-secondary ">
+            <!-- <thead class="table table-secondary text-center"> -->
             <tr>
                 <th scope="col">Reference</th>
-                <th scope="col">Nom</th>
+                <th scope="col">Nom du poste</th>
                 <th scope="col"> Detail</th>
             </tr>
         </thead>
 
 
-
-        <tbody>
+        <tbody class="">
+            <!-- <tbody class="text-center"> -->
             <tr *ngFor="let poste of posteDeTravail | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
-                <td>{{ poste.reference }}</td>
+                <td> <button type="button" class="btn-reference rounded-pill mt-1">{{ poste.reference }}</button>
+                </td>
                 <td>{{ poste.nom }}</td>
                 <td>
 
@@ -39,7 +42,7 @@
         </tbody>
     </table>
 
-    <pagination-controls (pageChange)="pageChanged($event)" class="pagination"></pagination-controls>
+    <pagination-controls (pageChange)="pageChanged($event)" class="pagination "></pagination-controls>
 
 </div>
 <div class="modal fade" id="verticalycentered" tabindex="-1">
